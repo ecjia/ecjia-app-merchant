@@ -6,7 +6,7 @@
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{block name="title"}{if $ur_here}{$ur_here} - {/if}{$ecjia_merchant_cptitle}{/block}</title>
+	<title>{block name="title"}{if $ur_here}{$ur_here}{/if}{if $ecjia_merchant_cptitle} - {$ecjia_merchant_cptitle}{/if}{/block}</title>
 	<meta name="description" content="{ecjia::config('')}" />
 	<meta name="keywords" content="{ecjia::config('')}" />
 	<meta name="author" content="ecjia team" />
