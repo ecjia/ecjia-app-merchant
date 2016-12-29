@@ -221,11 +221,15 @@ class merchant extends ecjia_merchant {
     	$id = !empty($_GET['id']) ? intval($_GET['id']) : 0;
     	$shop_info = RC_DB::table('article')->where('cat_id', 0)->where('article_id', $id)->first();
 
+    	if (empty($shop_info)) {
+    		return $this->showmessage('该网店信息不存在', ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_HTML);
+    	}
     	$shopinfo_list = RC_DB::table('article')
 	    	->select('article_id', 'title', 'content', 'file_url')
 	    	->where('cat_id', 0)
 	    	->orderby('article_id', 'asc')
 	    	->get();
+
 		if (!empty($shopinfo_list)) {
 			foreach ($shopinfo_list as $k => $v) {
 				if (!empty($v['file_url']) && file_exists(RC_Upload::upload_path($v['file_url']))) {
