@@ -24,18 +24,14 @@ class merchant extends ecjia_merchant {
 
         RC_Script::enqueue_script('jquery.toggle.buttons', RC_Uri::admin_url('statics/lib/toggle_buttons/jquery.toggle.buttons.js'));
         RC_Style::enqueue_style('bootstrap-toggle-buttons', RC_Uri::admin_url('statics/lib/toggle_buttons/bootstrap-toggle-buttons.css'));
-
-
         RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__) , array() , false, true);
 
         RC_Loader::load_app_func('merchant_merchant');
         assign_adminlog_content();
 
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('我的店铺', RC_Uri::url('merchant/merchant/init')));
-
         ecjia_merchant_screen::get_current_screen()->set_parentage('store', 'store/merchant.php');
 	}
-
 
 	/**
 	 * 店铺基本信息
@@ -51,11 +47,9 @@ class merchant extends ecjia_merchant {
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
 
         $this->assign('data',$merchant_info);
-
         $this->assign('form_action', RC_Uri::url('merchant/merchant/update'));
 
 		$this->display('merchant_basic_info.dwt');
-
 	}
 
     /**
@@ -394,6 +388,6 @@ class merchant extends ecjia_merchant {
             }
         };
     }
-
 }
+
 //end
