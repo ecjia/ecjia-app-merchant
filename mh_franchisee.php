@@ -35,10 +35,8 @@ class mh_franchisee extends ecjia_merchant {
         RC_Style::enqueue_style('chosen_style', RC_App::apps_url('statics/assets/chosen/chosen.css', __FILE__), array());
         RC_Script::enqueue_script('chosen', RC_App::apps_url('statics/assets/chosen/chosen.jquery.min.js', __FILE__), array(), false, true);
 
-        RC_Loader::load_app_func('merchant');
+        RC_Loader::load_app_func('merchant_merchant');
         assign_adminlog_content();
-
-
 
         $this->store_preaudit = RC_Model::model('merchant/store_preaudit_model');
         $this->store_franchisee = RC_Model::model('merchant/store_franchisee_model');
@@ -128,7 +126,6 @@ class mh_franchisee extends ecjia_merchant {
         ecjia_merchant::admin_log('修改收款账号', 'edit', 'merchant');
         return $this->showmessage('成功修改收款账号', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/mh_franchisee/receipt')));
     }
-
 
     /**
      * 店铺入驻信息
@@ -428,4 +425,5 @@ class mh_franchisee extends ecjia_merchant {
         echo json_encode($location);
     }
 }
+
 //end
