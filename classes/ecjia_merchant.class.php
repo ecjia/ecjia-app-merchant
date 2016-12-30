@@ -77,7 +77,7 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		        return $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
 		    } else {
 		        RC_Cookie::set('admin_login_referer', RC_Uri::current_url());
-		        $this->redirect(RC_Uri::url('staff/privilege/login'));
+		        return $this->redirect(RC_Uri::url('staff/privilege/login'));
 		    }
 		}
 
