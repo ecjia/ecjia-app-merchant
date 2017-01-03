@@ -10,10 +10,6 @@
 <!-- {block name="title"} -->
 {$shop_info.title} - {ecjia::config('shop_name')}
 <!-- {/block} -->
-
-<!-- {block name="common_header"} -->
-<!-- #BeginLibraryItem "/library/common_nologin_header.lbi" --><!-- #EndLibraryItem -->
-<!-- {/block} -->
 {/if}    
 
 <!-- {block name="home-content"} -->
