@@ -822,7 +822,6 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
     public static function is_super_admin() {
 
     }
-
 }
 
 // end

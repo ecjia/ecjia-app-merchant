@@ -1,9 +1,11 @@
 <?php
 defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 分页处理类
  * @package     Core
  */
+ 
 class ecjia_merchant_page extends ecjia_page {
 
     /**
@@ -115,7 +117,6 @@ EOF;
     			return $this->page_code("<ul class='pagination'>" . $this->first() . $this->pre() . $this->text_list() . $this->next() . $this->end() . '</ul>');
     	}
     }
-
 }
 
 // end

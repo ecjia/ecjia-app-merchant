@@ -7,7 +7,6 @@ class store_preaudit_model extends Component_Model_Model {
 		$this->table_name = 'store_preaudit';
 		parent::__construct();
 	}
-
 }
 
 // end

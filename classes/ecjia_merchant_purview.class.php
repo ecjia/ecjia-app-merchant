@@ -1,4 +1,5 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
 
 class ecjia_merchant_purview extends ecjia_purview
 {
@@ -18,3 +19,5 @@ class ecjia_merchant_purview extends ecjia_purview
         return $res;
     }
 }
+
+// end

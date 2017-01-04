@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 店铺入驻信息
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class mh_franchisee extends ecjia_merchant {
 
@@ -342,8 +343,6 @@ class mh_franchisee extends ecjia_merchant {
                 }
             }
 
-//             _dump($log_original);
-//             _dump($log_new,1);
             $log = array(
                 'store_id' => $_SESSION['store_id'],
                 'type' => 2,

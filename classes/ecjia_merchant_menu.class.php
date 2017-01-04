@@ -1,5 +1,5 @@
 <?php
-
+defined('IN_ECJIA') or exit('No permission resources.');
 use Royalcms\Component\Foundation\Royalcms;
 use Royalcms\Component\Foundation\Object as RC_Object;
 
@@ -8,6 +8,7 @@ use Royalcms\Component\Foundation\Object as RC_Object;
  * @author royalwang
  *
  */
+ 
 class ecjia_merchant_menu extends RC_Object {
 
     protected $cacheKey;

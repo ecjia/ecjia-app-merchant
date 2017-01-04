@@ -1,5 +1,6 @@
 <?php
 defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 商店设置
  * @author weidong

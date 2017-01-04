@@ -1,7 +1,10 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /*
  * 获取店铺基本信息
  */
+ 
 function get_merchant_info()
 {
     if (empty($_SESSION['store_id'])) {
@@ -134,4 +137,5 @@ function assign_adminlog_content()
 {
     ecjia_admin_log::instance()->add_object('merchant', '我的店铺');
 }
+
 // end

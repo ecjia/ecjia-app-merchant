@@ -7,7 +7,6 @@ class merchants_config_model extends Component_Model_Model {
 		$this->table_name = 'merchants_config';
 		parent::__construct();
 	}
-
 }
 
 // end

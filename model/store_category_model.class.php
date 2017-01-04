@@ -7,7 +7,6 @@ class store_category_model extends Component_Model_Model {
 		$this->table_name = 'store_category';
 		parent::__construct();
 	}
-
 }
 
 // end

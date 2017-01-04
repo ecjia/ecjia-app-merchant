@@ -1,4 +1,5 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
 
 RC_Hook::add_filter('template', function () {
     return RC_Config::get('system.tpl_style');
@@ -16,5 +17,6 @@ RC_Hook::add_action('class_ecjia_merchant_page',        function () {RC_Package:
 RC_Hook::add_action('class_ecjia_merchant_purview',     function () {RC_Package::package('app::merchant')->loadClass('ecjia_merchant_purview', false);});
 
 RC_Hook::add_action('handle_404_error', function ($arg){
-
 });
+
+// end

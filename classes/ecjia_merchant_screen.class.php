@@ -1,4 +1,5 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
 
 class ecjia_merchant_screen extends ecjia_screen {
     
@@ -28,7 +29,7 @@ class ecjia_merchant_screen extends ecjia_screen {
         
         <?php 
         endif;
-        
     }
-    
 }
+
+// end

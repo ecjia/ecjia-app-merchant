@@ -26,3 +26,5 @@ return array(
     'personhand_identity_pic' => '手持证件拍照',
     'business_licence'      => '营业执照注册号',
 );
+
+// end

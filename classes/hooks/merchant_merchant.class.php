@@ -20,5 +20,4 @@ class merchant_merchant_hooks {
 RC_Hook::add_filter( 'ecjia_builtin_app_bundles', array('merchant_merchant_hooks', 'ecjia_builtin_app_bundles') );
 RC_Hook::add_filter( 'merchant_dashboard_right4', array('merchant_merchant_hooks', 'ecjia_merchant_dashboard_contact'), 2 );
 
-
 // end

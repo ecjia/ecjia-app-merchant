@@ -1,8 +1,9 @@
 <?php
+defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 店铺基本信息
  */
-defined('IN_ECJIA') or exit('No permission resources.');
 
 class merchant extends ecjia_merchant {
 	public function __construct() {
@@ -69,10 +70,10 @@ class merchant extends ecjia_merchant {
 		$merchants_config['express_assign_auto'] = $express_assign_auto;
         
 		$shop_nav_background = get_merchant_config('shop_nav_background');
-        $shop_logo = get_merchant_config('shop_logo');
-        $shop_thumb_logo = get_merchant_config('shop_thumb_logo');
-        $shop_banner_pic = get_merchant_config('shop_banner_pic');
-        $shop_front_logo = get_merchant_config('shop_front_logo');
+        $shop_logo           = get_merchant_config('shop_logo');
+        $shop_thumb_logo     = get_merchant_config('shop_thumb_logo');
+        $shop_banner_pic     = get_merchant_config('shop_banner_pic');
+        $shop_front_logo     = get_merchant_config('shop_front_logo');
 
         // 店铺导航背景图
         if(!empty($_FILES['shop_nav_background']) && empty($_FILES['error']) && !empty($_FILES['shop_nav_background']['name'])){
@@ -98,19 +99,19 @@ class merchant extends ecjia_merchant {
         }
         $time = array();
         if(!empty($shop_trade_time)){
-            $shop_time      = explode(',',$shop_trade_time);
-            $s_h = ($shop_time[0] / 60);
-            $s_i = ($shop_time[0] % 60);
-            $e_h = ($shop_time[1] / 60);
-            $e_i = ($shop_time[1] % 60);
-            $start_h        = empty($s_h)? '00' : intval($s_h);
-            $start_i        = empty($s_i)? '00' : intval($s_i);
-            $end_h          = empty($e_h)? '00' : intval($e_h);
-            $end_i          = empty($e_i)? '00' : intval($e_i);
-            $start_time     = $start_h.":".$start_i;
-            $end_time       = $end_h.":".$end_i;
-            $time['start']  = $start_time;
-            $time['end']    = $end_time;
+            $shop_time       = explode(',',$shop_trade_time);
+            $s_h             = ($shop_time[0] / 60);
+            $s_i             = ($shop_time[0] % 60);
+            $e_h             = ($shop_time[1] / 60);
+            $e_i             = ($shop_time[1] % 60);
+            $start_h         = empty($s_h)? '00' : intval($s_h);
+            $start_i         = empty($s_i)? '00' : intval($s_i);
+            $end_h           = empty($e_h)? '00' : intval($e_h);
+            $end_i           = empty($e_i)? '00' : intval($e_i);
+            $start_time      = $start_h.":".$start_i;
+            $end_time        = $end_h.":".$end_i;
+            $time['start']   = $start_time;
+            $time['end']     = $end_time;
             $shop_trade_time = serialize($time);
             if($shop_trade_time != get_merchant_config('shop_trade_time')){
                 $merchants_config['shop_trade_time'] = $shop_trade_time;// 营业时间
@@ -305,7 +306,7 @@ class merchant extends ecjia_merchant {
         $this->admin_priv('merchant_switch',ecjia::MSGTYPE_JSON);
 
         $shop_close = isset($_POST['shop_close']) ? $_POST['shop_close'] : null;
-        $code 	= !empty($_POST['code'])   ? $_POST['code'] 		: '';
+        $code = !empty($_POST['code'])   ? $_POST['code'] 		: '';
         $mobile = !empty($_POST['mobile']) ? trim($_POST['mobile']) : '';
         if (is_null($shop_close)) {
             return $this->showmessage('错误的提交', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);

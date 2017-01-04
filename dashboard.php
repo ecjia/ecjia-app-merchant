@@ -1,4 +1,5 @@
 <?php 
+defined('IN_ECJIA') or exit('No permission resources.');
 
 class dashboard extends ecjia_merchant {
 	
@@ -12,3 +13,4 @@ class dashboard extends ecjia_merchant {
     }
 }
 
+//end

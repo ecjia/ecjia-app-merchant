@@ -39,7 +39,6 @@ class orm_store_franchisee_model extends Model {
 	{
 		return RC_Cache::app_cache_delete($cache_key, 'store');
 	}
-
 }
 
 // end
