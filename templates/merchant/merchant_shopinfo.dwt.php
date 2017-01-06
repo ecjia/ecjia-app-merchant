@@ -1,3 +1,4 @@
+<?php defined('IN_ECJIA') or exit('No permission resources.');?> 
 <!-- {extends file="ecjia-merchant.dwt.php"} -->
 
 {if !array_get($_SESSION, 'staff_id')}

@@ -1,3 +1,4 @@
+<?php defined('IN_ECJIA') or exit('No permission resources.');?> 
 <!-- start:user info table -->
 <section class="panel">
     <div class="task-thumb-details">

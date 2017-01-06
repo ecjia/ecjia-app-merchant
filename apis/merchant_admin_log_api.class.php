@@ -1,9 +1,9 @@
 <?php
 defined('IN_ECJIA') or exit('No permission resources.');
+
 /**
  * 商家日志
  * @author 
- *
  */
 class merchant_admin_log_api extends Component_Event_Api {
 	public function call(&$options) {	

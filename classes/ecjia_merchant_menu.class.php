@@ -6,9 +6,7 @@ use Royalcms\Component\Foundation\Object as RC_Object;
 /**
  * ECJia 商家后台菜单管理
  * @author royalwang
- *
  */
- 
 class ecjia_merchant_menu extends RC_Object {
 
     protected $cacheKey;

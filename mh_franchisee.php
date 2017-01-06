@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 店铺入驻信息
  */
-
 class mh_franchisee extends ecjia_merchant {
 
     private $store_preaudit;
@@ -133,6 +132,7 @@ class mh_franchisee extends ecjia_merchant {
      */
     public function request_edit() {
         $this->admin_priv('franchisee_request',ecjia::MSGTYPE_JSON);
+        
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('提交申请'));
         $this->assign('ur_here', '提交申请');
         $this->assign('action_link', array('href' => RC_Uri::url('merchant/mh_franchisee/init'), 'text' => '入驻信息'));

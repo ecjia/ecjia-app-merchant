@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 商店设置
  * @author weidong
- *
  */
 class merchant_merchant_purview_api extends Component_Event_Api {
     public function call(&$options) {

@@ -1,10 +1,9 @@
 <?php
 defined('IN_ECJIA') or exit('No permission resources.');
 
-/*
+/**
  * 获取店铺基本信息
  */
- 
 function get_merchant_info()
 {
     if (empty($_SESSION['store_id'])) {

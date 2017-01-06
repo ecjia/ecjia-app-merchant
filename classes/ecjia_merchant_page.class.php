@@ -5,7 +5,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
  * 分页处理类
  * @package     Core
  */
- 
 class ecjia_merchant_page extends ecjia_page {
 
     /**

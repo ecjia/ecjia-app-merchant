@@ -4,7 +4,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 商家员工管理菜单
  * @author songqian
- *
  */
 class merchant_merchant_menu_api extends Component_Event_Api {
 
