@@ -44,9 +44,9 @@
 //
 //  ---------------------------------------------------------------------------------
 //
-defined('IN_ECJIA') or exit('No permission resources.');
 use Royalcms\Component\Foundation\Royalcms;
 use Royalcms\Component\Foundation\Object as RC_Object;
+defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
  * ECJia 商家后台菜单管理
