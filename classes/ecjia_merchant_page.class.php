@@ -119,7 +119,7 @@ EOF;
         }
         \"/>
         <span class='input-group-btn'>
-        <button class='btn btn-default' onclick = \"javascript:
+        <button class='btn btn-primary' onclick = \"javascript:
         var input = document.getElementById('pagekeydown');
         location.href='{$this->get_url('B')}'+input.value+'{$this->get_url('A')}';
         \">GO</button></span>
