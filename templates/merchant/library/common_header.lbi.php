@@ -65,18 +65,24 @@
                         <li>
                             <p class="yellow">您有 {$ecjia_merchant_notice_count} 条新通知</p>
                         </li>
+                  		<div class="mh300 ecjiaf-oa">
                         <!-- {foreach from=$ecjia_merchant_notice_list item=val} -->
                         <li>
                             <a href='{url path="notification/mh_notification/init" args="status=not_read"}'>
-                                <span class="label label-info">
-                                	{if $val.type eq 'order_reminder'}
-                                	<i class="fa fa-bullhorn"></i>
-                                	{else if $val.type eq 'push_event'}
-                                	<i class="fa fa-comment"></i>
-                                	{/if}
-                                </span>
-                                <span class="m_l5">{$val.content}</span>
-                                <span class="small italic"></span>
+                                <div class="f_l">
+	                                <span class="label label-info">
+	                                	{if $val.type eq 'order_reminder'}
+	                                	<i class="fa fa-bullhorn"></i>
+	                                	{else if $val.type eq 'push_event'}
+	                                	<i class="fa fa-comment"></i>
+	                                	{else}
+	                                	<i class="fa fa-bullhorn"></i>
+	                                	{/if}
+	                                </span>
+                                </div>
+                                <div class="f_l mw160">
+                                	{$val.content}
+                                </div>
                             </a>
                         </li>
                         <!-- {foreachelse} -->
@@ -90,7 +96,8 @@
                             </a>
                         </li>
                  		<!-- {/foreach} -->
-                        <li>
+                        </div>
+                        <li {if $ecjia_merchant_notice_count gt 0}class="ecjiaf-bt"{/if}>
                             <a href="{url path='notification/mh_notification/init'}">查看所有通知</a>
                         </li>
                     </ul>
