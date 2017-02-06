@@ -59,20 +59,7 @@ class ecjia_merchant_loader {
 	 * @param object $scripts WP_Scripts object.
 	 */
 	public static function default_scripts( &$scripts ) {
-// 		$develop_src = false !== strpos( Royalcms\Component\Foundation\Royalcms::VERSION, '-src' );
-
-// 		if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-// 			define( 'SCRIPT_DEBUG', $develop_src );
-// 		}
-
 		$base_url = dirname(RC_App::app_dir_url(__FILE__)) . '/statics';
-
-// 		$scripts->content_url = RC_Theme::get_template_directory_uri();
-// 		$scripts->default_version = VERSION;
-// 		$scripts->default_dirs = array('/content/system/statics/');
-
-// 		$suffix = SCRIPT_DEBUG ? '' : '.min';
-// 		$dev_suffix = $develop_src ? '' : '.min';
 
 		$scripts->remove('jquery');
 		$scripts->remove('bootstrap');
@@ -99,14 +86,9 @@ class ecjia_merchant_loader {
 
 		$scripts->add( 'ecjia-mh-jquery-easy-pie-chart',  $base_url.'/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js', array('jquery'), false, 1 );
 
-
-// 		$scripts->add( 'ecjia-mh-morris-script',    $base_url.'/mh-js/morris-script.js', array(), false, 1 );
 		$scripts->add( 'ecjia-mh-owl-carousel',     $base_url.'/mh-js/owl.carousel.js', array(), false, 1 );
 		$scripts->add( 'ecjia-mh-respond',          $base_url.'/mh-js/respond.min.js', array(), false, 1 );
-// 		$scripts->add( 'ecjia-mh-slider',           $base_url.'/mh-js/slider.js', array(), false, 1 );
 		$scripts->add( 'ecjia-mh-sparkline-chart',  $base_url.'/mh-js/sparkline-chart.js', array(), false, 1 );
-// 		$scripts->add( 'ecjia-mh-themes',           $base_url.'/mh-js/themes.js', array(), false, 1 );
-// 		$scripts->add( 'ecjia-mh-xchart',           $base_url.'/mh-js/xchart.js', array(), false, 1 );
 
 		$scripts->add( 'ecjia-mh-chosen-jquery',    $base_url.'/assets/chosen/chosen.jquery.min.js', array(), false, 1 );
 		$scripts->add( 'ecjia-mh-chart',    $base_url.'/assets/Chart/Chart.min.js', array(), false, 1 );
@@ -132,19 +114,7 @@ class ecjia_merchant_loader {
 	 * @param object $styles
 	 */
 	public static function default_styles( &$styles ) {
-// 		$develop_src = false !== strpos( Royalcms\Component\Foundation\Royalcms::VERSION, '-src' );
-
-// 		if ( ! defined( 'SCRIPT_DEBUG' ) ) {
-// 			define( 'SCRIPT_DEBUG', $develop_src );
-// 		}
-
 		$base_url = dirname(RC_App::app_dir_url(__FILE__)) . '/statics';
-// 		$styles->content_url = RC_Theme::get_template_directory_uri();
-// 		$styles->default_version = VERSION;
-// 		$styles->text_direction = function_exists( 'is_rtl' ) && is_rtl() ? 'rtl' : 'ltr';
-// 		$styles->default_dirs = array('/content/system/statics/');
-
-// 		$suffix = SCRIPT_DEBUG ? '' : '.min';
 
 		$styles->remove('bootstrap');
 		$styles->remove('bootstrap-reset');
@@ -158,7 +128,6 @@ class ecjia_merchant_loader {
 		$styles->add( 'ecjia-mh-owl-carousel',            $base_url."/mh-css/owl.carousel.css" );
 		$styles->add( 'ecjia-mh-owl-theme',               $base_url."/mh-css/owl.theme.css" );
 		$styles->add( 'ecjia-mh-owl-transitions',         $base_url."/mh-css/owl.transitions.css" );
-// 		$styles->add( 'ecjia-mh-style',         		  $base_url."/mh-css/style.css" );
 		$styles->add( 'ecjia-mh-table-responsive',        $base_url."/mh-css/table-responsive.css" );
 
 		$styles->add( 'ecjia-mh-jquery-easy-pie-chart',   $base_url."/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" );

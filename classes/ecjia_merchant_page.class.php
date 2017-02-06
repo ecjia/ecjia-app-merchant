@@ -68,8 +68,6 @@ class ecjia_merchant_page extends ecjia_page {
   		{$lang['total_records']} <span id="totalRecords">{$this->total_records}</span>
  		{$lang['total_pages']} <span id="totalPages">{$this->total_pages}{$lang['page']}</span>
 EOF;
-// 		{$lang['page_current']} <span id="pageCurrent">{$this->current_page}</span>
-// 		{$lang['page_size']} <span id="pageCurrent">{$this->page_size}</span> {$this->desc['unit']}
     }
     
     /**
@@ -80,19 +78,6 @@ EOF;
     	if (is_null($page_desc)) {
     		$page_desc = $this->page_desc();
     	}
-    	
-//     	if ($style == 6) {
-//     	    return <<<EOF
-// 			<div class="page panel page_style_6">
-// 				<div class="pull-left">
-// 					$page_desc
-// 				</div>
-// 				<div class="pull-right">
-// 	    			$code
-// 				</div>
-// 			</div>
-// EOF;
-//     	}
     	
     	return <<<EOF
 	    	<div class="page">

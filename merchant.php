@@ -178,52 +178,6 @@ class merchant extends ecjia_merchant {
             ecjia_merchant::admin_log('修改店铺基本信息', 'edit', 'merchant');
             return $this->showmessage('编辑成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/init')));
         }
-
-
-        // $shop_title             = empty($_POST['shop_title'])? '' : htmlspecialchars($_POST['shop_title']);
-        //
-        // $shop_kf_email          = empty($_POST['shop_kf_email'])? get_merchant_config($store_id, 'shop_kf_email') : htmlspecialchars($_POST['shop_kf_email']);
-        // $shop_kf_qq             = empty($_POST['shop_kf_qq'])? get_merchant_config($store_id, 'shop_kf_qq') : htmlspecialchars($_POST['shop_kf_qq']);
-        // $shop_kf_ww             = empty($_POST['shop_kf_ww'])? get_merchant_config($store_id, 'shop_kf_ww') : htmlspecialchars($_POST['shop_kf_ww']);
-        // $shop_kf_welcomeMsg     = empty($_POST['shop_kf_welcomeMsg'])? get_merchant_config($store_id, 'shop_kf_welcomeMsg') : htmlspecialchars($_POST['shop_kf_welcomeMsg']);
-        // $shop_kf_type           = empty($_POST['shop_kf_type'])? get_merchant_config($store_id, 'shop_kf_type') : htmlspecialchars($_POST['shop_kf_type']);
-
-        // $shop_qrcode_logo = get_merchant_config('shop_qrcode_logo');
-
-        // $merchant_config = array(
-        //     'shop_title'                => $shop_title,
-        //     // 'shop_kf_mobile'            => $shop_kf_mobile,         // 客服手机号码
-        //     // 'shop_kf_email'             => $shop_kf_email,          // 客服邮件地址
-        //     // 'shop_kf_qq'                => $shop_kf_qq,             // 客服QQ号码
-        //     // 'shop_kf_ww'                => $shop_kf_ww,             // 客服淘宝旺旺
-        //     // 'shop_kf_type'              => $shop_kf_type,           // 客服样式
-        //     'shop_trade_time'           => $shop_trade_time,
-        //     'shop_description'          => $shop_description,
-        //     'shop_notice'               => $shop_notice,
-        //
-        // 	'shop_nav_background'		=> $shop_nav_background,	// 店铺导航背景图
-        //     'shop_logo'                 => $shop_logo,
-        //     'shop_thumb_logo'           => $shop_thumb_logo,
-        //     'shop_banner_pic'           => $shop_banner_pic,
-        //     'shop_qrcode_logo'          => $shop_qrcode_logo,       // 二维码中间Logo
-        //     'shop_front_logo'           => $shop_front_logo,
-        // );
-
-        // if(!empty($_FILES['shop_qrcode_logo']) && empty($_FILES['error']) && !empty($_FILES['shop_qrcode_logo']['name'])){
-        //     $merchants_config['shop_qrcode_logo'] = file_upload_info('qrcode_logo', 'shop_qrcode_logo', $shop_qrcode_logo);
-        // }
-
-        // if(!empty($_FILES['shop_front_logo']) && empty($_FILES['error']) && !empty($_FILES['shop_front_logo']['name'])){
-        //     $merchants_config['shop_front_logo'] = file_upload_info('front_logo', 'shop_front_logo', $shop_front_logo);
-        // }
-
-        // Logo缩略图
-        // if(!empty($_FILES['shop_thumb_logo']) && empty($_FILES['error']) && !empty($_FILES['shop_thumb_logo']['name'])){
-        //     $merchants_config['shop_thumb_logo'] = file_upload_info('thumb_logo','shop_thumb_logo', $shop_thumb_logo);
-        // }
-        // if(!empty($shop_title)){
-        //     $merchants_config['shop_title'] = $shop_title;// 店铺标题
-        // }
 	}
 
     /**
@@ -401,11 +355,6 @@ class merchant extends ecjia_merchant {
         if (empty($mobile)){
             return $this->showmessage('请输入手机号码', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-
-        // 		$_SESSION['temp_mobile'] 	= $mobile;
-        // 		$_SESSION['temp_code'] 		= 1234;
-        // 		$_SESSION['temp_code_time'] = RC_Time::gmtime();
-        // 		return $this->showmessage('手机验证码发送成功，请注意查收', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
 
         $code = rand(100000, 999999);
         $tpl_name = 'sms_get_validate';

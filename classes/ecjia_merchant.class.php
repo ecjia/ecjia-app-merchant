@@ -312,7 +312,6 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 
 		if (!empty($staff_id) && !empty($staff_pass)) {
 			// 找到了cookie, 验证cookie信息
-// 			$row = RC_Model::model('admin_user_model')->field("user_id, user_name, password, action_list, last_login")->find(array('user_id' => intval($staff_id)));
 			$row = RC_DB::TABLE('staff_user')->where('user_id', intval($staff_id))->select('user_id', 'name', 'password', 'action_list', 'last_login')->get();
 			if (!empty($row)) {
 				// 检查密码是否正确
@@ -448,11 +447,6 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		$_SESSION['staff_name']  		= $username;
 		$_SESSION['action_list'] 		= $action_list;
 		$_SESSION['last_check_order']  	= $last_time; // 用于保存最后一次检查订单的时间
-
-// 		RC_Session::set('admin_id', $user_id);
-// 		RC_Session::set('admin_name', $username);
-// 		RC_Session::set('action_list', $username);
-// 		RC_Session::set('last_check_order', $last_time);
 	}
 
 	/**
@@ -492,30 +486,12 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 	    RC_Style::enqueue_style('ecjia-mh-owl-carousel');
 	    RC_Style::enqueue_style('ecjia-mh-owl-theme');
 	    RC_Style::enqueue_style('ecjia-mh-owl-transitions');
-// 	    RC_Style::enqueue_style('ecjia-mh-style');
 	    RC_Style::enqueue_style('ecjia-mh-table-responsive');
 	    RC_Style::enqueue_style('ecjia-mh-jquery-easy-pie-chart');
 
 	    RC_Style::enqueue_style('ecjia-mh-function');
 	    RC_Style::enqueue_style('ecjia-mh-page');
 	    RC_Style::enqueue_style('ecjia-mh-chosen');
-
-
-// 		//响应式css
-// 		RC_Style::enqueue_style('bootstrap-responsive');
-// 		// tooltips 面包导航等
-// 		RC_Style::enqueue_style('jquery-jBreadCrumb');
-// 		// flags
-// 		RC_Style::enqueue_style('flags');
-// 		// 图标css
-// 		RC_Style::enqueue_style('fontello');
-
-// 		// ecjia function
-// 		RC_Style::enqueue_style('ecjia-function');
-// 		//ecjia skin
-// 		RC_Style::enqueue_style('ecjia-skin-blue');
-// 		RC_Style::enqueue_style('jquery-sticky');
-
 
 		// 加载脚本
 		// jquery
@@ -560,45 +536,31 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		RC_Script::enqueue_script('ecjia-merchant');
 		RC_Script::enqueue_script('ecjia-merchant-ui');
 
-// 		// touch events for jquery ui
-// 		RC_Script::enqueue_script('jquery-ui-touchpunch');
-//
-// 		// hidden elements width/height
-
-// 		RC_Script::enqueue_script('jquery-sticky');
-
-// 		RC_Script::enqueue_script('jquery-quicksearch');
-
-
-
 		$admin_jslang = array(
-				'display_sidebar'	=> __('显示侧边栏'),
-				'hide_sidebar'		=> __('隐藏侧边栏'),
-				'search_check'		=> __('请先输入搜索信息'),
-				'search_no_message'	=> __('未搜索到导航信息'),
-				'success'			=> __('操作成功'),
-				'fail'				=> __('操作失败'),
-				'confirm_jump'		=> __('是否确认跳转？'),
-				'ok'				=> __('确定'),
-				'cancel'			=> __('取消'),
-				'request_failed'	=> __('请求失败，错误编号：'),
-				'error_msg'			=> __('，错误信息：')
+			'display_sidebar'	=> __('显示侧边栏'),
+			'hide_sidebar'		=> __('隐藏侧边栏'),
+			'search_check'		=> __('请先输入搜索信息'),
+			'search_no_message'	=> __('未搜索到导航信息'),
+			'success'			=> __('操作成功'),
+			'fail'				=> __('操作失败'),
+			'confirm_jump'		=> __('是否确认跳转？'),
+			'ok'				=> __('确定'),
+			'cancel'			=> __('取消'),
+			'request_failed'	=> __('请求失败，错误编号：'),
+			'error_msg'			=> __('，错误信息：')
 		);
 		RC_Script::localize_script('ecjia-merchant', 'admin_lang', $admin_jslang );
 	}
 
 
 	protected function load_hooks() {
-// 		RC_Hook::add_action('merchant_head', array(__CLASS__, '_ie_support_header'));
 		RC_Hook::add_action('merchant_head', array('ecjia_merchant_loader', 'admin_enqueue_scripts'), 1 );
 		RC_Hook::add_action('merchant_print_scripts', array('ecjia_merchant_loader', 'print_head_scripts'), 20 );
 		RC_Hook::add_action('merchant_print_footer_scripts', array('ecjia_merchant_loader', '_admin_footer_scripts') );
 		RC_Hook::add_action('merchant_print_styles', array('ecjia_merchant_loader', 'print_admin_styles'), 20 );
-// 		RC_Hook::add_action('merchant_print_main_bottom', array(__CLASS__, 'display_admin_copyright'));
 		RC_Hook::add_action('merchant_print_header_nav', array(__CLASS__, 'display_admin_header_nav'));
 		RC_Hook::add_action('merchant_sidebar_collapse_search', array(__CLASS__, 'display_admin_sidebar_nav_search'), 9);
 		RC_Hook::add_action('merchant_sidebar_collapse', array(__CLASS__, 'display_admin_sidebar_nav'), 9);
-// 		RC_Hook::add_action('merchant_dashboard_top', array(__CLASS__, 'display_admin_welcome'), 9);
 		RC_Hook::add_filter('upload_default_random_filename', array('ecjia_utility', 'random_filename'));
 		RC_Hook::add_action('merchant_print_footer_scripts', array(ecjia_notification::make(), 'printScript') );
 
@@ -756,26 +718,10 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
         $menus = ecjia_merchant_menu::singleton()->admin_menu();
         $screen = ecjia_merchant_screen::get_current_screen();
 
-//         echo '<ul class="nav navbar-nav">';
         foreach ($menus as $key => $group) {
             if ($group) {
                 foreach ($group as $k => $menu) {
                     if ($menu->has_submenus()) {
-//                         if ($menu->base && $screen->parent_base && $menu->base == $screen->parent_base) {
-//                             echo '<li class="dropdown active">'.PHP_EOL;
-//                         } else {
-//                             echo '<li class="dropdown">'.PHP_EOL;
-//                         }
-//                         if ($menu->link) {
-//                             echo '  <a class="dropdown-toggle" data-toggle="dropdown" href="' . $menu->link . '" target="' . $menu->target . '">'.PHP_EOL;
-//                         } else {
-//                             echo '  <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" target="' . $menu->target . '">'.PHP_EOL;
-//                         }
-//                         echo '  <div class="text-center">'.PHP_EOL;
-//                         echo '      <i class="fa '.$menu->icon.' fa-3x"></i><br>'.$menu->name.' <span class="caret"></span>'.PHP_EOL;
-//                         echo '  </div>'.PHP_EOL;
-//                         echo '  </a>'.PHP_EOL;
-//                         echo '  <ul class="dropdown-menu" role="menu">'.PHP_EOL;
 
                         if ($menu->submenus) {
                             foreach ($menu->submenus as $child) {
@@ -786,29 +732,10 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
                                 }
                             }
                         }
-//                         echo '  </ul>'.PHP_EOL;
-//                         echo '</li>'.PHP_EOL;
-//                     } else {
-//                         if ($menu->base && $screen->parent_base && $menu->base == $screen->parent_base) {
-//                             echo '<li class="active">'.PHP_EOL;
-//                         } else {
-//                             echo '<li>'.PHP_EOL;
-//                         }
-//                         if ($menu->link) {
-//                             echo '  <a href="' . $menu->link . '" target="' . $menu->target . '">'.PHP_EOL;
-//                         } else {
-//                             echo '  <a href="javascript:;" target="' . $menu->target . '">'.PHP_EOL;
-//                         }
-//                         echo '  <div class="text-center">'.PHP_EOL;
-//                         echo '      <i class="fa '.$menu->icon.' fa-3x"></i><br>'.$menu->name.PHP_EOL;
-//                         echo '  </div>'.PHP_EOL;
-//                         echo '  </a>'.PHP_EOL;
-//                         echo '</li>'.PHP_EOL;
                     }
                 }
             }
         }
-//         echo '</ul>';
     }
 
     public static function display_admin_sidebar_nav() {

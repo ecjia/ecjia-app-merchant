@@ -129,12 +129,6 @@ class ecjia_merchant_menu extends RC_Object {
         }
         unset($menus);
 
-        // 管理员快捷菜单
-//         $shortcut = $this->admin_navlist();
-//         if ($shortcut) {
-//             $new_menus['shortcut'] = $shortcut;
-//         }
-
         return $new_menus;
     }
 
