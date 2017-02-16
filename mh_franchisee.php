@@ -97,7 +97,7 @@ class mh_franchisee extends ecjia_merchant {
      * 店铺入驻信息
      */
     public function init() {
-        $this->admin_priv('franchisee_manage',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('franchisee_manage');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('入驻信息', RC_Uri::url('merchant/mh_franchisee/init')));
         $this->assign('ur_here', '商家入驻信息');
@@ -122,7 +122,7 @@ class mh_franchisee extends ecjia_merchant {
      * 收款之类的信息
      */
     public function receipt() {
-        $this->admin_priv('franchisee_bank',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('franchisee_bank');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('收款账号', RC_Uri::url('merchant/mh_franchisee/init')));
         $this->assign('ur_here', '收款账号');
@@ -136,12 +136,14 @@ class mh_franchisee extends ecjia_merchant {
      */
     public function receipt_edit(){
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑收款账号', RC_Uri::url('merchant/mh_franchisee/init')));
+
         $this->assign('ur_here', '编辑收款账号');
         $this->assign('action_link', array('href' => RC_Uri::url('merchant/mh_franchisee/receipt'), 'text' => '收款账号'));
         $data = RC_DB::TABLE('store_franchisee')->where('store_id', $_SESSION['store_id'])->select('bank_name', 'bank_branch_name', 'bank_account_name', 'bank_account_number','bank_address')->first();
         $this->assign('data',$data);
         $form_action = RC_Uri::url('merchant/mh_franchisee/receipt_update');
         $this->assign('form_action',$form_action);
+
         $this->display('merchant_receipt_edit.dwt');
     }
 
@@ -149,7 +151,7 @@ class mh_franchisee extends ecjia_merchant {
      * 更新收款之类的信息
      */
     public function receipt_update() {
-        $this->admin_priv('franchisee_bank',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('franchisee_bank', ecjia::MSGTYPE_JSON);
 
         $bank_name              = !empty($_POST['bank_name'])? htmlspecialchars($_POST['bank_name']) :'';
         $bank_account_number    = !empty($_POST['bank_account_number'])? htmlspecialchars($_POST['bank_account_number']) :'';
@@ -176,7 +178,7 @@ class mh_franchisee extends ecjia_merchant {
      * 店铺入驻信息
      */
     public function request_edit() {
-        $this->admin_priv('franchisee_request',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('franchisee_request');
         
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('提交申请'));
         $this->assign('ur_here', '提交申请');
@@ -218,6 +220,7 @@ class mh_franchisee extends ecjia_merchant {
         $request_step 	= intval($_REQUEST['step']);
         $step 			= empty($request_step)? $step : $request_step;
 		$data['identity_type'] = !empty($data['identity_type'])? $data['identity_type']: '1';
+
         $this->assign('province', $province);
         $this->assign('city', $city);
         $this->assign('district', $district);
@@ -233,7 +236,7 @@ class mh_franchisee extends ecjia_merchant {
      * 编辑入驻信息
      */
     public function update(){
-        $this->admin_priv('franchisee_request',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('franchisee_request', ecjia::MSGTYPE_JSON);
 
         $edit_fields = array(
             'merchants_name'            => '店铺名称',
@@ -280,13 +283,13 @@ class mh_franchisee extends ecjia_merchant {
 
         $franchisee_count = RC_DB::table('store_franchisee')->where('email', '=', $email)->where('store_id', '!=', $_SESSION['store_id'])->count();
         $preaudit_count   = RC_DB::table('store_preaudit')->where('email', '=', $email)->where('store_id', '!=', $_SESSION['store_id'])->count();
-        if(!empty($franchisee_count) || $preaudit_count){
+        if (!empty($franchisee_count) || $preaudit_count) {
             return $this->showmessage('改邮箱已经使用，请填写其他邮箱地址', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
         $franchisee_count = RC_DB::table('store_franchisee')->where('contact_mobile', '=', $contact_mobile)->where('store_id', '!=', $_SESSION['store_id'])->count();
         $preaudit_count   = RC_DB::table('store_preaudit')->where('contact_mobile', '=', $contact_mobile)->where('store_id', '!=', $_SESSION['store_id'])->count();
-        if(!empty($franchisee_count) || $preaudit_count){
+        if (!empty($franchisee_count) || $preaudit_count) {
             return $this->showmessage('改手机号已经使用，请填写其他联系方式', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
@@ -330,40 +333,40 @@ class mh_franchisee extends ecjia_merchant {
             }
         }
 
-        if(!empty($_FILES['identity_pic_front']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_front']['name'])){
+        if (!empty($_FILES['identity_pic_front']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_front']['name'])) {
             $data['identity_pic_front'] = file_upload_info('identity_pic','identity_pic_front');
-        }else{
+        } else {
             $data['identity_pic_front'] = $store_info['identity_pic_front'];
         }
 
-        if(!empty($_FILES['identity_pic_back']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_back']['name'])){
+        if (!empty($_FILES['identity_pic_back']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_back']['name'])) {
             $data['identity_pic_back'] = file_upload_info('identity_pic','identity_pic_back');
-        }else{
+        } else {
             $data['identity_pic_back'] = $store_info['identity_pic_back'];
         }
 
-        if(!empty($_FILES['personhand_identity_pic']) && empty($_FILES['error']) && !empty($_FILES['personhand_identity_pic']['name'])){
+        if (!empty($_FILES['personhand_identity_pic']) && empty($_FILES['error']) && !empty($_FILES['personhand_identity_pic']['name'])) {
             $data['personhand_identity_pic'] = file_upload_info('identity_pic','personhand_identity_pic');
-        }else{
+        } else {
             $data['personhand_identity_pic'] = $store_info['personhand_identity_pic'];
         }
 
-        if(!empty($_FILES['business_licence_pic']) && empty($_FILES['error']) && !empty($_FILES['business_licence_pic']['name'])){
+        if (!empty($_FILES['business_licence_pic']) && empty($_FILES['error']) && !empty($_FILES['business_licence_pic']['name'])) {
             $data['business_licence_pic'] = file_upload_info('business_licence','business_licence_pic');
-        }else{
+        } else {
             $data['business_licence_pic'] = $store_info['business_licence_pic'];
         }
 
         $data['store_id'] = intval($_SESSION['store_id']);
         $data['check_status'] = 2;
         $count = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->count();
-        if(empty($count)){
+        if (empty($count)) {
             $preaudit = $this->store_preaudit->insert($data);
-        }else{
+        } else {
             $preaudit = $this->store_preaudit->where(array('store_id' => $_SESSION['store_id']))->update($data);
         }
 
-        if(!empty($preaudit)){
+        if (!empty($preaudit)) {
             //审核日志
             //$store_info
             //$data
@@ -401,7 +404,7 @@ class mh_franchisee extends ecjia_merchant {
             // 记录日志
             ecjia_merchant::admin_log('申请修改店铺入驻信息', 'edit', 'merchant');
             return $this->showmessage('成功提交申请', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/mh_franchisee/request_edit')));
-        }else{
+        } else {
             return $this->showmessage('提交失败', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
     }
@@ -409,8 +412,8 @@ class mh_franchisee extends ecjia_merchant {
     /**
      * 撤销修改
      */
-    public function delete(){
-        $this->admin_priv('franchisee_request',ecjia::MSGTYPE_JSON);
+    public function delete() {
+        $this->admin_priv('franchisee_request', ecjia::MSGTYPE_JSON);
 
         $log = array(
             'store_id' => $_SESSION['store_id'],

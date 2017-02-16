@@ -82,7 +82,7 @@ class merchant extends ecjia_merchant {
 	 * 店铺基本信息
 	 */
 	public function init() {
-		$this->admin_priv('merchant_manage',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('merchant_manage');
 
 		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺设置', RC_Uri::url('merchant/mh_franchisee/init')));
 		$this->assign('app_url', RC_App::apps_url('statics', __FILE__));
@@ -101,7 +101,7 @@ class merchant extends ecjia_merchant {
 	 * 店铺基本信息
 	 */
 	public function update() {
-		$this->admin_priv('merchant_manage',ecjia::MSGTYPE_JSON);
+		$this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
 
         $store_id               = $_SESSION['store_id'];
         $shop_kf_mobile         = ($_POST['shop_kf_mobile'] == get_merchant_config('shop_kf_mobile'))       ? '' : htmlspecialchars($_POST['shop_kf_mobile']);
@@ -278,7 +278,7 @@ class merchant extends ecjia_merchant {
      * 店铺开关
      */
     public function mh_switch() {
-        $this->admin_priv('merchant_switch',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('merchant_switch');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺开关'));
         $this->assign('app_url', RC_App::apps_url('statics', __FILE__));
@@ -301,7 +301,7 @@ class merchant extends ecjia_merchant {
      * 店铺开关
      */
     public function mh_switch_update() {
-        $this->admin_priv('merchant_switch',ecjia::MSGTYPE_JSON);
+        $this->admin_priv('merchant_switch', ecjia::MSGTYPE_JSON);
 
         $shop_close = isset($_POST['shop_close']) ? $_POST['shop_close'] : null;
         $code = !empty($_POST['code'])   ? $_POST['code'] 		: '';
