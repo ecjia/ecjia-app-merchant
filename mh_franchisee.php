@@ -153,12 +153,12 @@ class mh_franchisee extends ecjia_merchant {
     public function receipt_update() {
         $this->admin_priv('franchisee_bank', ecjia::MSGTYPE_JSON);
 
-        $bank_name              = !empty($_POST['bank_name'])? htmlspecialchars($_POST['bank_name']) :'';
-        $bank_account_number    = !empty($_POST['bank_account_number'])? htmlspecialchars($_POST['bank_account_number']) :'';
-        $bank_account_name      = !empty($_POST['bank_account_name'])? htmlspecialchars($_POST['bank_account_name']) :'';
-        $bank_branch_name       = !empty($_POST['bank_branch_name'])? htmlspecialchars($_POST['bank_branch_name']) :'';
-        $bank_address           = !empty($_POST['bank_address'])? htmlspecialchars($_POST['bank_address']) :'';
-        if(empty($bank_name) || empty($bank_account_number) || empty($bank_account_name) || empty($bank_branch_name) || empty($bank_address)){
+        $bank_name              = !empty($_POST['bank_name'])           ? htmlspecialchars($_POST['bank_name'])             : '';
+        $bank_account_number    = !empty($_POST['bank_account_number']) ? htmlspecialchars($_POST['bank_account_number'])   : '';
+        $bank_account_name      = !empty($_POST['bank_account_name'])   ? htmlspecialchars($_POST['bank_account_name'])     : '';
+        $bank_branch_name       = !empty($_POST['bank_branch_name'])    ? htmlspecialchars($_POST['bank_branch_name'])      : '';
+        $bank_address           = !empty($_POST['bank_address'])        ? htmlspecialchars($_POST['bank_address'])          : '';
+        if (empty($bank_name) || empty($bank_account_number) || empty($bank_account_name) || empty($bank_branch_name) || empty($bank_address)) {
             return $this->showmessage('请不要提交空值', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
         $data = array(
