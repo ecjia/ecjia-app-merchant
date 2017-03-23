@@ -1,12 +1,12 @@
 /*
  * ui
- * 模块（module）（.m-）：通常是一个语义化的可以重复使用的较大的整体！比如导航、登录、注册、各种列表、评论、搜索等！
- * 元件（unit）（.u-）：通常是一个不可再分的较为小巧的个体，通常被重复用于各种模块中！比如按钮、输入框、loading、图标等！
- * UI库（lib）：lib库中的css也属于此类，但lib中的css要按需加载。
- * TODO:使用nec规范css样式;
+ * 妯″潡锛坢odule锛夛紙.m-锛夛細閫氬父鏄竴涓涔夊寲鐨勫彲浠ラ噸澶嶄娇鐢ㄧ殑杈冨ぇ鐨勬暣浣擄紒姣斿瀵艰埅銆佺櫥褰曘�娉ㄥ唽銆佸悇绉嶅垪琛ㄣ�璇勮銆佹悳绱㈢瓑锛�
+ * 鍏冧欢锛坲nit锛夛紙.u-锛夛細閫氬父鏄竴涓笉鍙啀鍒嗙殑杈冧负灏忓阀鐨勪釜浣擄紝閫氬父琚噸澶嶇敤浜庡悇绉嶆ā鍧椾腑锛佹瘮濡傛寜閽�杈撳叆妗嗐�loading銆佸浘鏍囩瓑锛�
+ * UI搴擄紙lib锛夛細lib搴撲腑鐨刢ss涔熷睘浜庢绫伙紝浣唋ib涓殑css瑕佹寜闇�姞杞姐�
+ * TODO:浣跨敤nec瑙勮寖css鏍峰紡;
  */
 
-/*===========================style移植过来的ECJIA-MERCHANT-UI全局样式 START===========================*/
+/*===========================style绉绘杩囨潵鐨凟CJIA-MERCHANT-UI鍏ㄥ眬鏍峰紡 START===========================*/
 body{
 	background-color: #e7e7e7;
 	/*font-family: "Open Sans", sans-serif;*/
@@ -121,7 +121,7 @@ a:hover{
 
 input[type="checkbox"],
 input[type="radio"]{display: none;}
-/*单选框*/
+/*鍗曢�妗�/
 [type="radio"]:not(:checked) + label:before { border-radius: 50%;border: 2px solid #ddd;}
 [type="radio"]:not(:checked) + label,
 [type="radio"]:checked + label {position: relative;padding-left: 25px;cursor: pointer;display: inline-block;height: 22px;top:5px;line-height: 22px;font-size: 14px;font-weight:400;-webkit-transition: .28s ease;-moz-transition: .28s ease;-o-transition: .28s ease;-ms-transition: .28s ease;transition: .28s ease;-webkit-user-select: none;-moz-user-select: none;-khtml-user-select: none;-ms-user-select: none;}
@@ -129,7 +129,7 @@ input[type="radio"]{display: none;}
 [type="radio"]:not(:checked) + label:after {border-radius: 50%;border: 2px solid #5a5a5a;z-index: -1;-webkit-transform: scale(0);-moz-transform: scale(0);-ms-transform: scale(0);-o-transform: scale(0);transform: scale(0);}
 [type="radio"]:checked + label:before {border-radius: 50%;border: 2px solid #3498db;}
 [type="radio"]:checked + label:after {border-radius: 50%;border: 2px solid #3498db;background-color: #3498db;z-index: 0;-webkit-transform: scale(.5);-moz-transform: scale(.5);-ms-transform: scale(.5);-o-transform: scale(.5);transform: scale(.5);}
-/*复选框*/
+/*澶嶉�妗�/
 [type="checkbox"] + label {position: relative;padding-left: 25px; padding-right:10px; cursor: pointer;display: inline-block;height: 25px;line-height: 25px;font-size: 14px;font-weight:400;-webkit-user-select: none;-moz-user-select: none;-khtml-user-select: none;-ms-user-select: none;}
 [type="checkbox"] + label:before {content: '';position: absolute;top: 0;left: 0;width: 18px;height: 18px;z-index: 0;border: 2px solid #5a5a5a;border-radius: 1px;margin-top: 2px;-webkit-transition: 0.2s;-moz-transition: 0.2s;-o-transition: 0.2s;-ms-transition: 0.2s;transition: 0.2s;}
 [type="checkbox"]:checked.fild-item + label:before {top: -4px;left: -3px;width: 12px;height: 22px;border-top: 2px solid transparent;border-left: 2px solid transparent;border-right: 2px solid #3498db;border-bottom: 2px solid #3498db;-webkit-transform: rotate(40deg);-moz-transform: rotate(40deg);-ms-transform: rotate(40deg);-o-transform: rotate(40deg);transform: rotate(40deg);-webkit-backface-visibility: hidden;-webkit-transform-origin: 100% 100%;-moz-transform-origin: 100% 100%;-ms-transform-origin: 100% 100%;-o-transform-origin: 100% 100%;transform-origin: 100% 100%;}
@@ -2509,7 +2509,7 @@ h3.timeline-title {
 	    -ms-border-radius: 100%;
 	     -o-border-radius: 100%;
 			border-radius: 100%;
-	border: 5px solid #ecf0f1;
+	border: 5px solid #bdc3c7;
 	margin-bottom: 10px;
 }
 #real-estates-detail #author p{
@@ -2809,7 +2809,7 @@ footer .content-widget-footer .icon-footer i.fa{
 	font-size: 11pt;
 }
 
-/* 表格中没有数据的样式 */
+/* 琛ㄦ牸涓病鏈夋暟鎹殑鏍峰紡 */
 table .no-records {
     text-align: center;
     height: 100px;
@@ -2821,15 +2821,15 @@ table .no-records {
     vertical-align: middle !important;
 }
 
-/*===========================style移植过来的ECJIAUI全局样式 END===========================*/
+/*===========================style绉绘杩囨潵鐨凟CJIAUI鍏ㄥ眬鏍峰紡 END===========================*/
 
-/*=========================== 自定义的ECJIA-MERCHANT-UI全局样式 END===========================*/
+/*=========================== 鑷畾涔夌殑ECJIA-MERCHANT-UI鍏ㄥ眬鏍峰紡 END===========================*/
 .badge{
     margin-left: 5px;
 }
 a[class*='no-underline']:hover,a[class*='no-underline']:focus{text-decoration:none;}
 
-/* pjax加载动画 */
+/* pjax鍔犺浇鍔ㄧ敾 */
 .pjaxLoadding-busy .pjaxLoadding {
     background: none repeat scroll 0 0 #37e2bf;
     height: 2px;
@@ -2852,11 +2852,11 @@ a[class*='no-underline']:hover,a[class*='no-underline']:focus{text-decoration:no
     width: 100%;
 }
 
-/*=========================== 自定义的ECJIAUI全局样式 END===========================*/
+/*=========================== 鑷畾涔夌殑ECJIAUI鍏ㄥ眬鏍峰紡 END===========================*/
 
 
-/*===========================全局的部分样式 START===========================*/
-/*input 行内输入框*/
+/*===========================鍏ㄥ眬鐨勯儴鍒嗘牱寮�START===========================*/
+/*input 琛屽唴杈撳叆妗�/
 input.edit-inline,
 input.edit-inline:focus {
     display: inline;
@@ -2872,7 +2872,7 @@ input.edit-inline:focus {
 }
 */
 
-/* ecj-wookmark 封装自适应图片列表 START */
+/* ecj-wookmark 灏佽鑷�搴斿浘鐗囧垪琛�START */
 .ecj-wookmark ul {
     position: static;
     bottom: 0;
@@ -2948,9 +2948,9 @@ input.edit-inline:focus {
 .ecj-wookmark ul li:nth-of-type(4n+1) {
     clear: both;
 }
-/* ecj-wookmark 封装自适应图片列表 END */
+/* ecj-wookmark 灏佽鑷�搴斿浘鐗囧垪琛�END */
 
- /*必填的红色星号*/
+ /*蹇呭～鐨勭孩鑹叉槦鍙�/
  .input-must{
 	display: inline;
 	line-height: 34px;
@@ -2959,18 +2959,18 @@ input.edit-inline:focus {
     color: red;
 }
 
-/*给隐藏框的列表添加行高，以对齐
+/*缁欓殣钘忔鐨勫垪琛ㄦ坊鍔犺楂橈紝浠ュ榻�
 .modal-body .controls{
     line-height: 30px;
 }
 */
 
-/*===========================全局的部分样式 END===========================*/
+/*===========================鍏ㄥ眬鐨勯儴鍒嗘牱寮�END===========================*/
 
 
-/*===========================ECJIAUI样式START===========================*/
+/*===========================ECJIAUI鏍峰紡START===========================*/
 
-/* editable 列表插件样式 START */
+/* editable 鍒楄〃鎻掍欢鏍峰紡 START */
 div.dataTables_length {text-align:left}
 div.dataTables_length select{width:inherit;min-width: 60px;}
 div.dataTables_filter {text-align:right}
@@ -3008,10 +3008,10 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .col_vis_menu {float:right}
 .dataTables_paginate {height:auto}
 .DTTT_collection_background {display:none}
-/* editable 列表插件样式 END */
+/* editable 鍒楄〃鎻掍欢鏍峰紡 END */
 
 
-/*navigator 的list区域抽象出 ECjiaUI默认的选择区域样式*/
+/*navigator 鐨刲ist鍖哄煙鎶借薄鍑�ECjiaUI榛樿鐨勯�鎷╁尯鍩熸牱寮�/
 .choose_list{
     line-height: 28px;
     /*display: inline-block;
@@ -3057,7 +3057,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     font-size:14px;
     display: inline-block;
 }
-/*select下拉框设置浮动清除，否则谷歌下不显示*/
+/*select涓嬫媺妗嗚缃诞鍔ㄦ竻闄わ紝鍚﹀垯璋锋瓕涓嬩笉鏄剧ず*/
 .choose_list .chzn-search input[type='text']{
     float:none;
 }
@@ -3084,14 +3084,14 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     display: initial;
 }
 
-/*choose_list扩展*/
+/*choose_list鎵╁睍*/
 .choose_list .center{
     margin-left: 20px;
 }
-/*ECjiaUI默认的选择区域样式 END*/
+/*ECjiaUI榛樿鐨勯�鎷╁尯鍩熸牱寮�END*/
 
 
-/*navigator 的edit区域抽象出 ECjiaUI默认的菜单编辑样式*/
+/*navigator 鐨別dit鍖哄煙鎶借薄鍑�ECjiaUI榛樿鐨勮彍鍗曠紪杈戞牱寮�/
 .nav_edit{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -3124,10 +3124,10 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .nav_edit .nav_edit_hd input, .nav_edit .nav_edit_ft input{
     margin: 0px;
 }
-/*ECjiaUI默认的菜单编辑样式 END*/
+/*ECjiaUI榛樿鐨勮彍鍗曠紪杈戞牱寮�END*/
 
 
-/* .wookmark动态列表组件 START*/
+/* .wookmark鍔ㄦ�鍒楄〃缁勪欢 START*/
 .wookmark{
     position: relative;
     text-align: center;
@@ -3149,9 +3149,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .wookmark p{
     margin-bottom: 0px;
 }
-/* .wookmark动态选择列表组件 END*/
+/* .wookmark鍔ㄦ�閫夋嫨鍒楄〃缁勪欢 END*/
 
-/*.wookmark 组件扩展START*/
+/*.wookmark 缁勪欢鎵╁睍START*/
 .wookmark .thumbnail{
     width: 20%;
     float: left;
@@ -3211,7 +3211,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     background: none;
 }
 
-/*高分辨率电脑样式*/
+/*楂樺垎杈ㄧ巼鐢佃剳鏍峰紡*/
 @media (min-width: 768px){
     .wookmark .thumbnail{
         width: 22%;
@@ -3221,7 +3221,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
         margin-right: 0px;
     }
 }
-/*平板和低分辨率电脑样式*/
+/*骞虫澘鍜屼綆鍒嗚鲸鐜囩數鑴戞牱寮�/
 @media (max-width: 767px){
     .wookmark .thumbnail{
         margin-right: 4%;
@@ -3231,7 +3231,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
         margin-right: 0px;
     }
 }
-/*手机版样式*/
+/*鎵嬫満鐗堟牱寮�/
 @media (max-width: 480px) {
     .wookmark .thumbnail{
         width: 100%;
@@ -3241,7 +3241,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
         margin-right: 0px;
     }
 }
-/*.wookmark-cycleimage扩展*/
+/*.wookmark-cycleimage鎵╁睍*/
     .wookmark.media_captcha .thumbnail .input{
         opacity: 0;
         transition: opacity 0.2s;
@@ -3315,7 +3315,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
         transition: opacity 0.1s;
     }
 
-    /*选中后的样式*/
+    /*閫変腑鍚庣殑鏍峰紡*/
     .wookmark .wookmark-cycleimage .choose .input{
         color: #fff;
         background: #48a6d2;
@@ -3343,9 +3343,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
         opacity: 1;
         cursor: pointer;
     }*/
-/*.wookmark 组件扩展 END*/
+/*.wookmark 缁勪欢鎵╁睍 END*/
 
-/* .wookmark .more列表扩展，更多内容  START*/
+/* .wookmark .more鍒楄〃鎵╁睍锛屾洿澶氬唴瀹� START*/
 .wookmark .more{
     float: left;
     display: block;
@@ -3400,9 +3400,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     top: 5%;
     font: 900 60px/85px dashicons;
 }
-/* .wookmark .more列表扩展，更多内容 END*/
+/* .wookmark .more鍒楄〃鎵╁睍锛屾洿澶氬唴瀹�END*/
 
-/*moveaccordion可拖动手风琴 START*/
+/*moveaccordion鍙嫋鍔ㄦ墜椋庣惔 START*/
 .moveaccordion{
     overflow: auto;
 }
@@ -3442,9 +3442,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     /*border: 1px solid #666;*/
     /*border-radius: 4px;*/
 }
-/*moveaccordion可拖动手风琴 END*/
+/*moveaccordion鍙嫋鍔ㄦ墜椋庣惔 END*/
 
-/*template布局管理左侧菜单 START*/
+/*template甯冨眬绠＄悊宸︿晶鑿滃崟 START*/
 .template_sidebar{
     top: 0px;
 }
@@ -3455,9 +3455,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .template_sidebar .btn_group{
     padding: 15px 10px;
 }
-/*template布局管理左侧菜单 END*/
+/*template甯冨眬绠＄悊宸︿晶鑿滃崟 END*/
 
-/*.page分页样式 START*/
+/*.page鍒嗛〉鏍峰紡 START*/
 /*
 .page{
     background-color: #F5F5F5;
@@ -3492,9 +3492,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .pagination ul > li > a,.pagination ul > li > span,.pagination ul > li > div > a,.pagination ul > li > div > span {line-height: 24px;padding:0 10px}
 .pagination ul > li > div.page {display:inline}
 */
-/*.page分页样式 END*/
+/*.page鍒嗛〉鏍峰紡 END*/
 
-/* .privilege权限管理的列表样式 START*/
+/* .privilege鏉冮檺绠＄悊鐨勫垪琛ㄦ牱寮�START*/
 .priv_list{
     width: 100%;
     overflow: hidden;
@@ -3515,10 +3515,10 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .priv_list .checkall{
     padding-left: 30px;
 }
-/* .privilege权限管理的列表样式 END*/
+/* .privilege鏉冮檺绠＄悊鐨勫垪琛ㄦ牱寮�END*/
 
 
-/* 验证码的css address : m=captcha&c=admin&a=init */
+/* 楠岃瘉鐮佺殑css address : m=captcha&c=admin&a=init */
 /*.media_captcha ul li{
     float:left;
     list-style:none;
@@ -3551,7 +3551,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     margin-left:3px;
 }*/
 
-/* .error错误提示的UI样式 START*/
+/* .error閿欒鎻愮ず鐨刄I鏍峰紡 START*/
 .errorpage{
     /*padding: 20px;*/
     text-align: left;
@@ -3582,9 +3582,9 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
 .errorpage li{
     list-style-type: none;
 }
-/* .error错误提示的UI样式 END*/
+/* .error閿欒鎻愮ず鐨刄I鏍峰紡 END*/
 
-/* .mock-table 模拟表格的UI样式 START*/
+/* .mock-table 妯℃嫙琛ㄦ牸鐨刄I鏍峰紡 START*/
 .mock-table{
     list-style-type: none;
 }
@@ -3622,26 +3622,26 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     opacity: 0;
     transition: opacity 0.2s;
 }
-/* .mock-table 模拟表格的UI样式 END*/
+/* .mock-table 妯℃嫙琛ㄦ牸鐨刄I鏍峰紡 END*/
 
-/*上传图片与按钮居中样式*/
+/*涓婁紶鍥剧墖涓庢寜閽眳涓牱寮�/
 /*.fileupload .thumbnail > img { display:inherit;margin-top:-3px;}
 .fileupload .btn{margin-top:-3px;}*/
 
-/* .goods_img 商品上传的图片预览样式扩展 STTART */
+/* .goods_img 鍟嗗搧涓婁紶鐨勫浘鐗囬瑙堟牱寮忔墿灞�STTART */
 .goods_img .fileupload-preview {
     width: 200px;
     height: 200px;
     line-height: 200px;
 }
-/* .goods_img 商品上传的图片预览样式扩展 END */
+/* .goods_img 鍟嗗搧涓婁紶鐨勫浘鐗囬瑙堟牱寮忔墿灞�END */
 
 
-/*全局 批量操作中的form去除margin*/
+/*鍏ㄥ眬 鎵归噺鎿嶄綔涓殑form鍘婚櫎margin*/
 .batch-select form{margin-bottom:0px;}
 
 
-/*全局css 适用编辑页面*/
+/*鍏ㄥ眬css 閫傜敤缂栬緫椤甸潰*/
 .edit-page .chzn-container{
     float:none;
 }
@@ -3673,26 +3673,26 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     float:left;
 }
 
-/*暂时单独用在会员编辑页面*/
+/*鏆傛椂鍗曠嫭鐢ㄥ湪浼氬憳缂栬緫椤甸潰*/
 .edit-page .control-group .users p{
     margin-top:6px;
 }
-/*select标签的间距*/
+/*select鏍囩鐨勯棿璺�/
 .edit-page .control-group .chzn-container{
     margin-right:5px;
 }
-/*控制必选*下面的help-block*/
+/*鎺у埗蹇呴�*涓嬮潰鐨刪elp-block*/
 .form-horizontal span+.help-block{
     margin-top:10px;
 }
-/*控制checkbox,radio下面的help-block*/
+/*鎺у埗checkbox,radio涓嬮潰鐨刪elp-block*/
 .form-horizontal div[class!='chzn-container']+span+.help-block{
     margin-top:5px !important;
 }
 .edit-page .check_radio>ul+.help-block{
     margin-top:6px;
 }
-/*商品编辑页面*/
+/*鍟嗗搧缂栬緫椤甸潰*/
 .edit-page .tab-pane {
     overflow: hidden;
 }
@@ -3726,11 +3726,11 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     padding-top:1px;
     margin-left: 0;
 }
-/*用户订单模块css*/
+/*鐢ㄦ埛璁㈠崟妯″潡css*/
 .edit-page .booking_notice>span{margin-top:5px;margin-right:5px;float:left;}
 .edit-page .booking_notice input{margin-right:5px;float:left;}
 .edit-page .booking_notice .uni-checker{margin-top:2px;}
-/*全局css 适用列表页面批量操作 */
+/*鍏ㄥ眬css 閫傜敤鍒楄〃椤甸潰鎵归噺鎿嶄綔 */
 .list-page .batch .chzn-container{
     margin-right:5px;
 }
@@ -3742,7 +3742,7 @@ table tr td.dataTables_empty {cursor:default;height:100px;line-height:100px;back
     list-style-type: none;
 }
 
-/* ---- 批量操作下拉css ---- */
+/* ---- 鎵归噺鎿嶄綔涓嬫媺css ---- */
 .dropdown-menu li > a:hover, .dropdown-menu .active > a,
 .dropdown-menu .active > a:hover,
 .nav-list > .active > a, .nav-list > .active > a:hover,
@@ -3751,7 +3751,7 @@ span.dynatree-active a {
    color: #fff;
 }
 
-/*table扩展 用户订单模块  START*/
+/*table鎵╁睍 鐢ㄦ埛璁㈠崟妯″潡  START*/
 .table-oddtd tr>td{
     vertical-align: middle;
 }
@@ -3780,10 +3780,10 @@ table tr th.sorting-asc{
 table tr th.sorting-desc{
     background: url("../assets/data-tables/images/sort_desc.png") no-repeat scroll right center #fff;
 }
-/*table扩展 用户订单模块  END*/
+/*table鎵╁睍 鐢ㄦ埛璁㈠崟妯″潡  END*/
 
 
-/* tempplateList 模板列表 库项目管理用到的列表样式 START*/
+/* tempplateList 妯℃澘鍒楄〃 搴撻」鐩鐞嗙敤鍒扮殑鍒楄〃鏍峰紡 START*/
 .library-content .template_list {
     padding: 10px;
 }
@@ -3820,7 +3820,7 @@ table tr th.sorting-desc{
     z-index: 999;
 }
 
-/*设置一个兼容样式，禁用ace_error*/
+/*璁剧疆涓�釜鍏煎鏍峰紡锛岀鐢╝ce_error*/
 .ace_editor {
     border: none;
     margin-bottom:0;
@@ -3831,9 +3831,9 @@ table tr th.sorting-desc{
     border-top-right-radius: 0;
 }
 
-/* tempplateList 模板列表 库项目管理用到的列表样式 END*/
+/* tempplateList 妯℃澘鍒楄〃 搴撻」鐩鐞嗙敤鍒扮殑鍒楄〃鏍峰紡 END*/
 
-/* .float_block 浮动区域样式 TODO：未完全封装 START */
+/* .float_block 娴姩鍖哄煙鏍峰紡 TODO锛氭湭瀹屽叏灏佽 START */
 .float_block{
     position: absolute;
     top: 116px;
@@ -3891,15 +3891,15 @@ table tr th.sorting-desc{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f1f1f1',GradientType=0 );
     color:#666;
 }
-/* .float_block 浮动区域样式 END */
+/* .float_block 娴姩鍖哄煙鏍峰紡 END */
 
-/*.table .install 表格状态的扩展 START*/
+/*.table .install 琛ㄦ牸鐘舵�鐨勬墿灞�START*/
 .table tr.left_border{
     border-left:5px solid #2ea2cc;
 }
-/*.table .install 表格状态的扩展 END*/
+/*.table .install 琛ㄦ牸鐘舵�鐨勬墿灞�END*/
 
-/* .clear_cache 更新缓存区域样式扩展 START*/
+/* .clear_cache 鏇存柊缂撳瓨鍖哄煙鏍峰紡鎵╁睍 START*/
 .clear_cache .left_box
 {
     padding-left: 20px;
@@ -3916,9 +3916,9 @@ table tr th.sorting-desc{
     color: #367ead;
     cursor: default;
 }
-/* .clear_cache 更新缓存区域样式扩展 END*/
+/* .clear_cache 鏇存柊缂撳瓨鍖哄煙鏍峰紡鎵╁睍 END*/
 
-/* input[type="number"] input的number框 START */
+/* input[type="number"] input鐨刵umber妗�START */
 .main_content .ui-spinner{
     background-color: #fff;
     border: 1px solid #ccc;
@@ -3933,10 +3933,10 @@ table tr th.sorting-desc{
     padding: 0 24px 0 8px;
     position: relative;
 }
-/* input[type="number"] input的number框 END */
+/* input[type="number"] input鐨刵umber妗�END */
 
 
-/* 手风琴效果扩展 START*/
+/* 鎵嬮鐞存晥鏋滄墿灞�START*/
 .foldable-list .accordion-group{margin-bottom: 10px;}
 .foldable-list .accordion-group .accordion-heading-url{position: relative;}
 .foldable-list .accordion-group .accordion-url{position: absolute;top: 8px;left: 90px;}
@@ -3961,9 +3961,9 @@ table tr th.sorting-desc{
 	content:"\2b";
 }
 
-/* 手风琴效果扩展 END*/
+/* 鎵嬮鐞存晥鏋滄墿灞�END*/
 
-/* 手风琴效果扩展2-编辑器 START*/
+/* 鎵嬮鐞存晥鏋滄墿灞�-缂栬緫鍣�START*/
 /*.accordion-group-editor {
     border: none;
     border-bottom: 1px solid #e5e5e5;
@@ -3985,10 +3985,10 @@ table tr th.sorting-desc{
 .accordion-group-editor .accordion-inner {
     padding: 0px;
 }
-/* 手风琴效果扩展2-编辑器 END*/
+/* 鎵嬮鐞存晥鏋滄墿灞�-缂栬緫鍣�END*/
 
 
-/* .table-hide-edit 编辑区域隐藏的table样式扩展 START*/
+/* .table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 START*/
 .table.table-hide-edit .center-td{
     vertical-align: middle;
 }
@@ -4026,9 +4026,9 @@ table tr th.sorting-desc{
 .table.table-hide-edit tr:hover .edit-list{
     opacity: 1;
 }
-/* .table-hide-edit 编辑区域隐藏的table样式扩展 END*/
+/* .table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 END*/
 
-/*.table-hide-edit 编辑区域隐藏的table样式扩展项 START*/
+/*.table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍椤�START*/
 .table.table-hide-edit .big img.thumbnail{
     width: 80px;
     height: 80px;
@@ -4036,9 +4036,9 @@ table tr th.sorting-desc{
 .table.table-hide-edit .big .edit-list{
     width: 800px;
 }
-/* .table-hide-edit 编辑区域隐藏的table样式扩展 END*/
+/* .table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 END*/
 
-/*.table-hide-edit 编辑区域隐藏的table样式扩展项 START*/
+/*.table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍椤�START*/
 .table.table-hide-edit .small{
     height: 40px;
 }
@@ -4052,9 +4052,9 @@ table tr th.sorting-desc{
     top: 0px;
     width: 300px;
 }
-/* .table-hide-edit 编辑区域隐藏的table样式扩展 END*/
+/* .table-hide-edit 缂栬緫鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 END*/
 
-/* .table-plugin 插件区域隐藏的table样式扩展 START*/
+/* .table-plugin 鎻掍欢鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 START*/
 .table.table-plugin .hide-edit-area{
     opacity: 0;
     transition: opacity 0.2s ease 0s;
@@ -4062,9 +4062,9 @@ table tr th.sorting-desc{
 .table.table-plugin tr:hover .hide-edit-area{
     opacity: 1;
 }
-/* .table-plugin 插件区域隐藏的table样式扩展 END*/
+/* .table-plugin 鎻掍欢鍖哄煙闅愯棌鐨則able鏍峰紡鎵╁睍 END*/
 
-/* .editpage-rightbar 编辑页面布局扩展，右侧固定大小扩展 START*/
+/* .editpage-rightbar 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-rightbar{
     width:auto;
     margin-right:370px;
@@ -4078,9 +4078,9 @@ table tr th.sorting-desc{
     float:left;
     width:100%;
 }
-/* .editpage-rightbar 编辑页面布局扩展，右侧固定大小扩展 END*/
+/* .editpage-rightbar 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-rightbar-small 编辑页面布局扩展，右侧固定大小扩展 START*/
+/* .editpage-rightbar-small 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-rightbar-small{
     margin-right:250px;
 }
@@ -4088,9 +4088,9 @@ table tr th.sorting-desc{
     width:230px;
     margin-right:-250px;
 }
-/* .editpage-rightbar-small 编辑页面布局扩展，右侧固定大小扩展 END*/
+/* .editpage-rightbar-small 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-rightbar-big 编辑页面布局扩展，右侧固定大小扩展 START*/
+/* .editpage-rightbar-big 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-rightbar-big{
     margin-right:470px;
 }
@@ -4098,9 +4098,9 @@ table tr th.sorting-desc{
     width:450px;
     margin-right:-470px;
 }
-/* .editpage-rightbar-big 编辑页面布局扩展，右侧固定大小扩展 END*/
+/* .editpage-rightbar-big 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽彸渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-leftbar编辑页面布局扩展，左侧固定大小扩展 START*/
+/* .editpage-leftbar缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-leftbar{
     width:auto;
     margin-left:370px;
@@ -4114,9 +4114,9 @@ table tr th.sorting-desc{
     float:right;
     width:100%;
 }
-/* .editpage-leftbar 编辑页面布局扩展，左侧固定大小扩展 END*/
+/* .editpage-leftbar 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-leftbar-small 编辑页面布局扩展，左侧固定大小扩展 START*/
+/* .editpage-leftbar-small 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-leftbar-small{
     margin-left:250px;
 }
@@ -4124,9 +4124,9 @@ table tr th.sorting-desc{
     width:230px;
     margin-left:-250px;
 }
-/* .editpage-leftbar-small 编辑页面布局扩展，左侧固定大小扩展 END*/
+/* .editpage-leftbar-small 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-leftbar-big 编辑页面布局扩展，左侧固定大小扩展 START*/
+/* .editpage-leftbar-big 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�START*/
 .editpage-leftbar-big{
     width:auto;
     margin-left:470px;
@@ -4135,9 +4135,9 @@ table tr th.sorting-desc{
     width:450px;
     margin-left:-470px;
 }
-/* .editpage-leftbar-big 编辑页面布局扩展，左侧固定大小扩展 END*/
+/* .editpage-leftbar-big 缂栬緫椤甸潰甯冨眬鎵╁睍锛屽乏渚у浐瀹氬ぇ灏忔墿灞�END*/
 
-/* .editpage-leftbar .editpage-rightbar .Solid  立体可拖动样式扩展 START*/
+/* .editpage-leftbar .editpage-rightbar .Solid  绔嬩綋鍙嫋鍔ㄦ牱寮忔墿灞�START*/
 .editpage-leftbar .left-bar.solid .accordion-heading .accordion-toggle{
     background: -moz-linear-gradient(center top , #fbfbfb 0%, #f1f1f1 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);
     border-top-left-radius: 4px;
@@ -4154,18 +4154,18 @@ table tr th.sorting-desc{
     moz-border-radius-topleft: 4px;
     cursor: move;
 }
-/* .editpage-leftbar .editpage-rightbar 可拖动样式 END*/
+/* .editpage-leftbar .editpage-rightbar 鍙嫋鍔ㄦ牱寮�END*/
 
-/* move-mod 移动模块 START */
+/* move-mod 绉诲姩妯″潡 START */
 .move-mod .move-mod-group{
     background: #fff;
 }
 .move-mod .move-mod-group .move-mod-head{
     cursor: move;
 }
-/* move-mod 移动模块 END */
+/* move-mod 绉诲姩妯″潡 END */
 
-/* 软件安装协议的正文模块 START */
+/* 杞欢瀹夎鍗忚鐨勬鏂囨ā鍧�START */
 .application-installer .muted{
     font-size: 16px;
 }
@@ -4234,9 +4234,9 @@ table tr th.sorting-desc{
 .application-detailed .media-body .media-heading{
     color: #999;
 }
-/* 软件安装协议的正文模块 END */
+/* 杞欢瀹夎鍗忚鐨勬鏂囨ā鍧�END */
 
-/* 管理员聊天模块 START */
+/* 绠＄悊鍛樿亰澶╂ā鍧�START */
 .chat_box select {margin:0}
 .chat_box .chat_content {border:1px solid #ddd;-webkit-border-radius:6px;border-radius:6px}
 .chat_box .chat_message {margin-bottom:10px}
@@ -4266,9 +4266,9 @@ table tr th.sorting-desc{
 .chat_box .chat_sidebar .chat_user_list li.active {background-color:#ffffef}
 .chat_box .chat_sidebar .chat_user_list li.check {background-color:#f4f4f4}
 .chat_box .chat_sidebar .chat_user_list li a span {color:#888;font-size:11px}
-/* 管理员聊天模块 START */
+/* 绠＄悊鍛樿亰澶╂ā鍧�START */
 
-/* 管理员聊天扩展 START  */
+/* 绠＄悊鍛樿亰澶╂墿灞�START  */
 .chat_box .chat_msg .chat_user{color:#08c;font-weight:700}
 .chat_box .chat-msg-mine .chat_msg_date {float:none;}
 .chat-msg-mine {width:50%;float:right;}
@@ -4278,9 +4278,9 @@ table tr th.sorting-desc{
 .chat_box .chat-msg-mine .chat_edit_msg{margin-right:10px;}
 .chat_box .chat-msg-mine .chat_edit_msg {float:right}
 .chat_box .chat_editor_msgbox {padding:20px;}
-/* 管理员聊天扩展 END */
+/* 绠＄悊鍛樿亰澶╂墿灞�END */
 
-/* 上传模块样式 START  */
+/* 涓婁紶妯″潡鏍峰紡 START  */
 .dropper {
     overflow: hidden;
 }
@@ -4315,9 +4315,9 @@ table tr th.sorting-desc{
 .no-opacity .dropper-input {
     left: -999px;
 }
-/* 管理员聊天扩展 END  */
+/* 绠＄悊鍛樿亰澶╂墿灞�END  */
 
-/*简介模块样式 START*/
+/*绠�粙妯″潡鏍峰紡 START*/
 .outline {
     padding: 10px;
     cursor: default;
@@ -4334,9 +4334,9 @@ table tr th.sorting-desc{
     color: #000000;
     border-radius: 5px;
 }
-/*简介模块样式 END*/
+/*绠�粙妯″潡鏍峰紡 END*/
 
-/*欢迎模块样式 START*/
+/*娆㈣繋妯″潡鏍峰紡 START*/
 .hero-unit {
     font-size: 14px;
     cursor: default;
@@ -4352,18 +4352,18 @@ table tr th.sorting-desc{
 .hero-unit h1 {
     line-height: normal;
 }
-/*简介模块样式 END*/
+/*绠�粙妯″潡鏍峰紡 END*/
 
-/* 底部footer模块样式 START*/
+/* 搴曢儴footer妯″潡鏍峰紡 START*/
 .footer{
     border-top: 1px solid #ccc;
     color: #666;
     padding-top: 15px;
     text-align: center;
 }
-/* 底部footer样式 END*/
+/* 搴曢儴footer鏍峰紡 END*/
 
-/* table仪表盘中的扩展 START*/
+/* table浠〃鐩樹腑鐨勬墿灞�START*/
 .dash-table-oddtd tr > td:nth-child(2n+1) {
     background-color: #f5f5f5;
     border-left: 1px solid #e5e5e5;
@@ -4371,9 +4371,9 @@ table tr th.sorting-desc{
 .dash-table-color {
     color: #f00;
 }
-/* table仪表盘中的扩展 END*/
+/* table浠〃鐩樹腑鐨勬墿灞�END*/
 
-/* ov_boxes扩展，数排列列表中的情况 START */
+/* ov_boxes鎵╁睍锛屾暟鎺掑垪鍒楄〃涓殑鎯呭喌 START */
 .manage_box {
     display: block;
 }
@@ -4408,9 +4408,9 @@ table tr th.sorting-desc{
     padding: 9px 0 7px;
     text-align: left;
 }
-/* ov_boxes扩展，数排列列表中的情况 END */
+/* ov_boxes鎵╁睍锛屾暟鎺掑垪鍒楄〃涓殑鎯呭喌 END */
 
-/* ms-container模块，左右两边的选项框 START */
+/* ms-container妯″潡锛屽乏鍙充袱杈圭殑閫夐」妗�START */
 .ms-container{
     background: transparent url('../assets/lou-multi-select/img/switch.png') no-repeat 50% 50%;
 }
@@ -4532,9 +4532,9 @@ table tr th.sorting-desc{
     line-height: 28px;
     font-size: 13px;
 }
-/* ms-container模块，左右两边的选项框 END */
+/* ms-container妯″潡锛屽乏鍙充袱杈圭殑閫夐」妗�END */
 
-/* ms-container模块，使用到单个的扩展 START */
+/* ms-container妯″潡锛屼娇鐢ㄥ埌鍗曚釜鐨勬墿灞�START */
 .ms-container-nobg{
     background: none;
 }
@@ -4549,9 +4549,9 @@ table tr th.sorting-desc{
 .ms-container .ms-not-selectable{
     margin-right: 4%;
 }
-/* ms-container模块，使用到单个的扩展 END */
+/* ms-container妯″潡锛屼娇鐢ㄥ埌鍗曚釜鐨勬墿灞�END */
 
-/* ms-shipping模块，选择地区的扩展 START */
+/* ms-shipping妯″潡锛岄�鎷╁湴鍖虹殑鎵╁睍 START */
 .ms-shipping{
     background: none;
 }
@@ -4572,10 +4572,10 @@ table tr th.sorting-desc{
 .ms-shipping .ms-elem-selectable:hover .edit-list{
     opacity: 1;
 }
-/* ms-shipping模块，选择地区的扩展 END */
+/* ms-shipping妯″潡锛岄�鎷╁湴鍖虹殑鎵╁睍 END */
 
 
-/*ms的扩展，拖动ms START*/
+/*ms鐨勬墿灞曪紝鎷栧姩ms START*/
 .draggable .ui-sortable-placeholder {
     background: none repeat scroll 0 0 transparent;
     border: 1px dashed #aaa;
@@ -4618,7 +4618,7 @@ table tr th.sorting-desc{
 .draggable .ms-container .modif li.ms-elem-selection {
     cursor: move;
 }
-/* 关联商品价格样式 */
+/* 鍏宠仈鍟嗗搧浠锋牸鏍峰紡 */
 .draggable li.ms-elem-selection .link_price_input{
     display: inline;
     border: none;
@@ -4631,9 +4631,9 @@ table tr th.sorting-desc{
     line-height: 16px;
     margin: 0;
 }
-/*ms的扩展，拖动ms END*/
+/*ms鐨勬墿灞曪紝鎷栧姩ms END*/
 
-/* wookmark_list 拖动模块扩展（修正列表拖拽元素的属性问题） START */
+/* wookmark_list 鎷栧姩妯″潡鎵╁睍锛堜慨姝ｅ垪琛ㄦ嫋鎷藉厓绱犵殑灞炴�闂锛�START */
 .wookmark_list {
     text-align: left;
     position: inherit;
@@ -4649,9 +4649,9 @@ table tr th.sorting-desc{
     height: 222px;
     background: #eee;
 }
-/* wookmark_list 拖动模块扩展（修正列表拖拽元素的属性问题） END */
+/* wookmark_list 鎷栧姩妯″潡鎵╁睍锛堜慨姝ｅ垪琛ㄦ嫋鎷藉厓绱犵殑灞炴�闂锛�END */
 
-/*.license_list 列表扩展 START*/
+/*.license_list 鍒楄〃鎵╁睍 START*/
 .license_list .thumbnail {
     padding: 15px;
 }
@@ -4664,9 +4664,9 @@ table tr th.sorting-desc{
 .license_list .thumbnail .license_bd {
     height: 120px;
 }
-/*.license_list 列表扩展 END*/
+/*.license_list 鍒楄〃鎵╁睍 END*/
 
-/*.fileupload-btn 上传按钮组件 START */
+/*.fileupload-btn 涓婁紶鎸夐挳缁勪欢 START */
 .fileupload-btn,
 .fileupload-btn:hover,
 .fileupload-btn:after {
@@ -4747,16 +4747,16 @@ table tr th.sorting-desc{
     vertical-align: middle;
     background: #eee;
 }*/
-/*.fileupload-btn 上传按钮组件 END */
+/*.fileupload-btn 涓婁紶鎸夐挳缁勪欢 END */
 
 
-/*===========================ECJIAUI样式END===========================*/
+/*===========================ECJIAUI鏍峰紡END===========================*/
 
 
 
-/*===========================等待整理===========================*/
+/*===========================绛夊緟鏁寸悊===========================*/
 
-/*.goods-cat 添加商品的商品分类样式 START*/
+/*.goods-cat 娣诲姞鍟嗗搧鐨勫晢鍝佸垎绫绘牱寮�START*/
 .goods-cat {
     height: 160px;
     max-height: 200px;
@@ -4766,9 +4766,9 @@ table tr th.sorting-desc{
     border-radius: 3px;
     overflow: auto;
 }
-/*.goods-cat 添加商品的商品分类样式 END*/
+/*.goods-cat 娣诲姞鍟嗗搧鐨勫晢鍝佸垎绫绘牱寮�END*/
 
-/*bootscrip的样式继承改写*/
+/*bootscrip鐨勬牱寮忕户鎵挎敼鍐�/
 /*input[type="radio"], input[type="checkbox"] {
     margin: 0px;
 }*/
@@ -4791,7 +4791,7 @@ table tr th.sorting-desc{
     -ms-box-shadow: 0 0 6px rgba(0,0,0,0.2);
     box-shadow: 0 0 6px rgba(0,0,0,0.2)
 }
-/*全局css 分页的css START*/
+/*鍏ㄥ眬css 鍒嗛〉鐨刢ss START*/
 /*
 .page{
     background-color: #F5F5F5;
@@ -4818,9 +4818,9 @@ table tr th.sorting-desc{
 }
 */
 
-/*全局css 分页的css END*/
+/*鍏ㄥ眬css 鍒嗛〉鐨刢ss END*/
 
-/*全局css 弹窗css START*/
+/*鍏ㄥ眬css 寮圭獥css START*/
 .smoke-base{position:fixed;top:0;left:0;bottom:0;right:0;visibility:hidden;opacity:0;-moz-transition:all .3s;-webkit-transition:opacity .3s;-o-transition:all .3s;transition:all .3s}
 .smoke-base.smoke-visible{opacity:1;visibility:visible}
 .smokebg{position:fixed;top:0;left:0;bottom:0;right:0}
@@ -4849,9 +4849,9 @@ table tr th.sorting-desc{
 .smoke .btn:hover{
 	background-color: #2980b9;
 }
-/*全局css 弹窗css END*/
+/*鍏ㄥ眬css 寮圭獥css END*/
 
-/* 图片列表模块CSS START */
+/* 鍥剧墖鍒楄〃妯″潡CSS START */
 .wmk_grid > ul {list-style: none;margin:0;position:relative}
 .wmk_grid > ul > li {background-color: #fff;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;box-sizing: border-box}
 .wmk_grid > ul > li>a,.wmk_grid ul > li>a img {display: block}
@@ -4878,9 +4878,9 @@ table tr th.sorting-desc{
 .video-container {position: relative;padding-bottom: 55.75%;height: 0;overflow: hidden;background: rgba(0,0,0,.3)}
 .video-container iframe,.video-container object,.video-container embed {position: absolute;top: 0;left: 0;width: 100%;height: 100%}
 #cboxContent .video-js {width:640px !important;height:360px !important}
-/* 图片列表模块CSS END */
+/* 鍥剧墖鍒楄〃妯″潡CSS END */
 
-/*wookmark-goods-photo 图片列表扩展 START */
+/*wookmark-goods-photo 鍥剧墖鍒楄〃鎵╁睍 START */
 .wookmark .wookmark-goods-photo > ul > li p span {
     width:70%
 }
@@ -4897,10 +4897,10 @@ table tr th.sorting-desc{
     max-width: 100%;
     vertical-align: middle;
 }
-/*wookmark-goods-photo 图片列表扩展 END */
+/*wookmark-goods-photo 鍥剧墖鍒楄〃鎵╁睍 END */
 
 
-/* 空页面 license-info 授权管理页面 START */
+/* 绌洪〉闈�license-info 鎺堟潈绠＄悊椤甸潰 START */
 .license-info .certificate {
     text-align: center;
     font-size: 16px;
@@ -4937,10 +4937,10 @@ table tr th.sorting-desc{
     font-size: 12px;
     font-weight: normal;
 }
-/* 空页面 license-info 授权管理页面 END */
+/* 绌洪〉闈�license-info 鎺堟潈绠＄悊椤甸潰 END */
 
-/*===========================ECJIAUI样式 By:weidong START ===========================*/
-/* 商品分类编辑 行的扩展TODO：待整理 START */
+/*===========================ECJIAUI鏍峰紡 By:weidong START ===========================*/
+/* 鍟嗗搧鍒嗙被缂栬緫 琛岀殑鎵╁睍TODO锛氬緟鏁寸悊 START */
 .goods_type {
     display: block;
     margin-bottom: 5px;
@@ -4949,9 +4949,9 @@ table tr th.sorting-desc{
 .goods_type .chzn-container {
     margin-right: 5px;
 }
-/* 商品分类编辑 行的扩展TODO：待整理 END */
+/* 鍟嗗搧鍒嗙被缂栬緫 琛岀殑鎵╁睍TODO锛氬緟鏁寸悊 END */
 
-/* 文章分类模块图标 - 无限分类列表 START */
+/* 鏂囩珷鍒嗙被妯″潡鍥炬爣 - 鏃犻檺鍒嗙被鍒楄〃 START */
 .unlimited-category-list .open_state{
     display: inline-block;
     width: 15px;
@@ -4968,9 +4968,9 @@ table tr th.sorting-desc{
     margin-top: 10px;
 }
 
-/* 文章分类模块图标 - 无限分类列表 END */
+/* 鏂囩珷鍒嗙被妯″潡鍥炬爣 - 鏃犻檺鍒嗙被鍒楄〃 END */
 
-/* .goods_preview商品预览页面 START */
+/* .goods_preview鍟嗗搧棰勮椤甸潰 START */
 /*.goods_preview{
     background: #f2f2f2;
 }*/
@@ -4985,12 +4985,12 @@ table tr th.sorting-desc{
     font-size: 28px;
     font-weight: 500;
 }
-/* .goods_preview商品预览页面 END */
+/* .goods_preview鍟嗗搧棰勮椤甸潰 END */
 
-/*===========================ECJIAUI样式 By:weidong END ===========================*/
+/*===========================ECJIAUI鏍峰紡 By:weidong END ===========================*/
 
-/*===========================ECJIAUI样式 By:GuanYongRui START ===========================*/
-/*配送区域添加页面css by:guanyongrui START*/
+/*===========================ECJIAUI鏍峰紡 By:GuanYongRui START ===========================*/
+/*閰嶉�鍖哄煙娣诲姞椤甸潰css by:guanyongrui START*/
 .ship-controls {
     margin-left: 5%;
     margin-right: 5%;
@@ -5106,16 +5106,16 @@ table tr th.sorting-desc{
     -moz-border-right-colors: none;
     -moz-border-top-colors: none;
 }
-/*配送区域添加页面css END*/
+/*閰嶉�鍖哄煙娣诲姞椤甸潰css END*/
 
-/*红包类型列表页面针对隐藏菜单显示修正css by:guanyongrui START*/
+/*绾㈠寘绫诲瀷鍒楄〃椤甸潰閽堝闅愯棌鑿滃崟鏄剧ず淇css by:guanyongrui START*/
 .table-hide-edit .hide_edit_area_bottom{
     padding-bottom: 33px;
 }
-/*配送区域添加页面css END*/
+/*閰嶉�鍖哄煙娣诲姞椤甸潰css END*/
 
-/**======邮件发送遮罩css --by:guanyongrui  --start======**/
-/*全屏/部分 背景遮罩层*/
+/**======閭欢鍙戦�閬僵css --by:guanyongrui  --start======**/
+/*鍏ㄥ睆/閮ㄥ垎 鑳屾櫙閬僵灞�/
 .loadingPage_bg1 {
     background:none repeat scroll 0 0 #000;
     height:100%;
@@ -5127,11 +5127,11 @@ table tr th.sorting-desc{
     top:0px;
     z-index:110;
 }
-/*部分loading范围div*/
+/*閮ㄥ垎loading鑼冨洿div*/
 .loadingPage_partDiv{
     position:relative;
 }
-/*loading图片层*/
+/*loading鍥剧墖灞�/
 .loadingPageimage {
     display:block;
     font-weight:bold;
@@ -5151,29 +5151,29 @@ table tr th.sorting-desc{
     background:url(../images/loading.gif) no-repeat scroll 12px center #FFFFFF;
     border:2px solid #86A5AD;
 }
-/**======邮件发送遮罩css --by:guanyongrui  --end======**/
+/**======閭欢鍙戦�閬僵css --by:guanyongrui  --end======**/
 
-/*===========================ECJIAUI样式 By:GuanYongRui END ===========================*/
+/*===========================ECJIAUI鏍峰紡 By:GuanYongRui END ===========================*/
 
 
-/* 会员整合样式 扩展 start*/
+/* 浼氬憳鏁村悎鏍峰紡 鎵╁睍 start*/
 .notice-span{
     position:relative;
     top:10px;
     left:-30px;
 }
-/* 会员整合样式扩展 end */
+/* 浼氬憳鏁村悎鏍峰紡鎵╁睍 end */
 
-/* 会员管理 新增列表对齐样式  start */
+/* 浼氬憳绠＄悊 鏂板鍒楄〃瀵归綈鏍峰紡  start */
 .top_right input{
     float: left;
     margin-left: 5px;
     margin-bottom: 0px;
 }
-/* 会员管理 新增列表对齐样式  end */
+/* 浼氬憳绠＄悊 鏂板鍒楄〃瀵归綈鏍峰紡  end */
 
-/*===========================ECJIAUI样式 By:yuanhuan START ===========================*/
-/* 添加abstract组件(用于摘要描述等绘制的提示框,可自定义扩展) START */
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan START ===========================*/
+/* 娣诲姞abstract缁勪欢(鐢ㄤ簬鎽樿鎻忚堪绛夌粯鍒剁殑鎻愮ず妗�鍙嚜瀹氫箟鎵╁睍) START */
 .abstract{
     display: block;
     position: relative;
@@ -5246,12 +5246,12 @@ table tr th.sorting-desc{
     border-bottom-color:#F3F3F3;
     border-top-width:0;
 }
-/* 添加abstract组件(用于摘要描述等绘制的提示框,可自定义扩展) END */
-/*===========================ECJIAUI样式 By:yuanhuan END ===========================*/
+/* 娣诲姞abstract缁勪欢(鐢ㄤ簬鎽樿鎻忚堪绛夌粯鍒剁殑鎻愮ず妗�鍙嚜瀹氫箟鎵╁睍) END */
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan END ===========================*/
 
 
-/*===========================ECJIAUI样式 By:yuanhuan START ===========================*/
-/* 添加列表缩略图--视频样式 START */
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan START ===========================*/
+/* 娣诲姞鍒楄〃缂╃暐鍥�-瑙嗛鏍峰紡 START */
 .table.table-hide-edit img.big-thumbnail {
     width: 140px;
     height: 80px;
@@ -5270,12 +5270,12 @@ table tr th.sorting-desc{
 .table.table-hide-edit .edit-other i:before{
     font-size: 14px;
 }
-/* 添加列表缩略图--视频样式 END */
-/*===========================ECJIAUI样式 By:yuanhuan END ===========================*/
+/* 娣诲姞鍒楄〃缂╃暐鍥�-瑙嗛鏍峰紡 END */
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan END ===========================*/
 
 
-/*===========================ECJIAUI样式 By:yuanhuan START===========================*/
-/* 上传样式扩展 START TODO需调整 */
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan START===========================*/
+/* 涓婁紶鏍峰紡鎵╁睍 START TODO闇�皟鏁�*/
 .fileupload-area{
     float: left;
     width: 410px;
@@ -5365,11 +5365,11 @@ table tr th.sorting-desc{
     z-index:1024;
 }
 
-/*上传框扩展 END TODO需调整 *
-/*===========================ECJIAUI样式 By:yuanhuan END===========================*/
+/*涓婁紶妗嗘墿灞�END TODO闇�皟鏁�*
+/*===========================ECJIAUI鏍峰紡 By:yuanhuan END===========================*/
 
 
-/* 反馈留言评论详情页样式start*/
+/* 鍙嶉鐣欒█璇勮璇︽儏椤垫牱寮弒tart*/
 .comment-content{
     border-bottom: 1px dashed #dcdcdc;
     margin-bottom: 12px;
@@ -5387,9 +5387,9 @@ table tr th.sorting-desc{
 .comment-content .reply-order-msg:last-child{border-bottom:0px;}
 .comment-content .reply-order-msg .reply-area{font-size:11px; padding-left:10px;}
 
-/* 反馈留言评论详情页样式 end*/
+/* 鍙嶉鐣欒█璇勮璇︽儏椤垫牱寮�end*/
 
-/* 添加订单操作轴与选择购买用户类型 start*/
+/* 娣诲姞璁㈠崟鎿嶄綔杞翠笌閫夋嫨璐拱鐢ㄦ埛绫诲瀷 start*/
 .order-time-base{text-algin:center;}
 .order-time-base ul{margin:0px auto;overflow: hidden;}
 .order-time-base ul li{list-style:none;margin-left:0 !important;text-align:center;width:16.5%;float:left;}
@@ -5439,12 +5439,12 @@ table tr th.sorting-desc{
 .order-goods-select.table th{text-align:center;}
 .order-goods-select.table tr .right-td{text-align:right;vertical-align: middle;}
 .order-goods-select.table tr .left-td{text-align:left;vertical-align: middle;}
-/* 添加订单操作轴与选择购买用户类型 end*/
+/* 娣诲姞璁㈠崟鎿嶄綔杞翠笌閫夋嫨璐拱鐢ㄦ埛绫诲瀷 end*/
 
 #range-div {margin-top:15px;margin-left:0px;display:none;}
 #range-div li{list-style:none;}
 
-/*===========================ECJIAUI专题商品预览 By:sq START===========================*/
+/*===========================ECJIAUI涓撻鍟嗗搧棰勮 By:sq START===========================*/
 
 .bigimg{
     margin-top: 2%;
@@ -5461,9 +5461,9 @@ table tr th.sorting-desc{
     list-style: outside none none;
 
 }
-/*===========================ECJIAUI专题商品预览 By:sq END===========================*/
+/*===========================ECJIAUI涓撻鍟嗗搧棰勮 By:sq END===========================*/
 
-/*===========================ECJIAUI专题商品预览 By:sq START===========================*/
+/*===========================ECJIAUI涓撻鍟嗗搧棰勮 By:sq START===========================*/
 .push_list{
     width: 100%;
 }
@@ -5482,12 +5482,12 @@ table tr th.sorting-desc{
 .clear_both {
     clear:both;
 }
-/*===========================ECJIAUI专题商品预览 By:sq END===========================*/
+/*===========================ECJIAUI涓撻鍟嗗搧棰勮 By:sq END===========================*/
 
 
-/* 主题选择 样式 START */
+/* 涓婚閫夋嫨 鏍峰紡 START */
 
-/*显示视图showview START*/
+/*鏄剧ず瑙嗗浘showview START*/
 .form-horizontal .showview  .left {
     position: absolute;
     width: 400px;
@@ -5513,7 +5513,7 @@ table tr th.sorting-desc{
 .form-horizontal .showview .tmpstyle i.active {
     box-shadow: 1px 1.5px #999;
 }
-/*显示视图showview END*/
+/*鏄剧ず瑙嗗浘showview END*/
 .form-horizontal .control-group .wookmark .thumbnail {
     width: 19%;
     margin-right: 1%;
@@ -5570,7 +5570,7 @@ table tr th.sorting-desc{
        margin-right: 0;
    }
 }
-/* 主题选择 样式 END */
+/* 涓婚閫夋嫨 鏍峰紡 END */
 
 /* to top */
 #toTop{display:none;text-decoration:none;position:fixed;bottom:10px;right:0;overflow:hidden;width:29px;height:32px;border:none;text-indent:100%;background:#000 url("../img/ui.totop.png") no-repeat 0 0;border-radius:3px 0px 0px 3px;}
