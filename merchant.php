@@ -126,6 +126,13 @@ class merchant extends ecjia_merchant {
         // 默认店铺页头部LOGO
         if(!empty($_FILES['shop_logo']) && empty($_FILES['error']) && !empty($_FILES['shop_logo']['name'])){
             $merchants_config['shop_logo'] = file_upload_info('shop_logo', '', $shop_logo);
+            
+            //删除生成的店铺二维码
+            $store_qrcode = 'data/qrcodes/merchants/merchant_'.$store_id.'.png';
+            if (file_exists(RC_Upload::upload_path($store_qrcode))) {
+            	$disk = RC_Filesystem::disk();
+            	$disk->delete(RC_Upload::upload_path().$store_qrcode);
+            }
         }
 
         // APPbanner图
