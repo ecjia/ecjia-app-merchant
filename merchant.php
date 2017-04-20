@@ -217,6 +217,7 @@ class merchant extends ecjia_merchant {
     	ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('网店信息')));
 
     	$this->assign('ur_here', '网店信息');
+    	$this->assign('shop_title', '网店信息');
 
     	$id = !empty($_GET['id']) ? intval($_GET['id']) : 0;
     	$shop_info = RC_DB::table('article')->where('cat_id', 0)->where('article_id', $id)->first();
