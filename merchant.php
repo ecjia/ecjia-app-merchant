@@ -241,6 +241,7 @@ class merchant extends ecjia_merchant {
 				}
 			}
 		}
+		$shop_info['content'] = stripslashes($shop_info['content']);
 		$this->assign('id', $id);
     	$this->assign('shop_info', $shop_info);
     	$this->assign('info_list', $shopinfo_list);
