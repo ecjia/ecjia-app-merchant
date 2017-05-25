@@ -194,7 +194,7 @@ class merchant extends ecjia_merchant {
         $code = $_GET['code'];
         $img = get_merchant_config($code);
         $merchant = set_merchant_config($code, '');
-        $file = !empty($img)? RC_Upload::upload_url($img) : '';
+        $file = !empty($img)? RC_Upload::upload_path($img) : '';
         $disk = RC_Filesystem::disk();
         $disk->delete($file);
         if($code == 'shop_nav_background'){
