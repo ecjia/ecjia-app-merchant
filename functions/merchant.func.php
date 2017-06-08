@@ -60,10 +60,10 @@ function get_merchant_info($store_id)
     $data = array('shop_kf_mobile' => '', 'shop_nav_background' => '', 'shop_logo' => '', 'shop_banner_pic' => '', 'shop_trade_time' => '', 'shop_description' => '', 'shop_notice' => '', 'express_assign_auto' => '');
     $data = get_merchant_config('', $data);
     if (!empty($data['shop_trade_time'])) {
-        /* $shop_time = unserialize($data['shop_trade_time']);
+        $shop_time = unserialize($data['shop_trade_time']);
         unset($data['shop_trade_time']);
         $sart_time = explode(':', $shop_time['start']);
-        $end_time = explode(':', $shop_time['end']); */
+        $end_time = explode(':', $shop_time['end']);
         $s_time = $sart_time[0] * 60 + $sart_time[1];
         $e_time = $end_time[0] * 60 + $end_time[1];
     } else {
