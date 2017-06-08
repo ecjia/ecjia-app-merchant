@@ -161,7 +161,6 @@ class merchant extends ecjia_merchant {
             if(($shop_time[1] - $shop_time[0] == 1440) && ($shop_time[0] != 0)) {
                 return $this->showmessage('24小时营业请选择0-24', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
             }
-            $shop_time[1] = $shop_time[1] > 1440 ? ($shop_time[1]-1440) : $shop_time[1];
             
             $s_h             = ($shop_time[0] / 60);
             $s_i             = ($shop_time[0] % 60);
