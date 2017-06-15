@@ -239,6 +239,7 @@ class merchant extends ecjia_merchant {
     	$shopinfo_list = RC_DB::table('article')
 	    	->select('article_id', 'title', 'content', 'file_url')
 	    	->where('cat_id', 0)
+	    	->where('article_type', 'shop_info')
 	    	->orderby('article_id', 'asc')
 	    	->get();
 
@@ -272,10 +273,9 @@ class merchant extends ecjia_merchant {
     	$shop_notice = RC_DB::table('article')->where('article_id', $id)->first();
 
     	$shop_notice_list = RC_DB::table('article as a')
- 			->leftJoin('article_cat as ac', RC_DB::raw('a.cat_id'), '=', RC_DB::raw('ac.cat_id'))
  			->orderBy(RC_DB::raw('a.add_time'), 'desc')
  			->take(5)
- 			->where(RC_DB::raw('ac.cat_type'), 6)
+ 			->where(RC_DB::raw('a.article_type'), 'merchant_notice')
  			->get();
     	if (!empty($shop_notice_list)) {
     		foreach ($shop_notice_list as $k => $v) {
