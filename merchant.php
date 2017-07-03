@@ -128,9 +128,9 @@ class merchant extends ecjia_merchant {
             $merchants_config['shop_logo'] = file_upload_info('shop_logo', '', $shop_logo);
             
             //删除生成的店铺二维码
+            $disk = RC_Filesystem::disk();
             $store_qrcode = 'data/qrcodes/merchants/merchant_'.$store_id.'.png';
-            if (file_exists(RC_Upload::upload_path($store_qrcode))) {
-            	$disk = RC_Filesystem::disk();
+            if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
             	$disk->delete(RC_Upload::upload_path().$store_qrcode);
             }
         }
@@ -244,8 +244,9 @@ class merchant extends ecjia_merchant {
 	    	->get();
 
 		if (!empty($shopinfo_list)) {
+			$disk = RC_Filesystem::disk();
 			foreach ($shopinfo_list as $k => $v) {
-				if (!empty($v['file_url']) && file_exists(RC_Upload::upload_path($v['file_url']))) {
+				if (!empty($v['file_url']) && $disk->exists(RC_Upload::upload_path($v['file_url']))) {
 					$file_url = RC_Upload::upload_url($v['file_url']);
 					$shopinfo_list[$k]['file_url'] = '<img src='.$file_url.' / style="width:12px;height:14px;">';
 				} else {
@@ -278,8 +279,9 @@ class merchant extends ecjia_merchant {
  			->where(RC_DB::raw('a.article_type'), 'merchant_notice')
  			->get();
     	if (!empty($shop_notice_list)) {
+    		$disk = RC_Filesystem::disk();
     		foreach ($shop_notice_list as $k => $v) {
-    			if (!empty($v['file_url']) && file_exists(RC_Upload::upload_path($v['file_url']))) {
+    			if (!empty($v['file_url']) && $disk->exists(RC_Upload::upload_path($v['file_url']))) {
     				$file_url = RC_Upload::upload_url($v['file_url']);
     				$shop_notice_list[$k]['file_url'] = '<img src='.$file_url.' / style="width:12px;height:14px;">';
     			} else {
