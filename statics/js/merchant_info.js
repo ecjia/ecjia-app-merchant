@@ -172,7 +172,7 @@
                 }
                 ecjia.merchant.showmessage(location);
             } else {
-                $('.localtion-address').removeClass('hide');
+                $('.location-address').removeClass('hide');
                 var map, markersArray = [];
                 var lat = location.result.location.lat;
                 var lng = location.result.location.lng;

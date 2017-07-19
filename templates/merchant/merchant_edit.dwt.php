@@ -180,7 +180,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group localtion-address {if !$data.longitude || !$data.latitude}hide{/if}">
+                        <div class="form-group location-address {if !$data.longitude || !$data.latitude}hide{/if}">
                             <label class="control-label col-lg-2">{lang key='merchant::merchant.merchant_addres'}：</label>
                             <div class="col-lg-6">
                                 <div id="allmap" style="height:320px;"></div>

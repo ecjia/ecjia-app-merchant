@@ -135,7 +135,7 @@ class mh_franchisee extends ecjia_merchant {
     /**
      * 编辑收款之类的信息
      */
-    public function receipt_edit(){
+    public function receipt_edit() {
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑收款账号', RC_Uri::url('merchant/mh_franchisee/init')));
 
         $this->assign('ur_here', '编辑收款账号');
@@ -292,6 +292,10 @@ class mh_franchisee extends ecjia_merchant {
         $preaudit_count   = RC_DB::table('store_preaudit')->where('contact_mobile', '=', $contact_mobile)->where('store_id', '!=', $_SESSION['store_id'])->count();
         if (!empty($franchisee_count) || $preaudit_count) {
             return $this->showmessage('该手机号已经使用，请填写其他联系方式', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
+        if (empty($longitude) || empty($latitude)) {
+            return $this->showmessage('请点击获取精准坐标获取店铺经纬度', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
         $geohash = RC_Loader::load_app_class('geohash', 'store');
