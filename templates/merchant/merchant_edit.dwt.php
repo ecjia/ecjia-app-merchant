@@ -103,7 +103,7 @@
                                 <input class="form-control required" name="merchants_name" type="text" value="{$data.merchants_name}" />
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -118,7 +118,7 @@
                                 </select>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -129,7 +129,7 @@
                                 <div class="help-block">精确填写店铺关键字有利于店铺搜索</div>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -162,7 +162,7 @@
                                 </select>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -173,7 +173,7 @@
                                 <div class="help-block">点击获取精确位置显示地图坐标</div>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                             <div class="input-must">
                                 <button class="btn btn-info small-btn" data-toggle="get-gohash" data-url="{url path='merchant/mh_franchisee/getgeohash'}">获取精准坐标</button>
@@ -200,7 +200,7 @@
                                 <div class="help-block">必须和证件上名称保持一致</div>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -210,7 +210,7 @@
                                 <input class="form-control required email" name="email" type="text" value="{$data.email}"/>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -220,7 +220,7 @@
                                 <input class="form-control required" name="contact_mobile" type="text" value="{$data.contact_mobile}"/>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -234,7 +234,7 @@
                                 </select>
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -244,7 +244,7 @@
                                 <input class="form-control required" type="type" name="identity_number" value="{$data.identity_number}">
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -315,7 +315,7 @@
                                 <input class="form-control required" name="company_name" type="text" value="{$data.company_name}" />
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
@@ -325,7 +325,7 @@
                                 <input class="form-control required" type="text" name="business_licence" value="{$data.business_licence}">
                             </div>
                             <span class="input-must">
-                                <span id="email-error" class="require-field error" style="color:#FF0000,">*</span>
+                                <span class="input-must">*</span>
                             </span>
                         </div>
 
