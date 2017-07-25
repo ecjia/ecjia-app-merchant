@@ -80,7 +80,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                     <a class="btn btn-danger btn-sm fileupload-exists" {if $data.shop_logo}data-toggle="ajaxremove"{else}data-dismiss="fileupload"{/if} href="{url path='merchant/merchant/drop_file' args="code=shop_logo"}" >删除</a>
                                 	<span class="input-must">{lang key='system::system.require_field'}</span>
                                 </div>
-                                <span class="help-block">推荐图片的尺寸为：512x512px.</span>
+                                <span class="help-block">推荐图片的尺寸为：512x512px</span>
                             </div>
                         </div>
 
