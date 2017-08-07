@@ -33,7 +33,7 @@
         },
 
         ajaxremove: function () {
-            $('[data-toggle="ajaxremove"]').on('click', function (e) {
+            $('[data-toggle="ajax_remove"]').on('click', function (e) {
                 e.preventDefault();
                 var $this = $(this),
                     url = $this.attr('data-href') || $this.attr('href'),
@@ -45,12 +45,8 @@
                 smoke.confirm(msg, function (e) {
                     if (e) {
                         $.get(url, function (data) {
-                        	if (data.store_qrcode != undefined) {
-                        		window.location.reload();
-                        	} else {
-                        		ecjia.merchant.showmessage(data);
-                        	}
-                        });
+                        	ecjia.merchant.showmessage(data);
+                        }, 'json');
                     }
                 }, { ok: "确定", cancel: "取消" });
             });

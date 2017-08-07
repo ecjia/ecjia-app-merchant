@@ -353,7 +353,7 @@
                         <div class="form-group ">
                             <div class="col-lg-6 col-md-offset-2">
                                 <!-- {if $step eq 1} --><input class="btn btn-info" type="submit" name="name" value="提交修改"> <!-- {/if} -->
-                                <!-- {if $step eq 2} --><a class="btn btn-primary nodisabled data-pjax ajaxremove" disabled="false" data-toggle="ajaxremove" href="{url path='merchant/mh_franchisee/delete'}">撤销修改申请</a> <!-- {/if} -->
+                                <!-- {if $step eq 2} --><a class="btn btn-primary nodisabled" disabled="false" data-toggle="ajax_remove" href="{url path='merchant/mh_franchisee/delete'}">撤销修改申请</a> <!-- {/if} -->
                             </div>
                         </div>
                     </form>
