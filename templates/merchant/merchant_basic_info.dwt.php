@@ -104,6 +104,23 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                 <span class="help-block">推荐图片的尺寸为：3:1（600x200px）</span>
                             </div>
                         </div>
+                        
+                      	<div class="form-group">
+                            <label class="control-label col-lg-2">{t}店铺二维码：{/t}</label>
+                            <div class="col-lg-10">
+                            	{if $data.store_qrcode}
+                                <div class="fileupload fileupload-{if $data.store_qrcode}exists{else}new{/if}" data-provides="fileupload">
+                                    <div class="fileupload-{if $data.store_qrcode}exists{else}new{/if} thumbnail">
+                                        <img class="fileupload-store-qrcode" src="{$data.store_qrcode}" alt="店铺二维码" style="width:150px; height:150px;"/>
+                                    </div>
+                                    <a class="btn btn-primary btn-sm fileupload-exists" {if $data.store_qrcode}data-toggle="ajaxremove"{else}data-dismiss="fileupload"{/if} href="{url path='merchant/merchant/refresh_qrcode'}" style="margin-top: 120px;">刷新</a>
+                                </div>
+                                {else}
+                                <a class="btn btn-primary btn-sm fileupload-exists" data-toggle="ajaxremove" href="{url path='merchant/merchant/refresh_qrcode'}">刷新</a>
+                                {/if}
+                                <span class="help-block">上传店铺logo后，点击刷新按钮可生成店铺二维码。删除店铺logo后，需手动刷新才可删除店铺二维码。</span>
+                            </div>
+                        </div>
 
                         <div class="form-group">
                             <label class="control-label col-lg-2">{t}营业时间：{/t}</label>

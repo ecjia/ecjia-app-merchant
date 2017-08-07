@@ -45,7 +45,11 @@
                 smoke.confirm(msg, function (e) {
                     if (e) {
                         $.get(url, function (data) {
-                            ecjia.merchant.showmessage(data);
+                        	if (data.store_qrcode != undefined) {
+                        		window.location.reload();
+                        	} else {
+                        		ecjia.merchant.showmessage(data);
+                        	}
                         });
                     }
                 }, { ok: "确定", cancel: "取消" });
