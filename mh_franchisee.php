@@ -339,25 +339,25 @@ class mh_franchisee extends ecjia_merchant {
         }
 
         if (!empty($_FILES['identity_pic_front']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_front']['name'])) {
-            $data['identity_pic_front'] = file_upload_info('identity_pic','identity_pic_front');
+            $data['identity_pic_front'] = merchant_file_upload_info('identity_pic', 'identity_pic_front');
         } else {
             $data['identity_pic_front'] = $store_info['identity_pic_front'];
         }
 
         if (!empty($_FILES['identity_pic_back']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_back']['name'])) {
-            $data['identity_pic_back'] = file_upload_info('identity_pic','identity_pic_back');
+            $data['identity_pic_back'] = merchant_file_upload_info('identity_pic', 'identity_pic_back');
         } else {
             $data['identity_pic_back'] = $store_info['identity_pic_back'];
         }
 
         if (!empty($_FILES['personhand_identity_pic']) && empty($_FILES['error']) && !empty($_FILES['personhand_identity_pic']['name'])) {
-            $data['personhand_identity_pic'] = file_upload_info('identity_pic','personhand_identity_pic');
+            $data['personhand_identity_pic'] = merchant_file_upload_info('identity_pic', 'personhand_identity_pic');
         } else {
             $data['personhand_identity_pic'] = $store_info['personhand_identity_pic'];
         }
 
         if (!empty($_FILES['business_licence_pic']) && empty($_FILES['error']) && !empty($_FILES['business_licence_pic']['name'])) {
-            $data['business_licence_pic'] = file_upload_info('business_licence','business_licence_pic');
+            $data['business_licence_pic'] = merchant_file_upload_info('business_licence', 'business_licence_pic');
         } else {
             $data['business_licence_pic'] = $store_info['business_licence_pic'];
         }
