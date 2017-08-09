@@ -212,7 +212,7 @@ function get_region_name($id)
 /*
 * 管理员操作对象和动作
 */
-function assign_adminlog_content()
+function merchant_assign_adminlog_content()
 {
     ecjia_admin_log::instance()->add_object('merchant', '我的店铺');
 }
