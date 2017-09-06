@@ -100,7 +100,6 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 			'staff/get_password/mobile_reset',
 			'staff/get_password/mobile_reset_pwd',
 		    'franchisee/merchant/init',
-		    'franchisee/merchant/init',
 		    'franchisee/merchant/get_code_value',
 		    'franchisee/merchant/insert',
 		    'franchisee/merchant/view',
