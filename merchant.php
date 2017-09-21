@@ -84,7 +84,7 @@ class merchant extends ecjia_merchant {
 	public function init() {
 		$this->admin_priv('merchant_manage');
 
-		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺设置', RC_Uri::url('merchant/mh_franchisee/init')));
+		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺设置'));
 		$this->assign('app_url', RC_App::apps_url('statics', __FILE__));
 
 		$this->assign('ur_here', '设置店铺信息');
@@ -415,6 +415,25 @@ class merchant extends ecjia_merchant {
     		$merchant_info['store_qrcode'] = with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
     	}
     	return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/init')));
+    }
+    
+    /**
+     * 店铺模版
+     */
+    public function template() {
+    	$this->admin_priv('merchant_manage');
+    	
+    	ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺模版'));
+    	$this->assign('app_url', RC_App::apps_url('statics/img/template/', __FILE__));
+    	
+    	$this->assign('ur_here', '店铺模版');
+    	$this->assign('form_action', RC_Uri::url('merchant/merchant/template_update'));
+    	
+    	$this->display('merchant_template.dwt');
+    }
+    
+    public function template_update() {
+    	return $this->showmessage('保存成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/template')));
     }
 }
 
