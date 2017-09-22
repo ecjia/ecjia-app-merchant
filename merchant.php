@@ -57,6 +57,10 @@ class merchant extends ecjia_merchant {
         RC_Style::enqueue_style('uniform-aristo');
         // 自定义JS
         RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__) , array() , false, true);
+        RC_Script::enqueue_script('photoswipe', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe.min.js', __FILE__) , array() , false, true);
+        RC_Script::enqueue_script('photoswipe-ui', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe-ui-default.min.js', __FILE__) , array() , false, true);
+        RC_Style::enqueue_style('photoswipe', RC_App::apps_url('statics/lib/photoswipe/css/photoswipe.css', __FILE__), array());
+        RC_Style::enqueue_style('default-skin', RC_App::apps_url('statics/lib/photoswipe/css/default-skin/default-skin.css', __FILE__), array());
         // 页面css样式
         RC_Style::enqueue_style('merchant', RC_App::apps_url('statics/css/merchant.css', __FILE__), array());
         // input file 长传
