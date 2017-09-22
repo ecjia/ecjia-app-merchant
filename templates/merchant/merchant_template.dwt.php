@@ -24,7 +24,7 @@
 <style type="text/css">
 .template-content {
 	width: 440px;
-	height: 444.22px;
+	height: 405.22px;
 	float: left;
 }
 .template-item {
@@ -34,6 +34,9 @@
 }
 .template-item.m_l30 {
 	margin-left: 30px;
+}
+.m_l135 {
+	margin-left: 135px;
 }
 </style>
 <div class="row">
@@ -50,30 +53,33 @@
                         </div>
                         <div class="form-group">
                         	<label class="control-label col-lg-2"></label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-10">
                                 <div class="template-content img-pwsp-list">
                                 	<div class="template-item">
                                 		<figure><span><a class="nopjax" href="{$app_url}template_1.png" data-size="248x500" data-med-size="200x403" title="点击放大" data-med="{$app_url}template_1.png"><img href="{$app_url}template_1.png" src="{$app_url}template_1.png" class="w200"/></a></span></figure>
-                                		<div class="m_l5">
-	                                		<input id="template_1" type="radio" name="shop_template" value="default1" {if $shop_template eq 'default1'} checked{/if}/>
-	                                		<label for="template_1">模版样式一</label>
-                                		</div>
                                 	</div>
                                 	<div class="template-item m_l30">
                                 		<figure><span><a class="nopjax" href="{$app_url}template_2.png" data-size="248x500" data-med-size="200x403" title="点击放大" data-med="{$app_url}template_2.png"><img href="{$app_url}template_2.png" src="{$app_url}template_2.png" class="w200"/></a></span></figure>
-                                		<div class="m_l5">
-	                                		<input id="template_2" type="radio" name="shop_template" value="default2" {if $shop_template eq 'default2'} checked{/if}/>
-	                                		<label for="template_2">模版样式二</label>
-                                		</div>
                                 	</div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group ">
-                            <div class="col-lg-6 col-md-offset-2">
-                                <input class="btn btn-info" type="submit" name="name" value="确定">
-                            </div>
-                        </div>
+                            <label class="control-label col-lg-2"></label>
+                            <div class="col-lg-6 m_b20">
+                            	<div class="f_l m_l5">
+	                                <input id="template_1" type="radio" name="shop_template" value="default1" {if $shop_template eq 'default1'} checked{/if}/>
+	                                <label for="template_1">模版样式一</label>
+                                </div>
+                                <div class="f_l m_l135">
+	                                <input id="template_2" type="radio" name="shop_template" value="default2" {if $shop_template eq 'default2'} checked{/if}/>
+	                                <label for="template_2">模版样式二</label>
+                                </div>
+                        	</div>
+	                        <div class="form-group ">
+	                            <div class="col-lg-6 col-md-offset-2">
+	                                <input class="btn btn-info" type="submit" name="name" value="确定">
+	                            </div>
+	                        </div>
+	                	</div>
                     </form>
                 </div>
             </div>
