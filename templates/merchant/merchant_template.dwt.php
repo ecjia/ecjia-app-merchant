@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                             <label class="control-label col-lg-2"></label>
-                            <div class="col-lg-6 m_b20">
+                            <div class="col-lg-6 m_b10">
                             	<div class="f_l m_l5">
 	                                <input id="template_1" type="radio" name="shop_template" value="default1" {if $shop_template eq 'default1'} checked{/if}/>
 	                                <label for="template_1">模版样式一</label>
@@ -74,12 +74,12 @@
 	                                <label for="template_2">模版样式二</label>
                                 </div>
                         	</div>
-	                        <div class="form-group ">
-	                            <div class="col-lg-6 col-md-offset-2">
-	                                <input class="btn btn-info" type="submit" name="name" value="确定">
-	                            </div>
-	                        </div>
-	                	</div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-6 col-md-offset-2">
+                                <input class="btn btn-info" type="submit" name="name" value="确定">
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
