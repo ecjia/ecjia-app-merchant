@@ -62,7 +62,7 @@ class merchant_merchant_menu_api extends Component_Event_Api {
         	ecjia_merchant::make_admin_menu('03_merchant_Receipt', __('收款账号'), RC_Uri::url('merchant/mh_franchisee/receipt'), 3)->add_purview('bank_manage')->add_icon('fa-credit-card'), //'enter_info'
             ecjia_merchant::make_admin_menu('04_merchant_Receipt', __('店铺上下线'), RC_Uri::url('merchant/merchant/mh_switch'), 4)->add_purview('merchant_switch')->add_icon('fa-power-off'), 
 
-            ecjia_merchant::make_admin_menu('05_merchant_Receipt', __('店铺模版'), RC_Uri::url('merchant/merchant/template'), 5)->add_purview('merchant_manage')->add_icon('fa-gears'), 
+            ecjia_merchant::make_admin_menu('05_merchant_Receipt', __('店铺模版'), RC_Uri::url('merchant/merchant/template'), 5)->add_purview('merchant_manage')->add_icon('fa-navicon'), 
         );
         
         $mymenus->add_submenu($submenus);
