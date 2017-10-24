@@ -472,8 +472,8 @@ class mh_franchisee extends ecjia_merchant {
         if (empty($key)) {
         	return $this->showmessage('腾讯地图key不能为空', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-        $city_name    	= RC_DB::table('region')->where('region_id', $shop_city)->pluck('region_name');
-        $city_district 	= RC_DB::table('region')->where('region_id', $shop_district)->pluck('region_name');
+        $city_name    	= RC_DB::table('regions')->where('region_id', $shop_city)->pluck('region_name');
+        $city_district 	= RC_DB::table('regions')->where('region_id', $shop_district)->pluck('region_name');
         $address      	= $city_name.'市'.$city_district.$shop_address;
         $address		= urlencode($address);
         $shop_point   	= RC_Http::remote_get("https://apis.map.qq.com/ws/geocoder/v1/?address=".$address."&key=".$key);
