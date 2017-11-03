@@ -90,13 +90,20 @@ class admin_store_setting extends ecjia_admin {
 	    $this->admin_priv('store_set_manage');
 
         $this->assign('action_link',array('href' => RC_Uri::url('store/admin/init'),'text' => RC_Lang::get('store::store.store_list')));
-		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺设置'));
         $store_id = intval($_GET['store_id']);
         if (empty($store_id)) {
             return $this->showmessage(__('请选择您要操作的店铺'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
         $store = RC_DB::table('store_franchisee')->where('store_id', $store_id)->first();
+        
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($store['merchants_name'], RC_Uri::url('store/admin/preview', array('store_id' => $store_id))));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺设置'));
+        
+        ecjia_screen::get_current_screen()->set_sidebar_display(false);
+        ecjia_screen::get_current_screen()->add_option('store_name', $store['merchants_name']);
+        ecjia_screen::get_current_screen()->add_option('current_code', 'store_setting');
+        
         $this->assign('ur_here', $store['merchants_name'].' - 店铺设置');
         $this->assign('store_name', $store['merchants_name']);
         $menu = set_store_menu($store_id, 'store_set');
@@ -110,11 +117,18 @@ class admin_store_setting extends ecjia_admin {
 	//店铺设置修改
 	public function edit() {
 	    $this->admin_priv('store_set_update');
-
         $this->assign('action_link',array('href' => RC_Uri::url('merchant/admin_store_setting/init', array('store_id' => $_GET['store_id'])),'text' => '店铺设置'));
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑入驻商'));
+
         $store_id = intval($_GET['store_id']);
         $store = RC_DB::table('store_franchisee')->where('store_id', $store_id)->first();
+        
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($store['merchants_name'], RC_Uri::url('store/admin/preview', array('store_id' => $store_id))));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('编辑入驻商'));
+        
+        ecjia_screen::get_current_screen()->set_sidebar_display(false);
+        ecjia_screen::get_current_screen()->add_option('store_name', $store['merchants_name']);
+        ecjia_screen::get_current_screen()->add_option('current_code', 'store_setting');
+        
         $this->assign('store_name', $store['merchants_name']);
         $menu = set_store_menu($store_id, 'store_set');
 
