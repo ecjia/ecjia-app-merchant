@@ -59,6 +59,9 @@ class merchant_merchant_purview_api extends Component_Event_Api {
         	array('action_name' => __('店铺入驻信息'), 'action_code' => 'franchisee_request', 'relevance'   => ''),
         	array('action_name' => __('收款账号'), 'action_code' => 'franchisee_bank', 'relevance'   => ''),
             array('action_name' => __('店铺上下线'), 'action_code' => 'merchant_switch', 'relevance'   => ''),
+        	array('action_name' => __('店铺模版'), 'action_code' => 'merchant_template', 'relevance'   => ''),
+        	array('action_name' => __('小票打印机管理'), 'action_code' => 'merchant_printer_manage', 'relevance'   => ''),
+        	array('action_name' => __('小票打印机更新'), 'action_code' => 'merchant_printer_update', 'relevance'   => ''),
         );
         return $purviews;
     }

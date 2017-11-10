@@ -425,7 +425,7 @@ class merchant extends ecjia_merchant {
      * 店铺模版
      */
     public function template() {
-    	$this->admin_priv('merchant_manage');
+    	$this->admin_priv('merchant_template');
     	
     	ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺模版'));
     	$this->assign('app_url', RC_App::apps_url('statics/img/template/', __FILE__));
@@ -444,6 +444,8 @@ class merchant extends ecjia_merchant {
     }
     
     public function template_update() {
+    	$this->admin_priv('merchant_template', ecjia::MSGTYPE_JSON);
+    	
     	$shop_template = trim($_POST['shop_template']);
     	RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_template')->update(array('value' => $shop_template));
     	return $this->showmessage('保存成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
