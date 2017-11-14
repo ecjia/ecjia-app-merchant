@@ -92,7 +92,7 @@ class merchant extends ecjia_merchant {
 		$this->assign('app_url', RC_App::apps_url('statics', __FILE__));
 
 		$this->assign('ur_here', '设置店铺信息');
-        $merchant_info = get_merchant_info();
+        $merchant_info = get_merchant_info($_SESSION['store_id']);
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
         
         $disk = RC_Filesystem::disk();
@@ -414,7 +414,7 @@ class merchant extends ecjia_merchant {
     	}
     	ecjia_merchant::admin_log('刷新店铺二维码', 'edit', 'merchant');
     	
-    	$merchant_info = get_merchant_info();
+    	$merchant_info = get_merchant_info($_SESSION['store_id']);
     	if (!empty($merchant_info['shop_logo'])) {
     		$merchant_info['store_qrcode'] = with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
     	}
