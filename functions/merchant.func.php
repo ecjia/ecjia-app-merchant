@@ -107,7 +107,7 @@ function get_store_trade_time($store_id) {
 /*
  * 获取店铺配置信息
  */
-function get_merchant_config($code, $arr, $store_id)
+function get_merchant_config($code = '', $arr = array(), $store_id = 0)
 {
     if (empty($store_id)) {
         $store_id = $_SESSION['store_id'];
@@ -117,7 +117,7 @@ function get_merchant_config($code, $arr, $store_id)
     }
     $merchants_config = RC_Model::model('merchant/merchants_config_model');
     if (empty($code)) {
-        if (is_array($arr)) {
+        if (!empty($arr)) {
             $config = RC_DB::table('merchants_config')->where('store_id', $store_id)->select('code', 'value')->get();
             foreach ($config as $key => $value) {
                 $arr[$value['code']] = $value['value'];
@@ -163,11 +163,11 @@ function merchant_file_upload_info($path, $code, $old_images = '')
 /*
  * 设置店铺配置信息
  */
-function set_merchant_config($code, $value, $arr)
+function set_merchant_config($code = '', $value = '', $arr = array())
 {
     $merchants_config = RC_Model::model('merchant/merchants_config_model');
     if (empty($code)) {
-        if (is_array($arr)) {
+        if (!empty($arr)) {
             foreach ($arr as $key => $val) {
                 $count = $merchants_config->where(array('store_id' => $_SESSION['store_id'], 'code' => $key))->count();
                 if (empty($count)) {
