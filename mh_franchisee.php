@@ -103,16 +103,18 @@ class mh_franchisee extends ecjia_merchant {
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('入驻信息', RC_Uri::url('merchant/mh_franchisee/init')));
         $this->assign('ur_here', '商家入驻信息');
 
-        $data       = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
-        $count      = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->count();
-        $data['identity_pic_front']         = !empty($data['identity_pic_front'])? RC_Upload::upload_url($data['identity_pic_front']) : '';
-        $data['identity_pic_back']          = !empty($data['identity_pic_back'])? RC_Upload::upload_url($data['identity_pic_back']) : '';
-        $data['personhand_identity_pic']    = !empty($data['personhand_identity_pic'])? RC_Upload::upload_url($data['personhand_identity_pic']) : '';
-        $data['business_licence_pic']       = !empty($data['business_licence_pic'])?  RC_Upload::upload_url($data['business_licence_pic']) : '';
-        $data['province']                   = !empty($data['province'])? get_region_name($data['province']) : '';
-        $data['city']                       = !empty($data['city'])? get_region_name($data['city']): '';
-        $data['district']                   = !empty($data['district'])? get_region_name($data['district']): '';
-        $data['identity_type']              = !empty($data['identity_type'])? $data['identity_type']: '1';
+        $data   = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
+        $count  = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->count();
+
+        $data['identity_pic_front']         = !empty($data['identity_pic_front'])       ? RC_Upload::upload_url($data['identity_pic_front'])        : '';
+        $data['identity_pic_back']          = !empty($data['identity_pic_back'])        ? RC_Upload::upload_url($data['identity_pic_back'])         : '';
+        $data['personhand_identity_pic']    = !empty($data['personhand_identity_pic'])  ? RC_Upload::upload_url($data['personhand_identity_pic'])   : '';
+        $data['business_licence_pic']       = !empty($data['business_licence_pic'])     ?  RC_Upload::upload_url($data['business_licence_pic'])     : '';
+        $data['province']                   = !empty($data['province'])                 ? get_region_name($data['province'])                        : '';
+        $data['city']                       = !empty($data['city'])                     ? get_region_name($data['city'])                            : '';
+        $data['district']                   = !empty($data['district'])                 ? get_region_name($data['district'])                        : '';
+        $data['identity_type']              = !empty($data['identity_type'])            ? $data['identity_type']                                    : '1';
+        
         $data['cat_name'] = $this->db_store_category->where(array('cat_id' => $data['cat_id']))->get_field('cat_name');
         $this->assign('data',$data);
 
@@ -272,9 +274,11 @@ class mh_franchisee extends ecjia_merchant {
         $responsible_person         = !empty($_POST['responsible_person'])? htmlspecialchars($_POST['responsible_person']) : '';
         $email                      = !empty($_POST['email'])? htmlspecialchars($_POST['email']) : '';
         $contact_mobile             = !empty($_POST['contact_mobile'])? htmlspecialchars($_POST['contact_mobile']) : '';
-        $province                   = !empty($_POST['province'])? intval($_POST['province']) : '';
-        $city                       = !empty($_POST['city'])? intval($_POST['city']) : '';
-        $district                   = !empty($_POST['district'])? intval($_POST['district']) : '';
+
+        $province                   = !empty($_POST['province']) ? trim($_POST['province']) : '';
+        $city                       = !empty($_POST['city'])     ? trim($_POST['city'])     : '';
+        $district                   = !empty($_POST['district']) ? trim($_POST['district']) : '';
+
         $address                    = !empty($_POST['address'])? htmlspecialchars($_POST['address']) : '';
         $identity_type              = !empty($_POST['identity_type'])? intval($_POST['identity_type']) : '';
         $identity_number            = !empty($_POST['identity_number'])? htmlspecialchars($_POST['identity_number']) : '';
@@ -451,9 +455,9 @@ class mh_franchisee extends ecjia_merchant {
      * 根据地区获取经纬度
      */
     public function getgeohash(){
-        $shop_province      = !empty($_REQUEST['province'])    ? intval($_REQUEST['province'])           : 0;
-        $shop_city          = !empty($_REQUEST['city'])        ? intval($_REQUEST['city'])               : 0;
-        $shop_district      = !empty($_REQUEST['district'])    ? intval($_REQUEST['district'])           : 0;
+        $shop_province      = !empty($_REQUEST['province'])    ? trim($_REQUEST['province'])             : '';
+        $shop_city          = !empty($_REQUEST['city'])        ? trim($_REQUEST['city'])                 : '';
+        $shop_district      = !empty($_REQUEST['district'])    ? trim($_REQUEST['district'])             : '';
         $shop_address       = !empty($_REQUEST['address'])     ? htmlspecialchars($_REQUEST['address'])  : 0;
         if(empty($shop_province)){
             return $this->showmessage('请选择省份', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'province'));
