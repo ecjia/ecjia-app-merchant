@@ -197,7 +197,7 @@ class mh_franchisee extends ecjia_merchant {
             $step = empty($request_step)? $step : $request_step;
             $this->assign('ur_here', '修改申请');
             if($step != 3){
-                $data       = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->first();
+                $data = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->first();
             }else{
                 ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('审核状态'));
                 $this->assign('ur_here', '审核状态');
@@ -210,15 +210,17 @@ class mh_franchisee extends ecjia_merchant {
                 $this->display('merchant_status.dwt');
                 exit;
             }
-
         }
         $data['identity_pic_front'] = !empty($data['identity_pic_front'])? RC_Upload::upload_url($data['identity_pic_front']) : '';
         $data['identity_pic_back'] = !empty($data['identity_pic_back'])? RC_Upload::upload_url($data['identity_pic_back']) : '';
         $data['personhand_identity_pic'] = !empty($data['personhand_identity_pic'])? RC_Upload::upload_url($data['personhand_identity_pic']) : '';
         $data['business_licence_pic'] = !empty($data['business_licence_pic'])?  RC_Upload::upload_url($data['business_licence_pic']) : '';
-        $province		= ecjia_region::instance()->region_datas(1, 1);
-        $city			= ecjia_region::instance()->region_datas(2, $data['province']);
-        $district   	= ecjia_region::instance()->region_datas(3, $data['city']);
+        
+        $province = with(new Ecjia\App\Setting\Region)->getProvinces(ecjia::config('shop_country'));
+        $city = with(new Ecjia\App\Setting\Region)->getSubarea($data['province']);
+        $district = with(new Ecjia\App\Setting\Region)->getSubarea($data['city']);
+        $street = with(new Ecjia\App\Setting\Region)->getSubarea($data['district']);
+        
         $cat_info 		= RC_DB::table('store_category')->get();
         $request_step 	= intval($_REQUEST['step']);
         $step 			= empty($request_step)? $step : $request_step;
@@ -227,6 +229,8 @@ class mh_franchisee extends ecjia_merchant {
         $this->assign('province', $province);
         $this->assign('city', $city);
         $this->assign('district', $district);
+        $this->assign('street', $street);
+        
         $this->assign('data', $data);
         $this->assign('step', $step);
         $this->assign('cat_info', $cat_info);
@@ -252,6 +256,7 @@ class mh_franchisee extends ecjia_merchant {
             'province'                  => '省',
             'city'                      => '市',
             'district'                  => '区',
+        	'street'					=> '街道',
             'address'                   => '详细地址',
             'identity_type'             => '证件类型',
             'identity_number'           => '证件号码',
@@ -278,7 +283,8 @@ class mh_franchisee extends ecjia_merchant {
         $province                   = !empty($_POST['province']) ? trim($_POST['province']) : '';
         $city                       = !empty($_POST['city'])     ? trim($_POST['city'])     : '';
         $district                   = !empty($_POST['district']) ? trim($_POST['district']) : '';
-
+        $street                   	= !empty($_POST['street']) ? trim($_POST['street']) : '';
+        
         $address                    = !empty($_POST['address'])? htmlspecialchars($_POST['address']) : '';
         $identity_type              = !empty($_POST['identity_type'])? intval($_POST['identity_type']) : '';
         $identity_number            = !empty($_POST['identity_number'])? htmlspecialchars($_POST['identity_number']) : '';
@@ -318,6 +324,7 @@ class mh_franchisee extends ecjia_merchant {
             'city'                      => $city,
             'address'                   => $address,
             'district'                  => $district,
+        	'street'					=> $street,
             'identity_type'             => $identity_type,
             'identity_number'           => $identity_number,
             'business_licence'          => $business_licence,
@@ -387,7 +394,7 @@ class mh_franchisee extends ecjia_merchant {
                     } else if ($field_key == 'identity_type') {
                         $store_info[$field_key] = $store_info[$field_key] == 1 ? '身份证' : ($store_info[$field_key] == 2 ? '护照' : '港澳身份证');
                         $data[$field_key] = $data[$field_key] == 1 ? '身份证' : ($data[$field_key] == 2 ? '护照' : '港澳身份证');
-                    } else if ( in_array($field_key, array('province', 'city', 'district'))) {
+                    } else if ( in_array($field_key, array('province', 'city', 'district', 'street'))) {
                         $store_info[$field_key] = ecjia_region::instance()->region_name($store_info[$field_key]);
                         $store_info[$field_key] = empty($store_info[$field_key]) ? "<em><空></em>" : $store_info[$field_key];
                         $data[$field_key] = ecjia_region::instance()->region_name($data[$field_key]);
@@ -399,7 +406,6 @@ class mh_franchisee extends ecjia_merchant {
                     $log_new[$field_key] = array('name'=>$field_name, 'value'=> (is_null($data[$field_key]) || $data[$field_key] == '') ? '<em><空></em>' : $data[$field_key]);
                 }
             }
-
             $log = array(
                 'store_id' => $_SESSION['store_id'],
                 'type' => 2,
@@ -442,13 +448,12 @@ class mh_franchisee extends ecjia_merchant {
      * 获取指定地区的子级地区
      */
     public function get_region(){
-        $type      = !empty($_GET['type'])   ? intval($_GET['type'])   : 0;
-        $parent        = !empty($_GET['parent']) ? intval($_GET['parent']) : 0;
-        $arr['regions'] = ecjia_region::instance()->region_datas($type, $parent);
-        $arr['type']    = $type;
-        $arr['target']  = !empty($_GET['target']) ? stripslashes(trim($_GET['target'])) : '';
-        $arr['target']  = htmlspecialchars($arr['target']);
-        echo json_encode($arr);
+        $parent_id	= $_GET['parent'];//上级区域编码
+		$arr['regions'] = with(new Ecjia\App\Setting\Region)->getSubarea($parent_id);//传参请求当前国家下信息
+		$arr['target']  = stripslashes(trim($_GET['target']));
+		$arr['target']  = htmlspecialchars($arr['target']);
+
+		echo json_encode($arr);
     }
 
     /**
