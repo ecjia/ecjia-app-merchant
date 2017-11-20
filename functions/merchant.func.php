@@ -49,7 +49,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 获取店铺基本信息
  */
-function get_merchant_info($store_id)
+function get_merchant_info($store_id = 0)
 {
     if (empty($store_id)) {
         $store_id = $_SESSION['store_id'];
@@ -79,7 +79,7 @@ function get_merchant_info($store_id)
     return $data;
 }
 
-function get_store_trade_time($store_id) {
+function get_store_trade_time($store_id = 0) {
     if (empty($store_id)) {
         $store_id = $_SESSION['store_id'];
     }
@@ -107,7 +107,7 @@ function get_store_trade_time($store_id) {
 /*
  * 获取店铺配置信息
  */
-function get_merchant_config($code, $arr, $store_id)
+function get_merchant_config($code = '', $arr = '', $store_id = 0)
 {
     if (empty($store_id)) {
         $store_id = $_SESSION['store_id'];
@@ -163,7 +163,7 @@ function merchant_file_upload_info($path, $code, $old_images = '')
 /*
  * 设置店铺配置信息
  */
-function set_merchant_config($code, $value, $arr)
+function set_merchant_config($code = '', $value = '', $arr = '')
 {
     $merchants_config = RC_Model::model('merchant/merchants_config_model');
     if (empty($code)) {
@@ -193,7 +193,7 @@ function set_merchant_config($code, $value, $arr)
 /**
 * 清除用户购物车
 */
-function clear_cart_list($store_id)
+function clear_cart_list($store_id = 0)
 {
     if (empty($store_id)) {
         return false;
