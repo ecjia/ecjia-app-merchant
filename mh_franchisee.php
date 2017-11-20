@@ -452,36 +452,50 @@ class mh_franchisee extends ecjia_merchant {
         $shop_province      = !empty($_REQUEST['province'])    ? trim($_REQUEST['province'])             : '';
         $shop_city          = !empty($_REQUEST['city'])        ? trim($_REQUEST['city'])                 : '';
         $shop_district      = !empty($_REQUEST['district'])    ? trim($_REQUEST['district'])             : '';
-        $shop_street      	= !empty($_REQUEST['street'])     ? trim($_REQUEST['street'])              : '';
+        $shop_street      	= !empty($_REQUEST['street'])      ? trim($_REQUEST['street'])               : '';
         $shop_address       = !empty($_REQUEST['address'])     ? htmlspecialchars($_REQUEST['address'])  : 0;
-        if(empty($shop_province)){
+        if (empty($shop_province)) {
             return $this->showmessage('请选择省份', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'province'));
         }
-        if(empty($shop_city)){
+        if (empty($shop_city)) {
             return $this->showmessage('请选择城市', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'city'));
         }
-        if(empty($shop_district)){
+        if (empty($shop_district)) {
             return $this->showmessage('请选择地区', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'district'));
         }
-        if(empty($shop_street)){
+        if (empty($shop_street)) {
         	return $this->showmessage('请选择街道', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'street'));
         }
-        if(empty($shop_address)){
+        if(empty($shop_address)) {
             return $this->showmessage('请填写详细地址', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('element' => 'address'));
         }
-        
         $key = ecjia::config('map_qq_key');
         if (empty($key)) {
         	return $this->showmessage('腾讯地图key不能为空', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
         $province_name  = ecjia_region::getRegionName($shop_province);
+        $city_name      = ecjia_region::getRegionName($shop_city);
         $district_name  = ecjia_region::getRegionName($shop_district);
         $street_name    = ecjia_region::getRegionName($shop_street);
         
-        $address      	= $province_name.$district_name.$street_name.$shop_address;
-        $address		= urlencode($address);
-        $shop_point   	= RC_Http::remote_get("https://apis.map.qq.com/ws/geocoder/v1/?address=".$address."&key=".$key);
-        $shop_point  	= json_decode($shop_point['body'], true);
+        $address = '';
+        if (!empty($province_name)) {
+            $address .= $province_name;
+        }
+        if (!empty($city_name)) {
+            $address .= $city_name;
+        }
+        if (!empty($district_name)) {
+            $address .= $district_name;
+        }
+        if (!empty($street_name)) {
+            $address .= $street_name;
+        }
+        $address .= $shop_address;
+        $address = urlencode($address);
+        
+        $shop_point = RC_Http::remote_get("https://apis.map.qq.com/ws/geocoder/v1/?address=".$address."&key=".$key);
+        $shop_point = json_decode($shop_point['body'], true);
 
 		if ($shop_point['status'] != 0) {
 			return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, $shop_point);
