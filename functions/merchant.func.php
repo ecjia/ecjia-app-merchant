@@ -201,14 +201,7 @@ function clear_cart_list($store_id = 0)
     // 清除所有用户购物车内商家的商品
     RC_DB::table('cart')->where('store_id', $store_id)->delete();
 }
-/*
-* 获取地区名称
-*/
-function get_region_name($id)
-{
-    $db_region = RC_Model::model('merchant/region_model');
-    return $db_region->where(array('region_id' => $id))->get_field('region_name');
-}
+
 /*
 * 管理员操作对象和动作
 */

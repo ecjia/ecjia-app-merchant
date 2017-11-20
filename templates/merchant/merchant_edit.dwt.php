@@ -136,7 +136,7 @@
                         <div class="form-group form-address">
                             <label class="control-label col-lg-2">{t}省份：{/t}</label>
                             <div class="w120 f_l m_l15">
-                                <select class="form-control required" name="province" data-toggle="regionSummary" data-type="2" data-target="region-summary-cities" data-url="{url path='merchant/mh_franchisee/get_region'}">
+                                <select class="form-control required" name="province" data-toggle="regionSummary" data-type="2" data-target="region-summary-cities" data-url="{url path='setting/region/init'}">
                                     <option value='0'>{t}请选择...{/t}</option>
                                     <!-- {foreach from=$province item=region} -->
                                         <option value="{$region.region_id}" {if $region.region_id eq $data.province}selected{/if}>{$region.region_name}</option>
