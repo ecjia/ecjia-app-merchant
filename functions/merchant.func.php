@@ -163,7 +163,7 @@ function merchant_file_upload_info($path, $code, $old_images = '')
 /*
  * 设置店铺配置信息
  */
-function set_merchant_config($code, $value, $arr)
+function set_merchant_config($code = '', $value = '', $arr = '')
 {
     $merchants_config = RC_Model::model('merchant/merchants_config_model');
     if (empty($code)) {
@@ -193,7 +193,7 @@ function set_merchant_config($code, $value, $arr)
 /**
 * 清除用户购物车
 */
-function clear_cart_list($store_id)
+function clear_cart_list($store_id = 0)
 {
     if (empty($store_id)) {
         return false;
