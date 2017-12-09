@@ -75,13 +75,13 @@ class preaudit_module extends api_admin implements api_interface {
                     ->where('contact_mobile', '=', $value)
                     ->first();
             
-            $data['country_id']     = $data['country'];
+            $data['country_id']     = ecjia::config('shop_country');
             $data['province_id']    = $data['province'];
             $data['city_id']        = $data['city'];
             $data['district_id']    = $data['district'];
             $data['street_id']      = $data['street'];
             
-            $data['country_name']     = ecjia_region::getCountryName($data['country']);
+            $data['country_name']     = ecjia_region::getCountryName($data['country_id']);
             $data['province_name']    = ecjia_region::getRegionName($data['province']);
             $data['city_name']        = ecjia_region::getRegionName($data['city']);
             $data['district_name']    = ecjia_region::getRegionName($data['district']);
