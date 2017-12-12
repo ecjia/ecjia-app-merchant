@@ -47,18 +47,34 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家店铺管理
+ * 店铺刷新二维码
+ * @author
  */
-return array(
-	'identifier' 	=> 'ecjia.merchant',
-	'directory' 	=> 'merchant',
-	'name'			=> 'merchant',
-	'description' 	=> 'merchant_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.10.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
+class refreshQrcode_module extends api_admin implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
 
-);
+        $this->authadminSession();
+    	if ($_SESSION['admin_id'] <= 0 && $_SESSION['staff_id'] <= 0) {
+    		return new ecjia_error(100, 'Invalid session');
+    	}
 
-// end
+		$store_id = $_SESSION['store_id'];
+		//删除原来的店铺二维码
+		$disk = RC_Filesystem::disk();
+		$store_qrcode = 'data/qrcodes/merchants/merchant_'.$store_id.'.png';
+		if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
+			$disk->delete(RC_Upload::upload_path().$store_qrcode);
+		}
+		ecjia_admin::admin_log('刷新店铺二维码', 'edit', 'merchant');
+		 
+		$shop_logo = RC_DB::table('merchants_config')->where('code', 'shop_logo')->where('store_id', $_SESSION['store_id'])->pluck('value');
+		$shop_logo = RC_Upload::upload_url($shop_logo);
+		
+		if (!empty($shop_logo)) {
+			$store_qrcode = with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($store_id,  $shop_logo))->getQrcodeUrl();
+		}
+		return array();
+    }
+}
+
+//end

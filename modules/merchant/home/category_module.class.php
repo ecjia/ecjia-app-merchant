@@ -47,18 +47,91 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家店铺管理
+ * 首页商品分类
+ * @author 
  */
-return array(
-	'identifier' 	=> 'ecjia.merchant',
-	'directory' 	=> 'merchant',
-	'name'			=> 'merchant',
-	'description' 	=> 'merchant_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.10.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
+class category_module extends api_front implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
+    	
+		$device	= $this->device;
+		$device_client = $request->header('device-client');
 
-);
+        $this->authSession();
+		$store_id = $this->requestData('store_id');
+		$location = $this->requestData('location', array());
+	
+		if (empty($store_id)) {
+			return new ecjia_error( 'invalid_parameter', RC_Lang::get ('system::system.invalid_parameter' ));
+		}
+
+		$options = array('type' => 'seller_goods_cat', 'cat_id' => 0, 'store_id' => $store_id, 'level' => 1);
+		$cat_list = RC_Api::api('goods', 'seller_goods_category', $options);
+		
+		$out = array();
+		RC_Loader::load_app_func('admin_goods', 'goods');
+		foreach ($cat_list as $cat) {
+		    //微信小程序首页6个商品，默认普通商品顺序
+		    if ($device_client == 'weapp') {
+	            $options_goods = array(
+	                'store_id' => $store_id,
+	                'merchant_cat_id' => $cat['cat_id'],
+	                'size' => 6,
+	                'page' => 1,
+	            );
+	            $goods = RC_Api::api('goods', 'goods_list', $options_goods);
+		    } else {
+		        $options_goods = array(
+		            'store_id' => $store_id,
+		            'merchant_cat_id' => $cat['cat_id'],
+		            'store_intro' => 'hot',
+		            'size' => 3,
+		            'page' => 1,
+		        );
+		        $goods = RC_Api::api('goods', 'goods_list', $options_goods);
+		        //热销没有商品使用默认商品
+		        if (empty($goods['list'])) {
+		            $options_goods = array(
+		                'store_id' => $store_id,
+		                'merchant_cat_id' => $cat['cat_id'],
+		                'size' => 3,
+		                'page' => 1,
+		            );
+		            $goods = RC_Api::api('goods', 'goods_list', $options_goods);
+		        }
+		    }
+		    
+		    $formate_goods = array();
+		    foreach ($goods['list'] as $val) {
+		        $properties = get_goods_properties($val['goods_id']); // 获得商品的规格和属性
+		        $formate_goods[] = array(
+		            'id'                  => $val['goods_id'],
+		            'name'                      => $val['name'],
+		            'market_price'              => $val['market_price'],
+		            'shop_price'                => $val['shop_price'],
+		            'promote_price'             => $val['promote_price'],
+	        		'unformatted_shop_price' 	=> $val['unformatted_shop_price'],
+	        		'unformatted_promote_price' => $val['unformatted_promote_price'],
+		            'img' => array(
+		                'thumb'   => $val['goods_img'],
+		                'url'     => $val['original_img'],
+		                'small'   => $val['goods_thumb']
+		            ),
+		            'properties'      => $properties['pro'],
+		            'specification'   => $properties['spe'],
+		        );
+	        }
+		    $out[] = array(
+		        'id' => $cat['cat_id'],
+		        'name' => $cat['cat_name'],
+		        'image' => !empty($cat['cat_image']) ? RC_Upload::upload_url($cat['cat_image']) : '',
+		        'goods' => $formate_goods,
+		    );
+		}
+// 		_dump($out,1);
+
+		return $out;
+	}
+}
+
 
 // end

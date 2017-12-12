@@ -47,18 +47,62 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家店铺管理
+ * 商铺商品分类
+ * @author will.chen
  */
-return array(
-	'identifier' 	=> 'ecjia.merchant',
-	'directory' 	=> 'merchant',
-	'name'			=> 'merchant',
-	'description' 	=> 'merchant_desc',			/* 描述对应的语言项 */
-	'author' 		=> 'ECJIA TEAM',			/* 作者 */
-	'website' 		=> 'http://www.ecjia.com',	/* 网址 */
-	'version' 		=> '1.10.0',					/* 版本号 */
-	'copyright' 	=> 'ECJIA Copyright 2015.',
+class category_module extends api_front implements api_interface {
+    public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
 
-);
+    	$this->authSession();
+		$seller_id = $this->requestData('seller_id');
+		$seller_id = empty($seller_id) ? '' : $seller_id;
+
+		if (empty($seller_id)) {
+			return new ecjia_error('invalid_parameter', RC_Lang::get ('system::system.invalid_parameter' ));
+		}
+        $cat_list = RC_DB::table('merchants_category')->selectRaw('cat_id, cat_name, parent_id,cat_image')
+        												->where('parent_id', 0)
+        												->where('store_id', $seller_id)
+        												->where('is_show', 1)
+        												->orderBy('sort_order', 'asc')
+        												->get();
+        
+        $cat_arr = array();
+        if (!empty($cat_list)) {
+        	foreach($cat_list as $key => $val){
+        		$cat_arr[] = array(
+        				'id'	=> $val['cat_id'],
+        				'name'	=> $val['cat_name'],
+        		        'image' => $val['cat_image'] ? RC_Upload::upload_url($val['cat_image']) : '',
+        				'children' => get_child_tree($val['cat_id']),
+        		);
+        	}
+        }
+        
+        return $cat_arr;
+
+		
+	}
+}
+
+
+function get_child_tree($cat_id) {
+    $cat_list = RC_DB::table('merchants_category')->selectRaw('cat_id, cat_name, parent_id, cat_image')
+        												->where('parent_id', $cat_id)
+        												->where('is_show', 1)
+        												->orderBy('sort_order', 'asc')
+        												->get();
+	$cat_arr = array();
+	if (!empty($cat_list)) {
+		foreach($cat_list as $key => $val){
+			$cat_arr[] = array(
+					'id'	=> $val['cat_id'],
+					'name'	=> $val['cat_name'],
+			        'image' => $val['cat_image'] ? RC_Upload::upload_url($val['cat_image']) : '',
+				);
+        	}
+	}												
+    return $cat_arr;
+}
 
 // end
