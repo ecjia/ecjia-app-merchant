@@ -63,7 +63,7 @@ class merchant_merchant_menu_api extends Component_Event_Api {
             ecjia_merchant::make_admin_menu('04_merchant_switch', __('店铺上下线'), RC_Uri::url('merchant/merchant/mh_switch'), 4)->add_purview('merchant_switch')->add_icon('fa-power-off'), 
             ecjia_merchant::make_admin_menu('05_merchant_template', __('店铺模版'), RC_Uri::url('merchant/merchant/template'), 5)->add_purview('merchant_template')->add_icon('fa-navicon'), 
         		
-       		ecjia_merchant::make_admin_menu('06_merchant_printer', __('小票机'), RC_Uri::url('printer/mh_print/init'), 6)->add_purview('merchant_printer_manage')->add_icon('fa-print'),
+       		ecjia_merchant::make_admin_menu('06_merchant_printer', __('小票机'), RC_Uri::url('printer/mh_print/init'), 6)->add_purview('mh_printer_manage')->add_icon('fa-print'),
         );
         
         $mymenus->add_submenu($submenus);
