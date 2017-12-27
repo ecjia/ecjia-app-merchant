@@ -55,7 +55,6 @@ class admin_store_setting extends ecjia_admin {
 
 		RC_Loader::load_app_func('global', 'store');
 		RC_Loader::load_app_func('merchant_store', 'store');
-		assign_adminlog_content();
 
 		//全局JS和CSS
 		RC_Script::enqueue_script('smoke');
