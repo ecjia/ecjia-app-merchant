@@ -23,7 +23,6 @@
 </div>
 <style type="text/css">
 .template-content {
-	width: 440px;
 	height: 405.22px;
 	float: left;
 }
@@ -61,10 +60,13 @@
                                 	<div class="template-item m_l30">
                                 		<figure><span><a class="nopjax" href="{$app_url}template_2.png" data-size="248x500" data-med-size="200x403" title="点击放大" data-med="{$app_url}template_2.png"><img href="{$app_url}template_2.png" src="{$app_url}template_2.png" class="w200"/></a></span></figure>
                                 	</div>
+                                	<div class="template-item m_l30">
+                                		<figure><span><a class="nopjax" href="{$app_url}template_3.png" data-size="248x500" data-med-size="200x403" title="点击放大" data-med="{$app_url}template_3.png"><img href="{$app_url}template_3.png" src="{$app_url}template_3.png" class="w200"/></a></span></figure>
+                                	</div>
                                 </div>
                             </div>
                             <label class="control-label col-lg-2"></label>
-                            <div class="col-lg-6 m_b10">
+                            <div class="col-lg-10 m_b10">
                             	<div class="f_l m_l5">
 	                                <input id="template_1" type="radio" name="shop_template" value="default1" {if $shop_template eq 'default1'} checked{/if}/>
 	                                <label for="template_1">模版样式一</label>
@@ -72,6 +74,10 @@
                                 <div class="f_l m_l135">
 	                                <input id="template_2" type="radio" name="shop_template" value="default2" {if $shop_template eq 'default2'} checked{/if}/>
 	                                <label for="template_2">模版样式二</label>
+                                </div>
+                                <div class="f_l m_l135">
+	                                <input id="template_3" type="radio" name="shop_template" value="default3" {if $shop_template eq 'default3'} checked{/if}/>
+	                                <label for="template_3">模版样式三</label>
                                 </div>
                         	</div>
                         </div>
