@@ -164,7 +164,15 @@ label + div.col-lg-6, label + div.col-lg-2 {
                             </div>
                             
                         </div>
-
+						
+						 <div class="form-group">
+                            <label class="control-label col-lg-2">{t}最小购物金额：{/t}</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="min_goods_amount" type="text" value="{$data.min_goods_amount}"/>
+                                <span class="help-block">用户下单时达到此购物金额，才能提交订单</span>
+                            </div>
+                        </div>
+						
                         <div class="form-group ">
                             <div class="col-lg-6 col-md-offset-2">
                                 <input class="btn btn-info" type="submit" name="name" value="提交信息">
