@@ -160,7 +160,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                 <label for="open">开启</label>
                                 <input id="close" type="radio" name="express_assign_auto" value="0" {if $data.express_assign_auto eq 0} checked="true" {/if}  />
                                 <label for="close">关闭</label>
-                                <span class="help-block">（订单使用o2o配送方式时。当发货未选择配送员时，系统将自动优先分派配送单，再进入抢单模式，否则进入抢单模式）</span>
+                                <span class="help-block">（订单使用商家配送方式时。当发货未选择配送员时，系统将自动优先分派配送单，再进入抢单模式，否则进入抢单模式）</span>
                             </div>
                             
                         </div>
