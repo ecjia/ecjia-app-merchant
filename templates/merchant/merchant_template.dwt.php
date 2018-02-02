@@ -82,7 +82,7 @@
                                 </div>
                         	</div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group m_t20">
                             <div class="col-lg-6 col-md-offset-2">
                                 <input class="btn btn-info" type="submit" name="name" value="确定">
                             </div>
