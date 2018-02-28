@@ -47,23 +47,75 @@
 defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商店设置
- * @author weidong
+ * 收款二维码
  */
-class merchant_merchant_purview_api extends Component_Event_Api {
-    public function call(&$options) {
-        $purviews = array(
-            array('action_name' => __('店铺设置'), 'action_code' => 'merchant_manage', 'relevance'   => ''),
-        		
-            array('action_name' => __('店铺入驻信息'), 'action_code' => 'franchisee_manage', 'relevance'   => ''),
-        	array('action_name' => __('店铺入驻信息'), 'action_code' => 'franchisee_request', 'relevance'   => ''),
-        	array('action_name' => __('收款账号'), 'action_code' => 'franchisee_bank', 'relevance'   => ''),
-        	array('action_name' => __('收款二维码'), 'action_code' => 'franchisee_qrcode', 'relevance'   => ''),
-            array('action_name' => __('店铺上下线'), 'action_code' => 'merchant_switch', 'relevance'   => ''),
-        	array('action_name' => __('小程序模版'), 'action_code' => 'merchant_template', 'relevance'   => ''),
-        );
-        return $purviews;
-    }
+class mh_qrcode extends ecjia_merchant {
+	public function __construct() {
+		parent::__construct();
+        RC_Script::enqueue_script('jquery-form');
+		RC_Script::enqueue_script('smoke');
+        RC_Style::enqueue_style('uniform-aristo');
+       
+        // 页面css样式
+        RC_Style::enqueue_style('merchant_qrcode', RC_App::apps_url('statics/css/merchant_qrcode.css', __FILE__), array());
+        RC_Script::enqueue_script('merchant_qrcode', RC_App::apps_url('statics/js/merchant_qrcode.js', __FILE__));
+        
+        RC_Loader::load_app_func('merchant');
+        Ecjia\App\Merchant\Helper::assign_adminlog_content();
+
+        ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here('我的店铺', RC_Uri::url('merchant/merchant/init')));
+        ecjia_merchant_screen::get_current_screen()->set_parentage('store', 'store/merchant.php');
+	}
+
+	/**
+	 * 收款二维码
+	 */
+	public function init() {
+		$this->admin_priv('merchant_qrcode');
+
+		ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('收款二维码'));
+		$this->assign('app_url', RC_App::apps_url('statics', __FILE__));
+
+		$this->assign('ur_here', '收款二维码');
+
+		$merchant_info = get_merchant_info($_SESSION['store_id']);
+        $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
+
+        $this->assign('merchant_info', $merchant_info);
+        $this->assign('merchant_qrcode', '');
+        
+        $this->assign('refresh_url', RC_Uri::url('merchant/mh_qrcode/refresh'));
+        $this->assign('download_url', RC_Uri::url('merchant/mh_qrcode/download'));
+        
+		$this->display('merchant_qrcode.dwt');
+	}
+	
+	/**
+	 * 刷新二维码
+	 */
+	public function refresh() {
+		$this->admin_priv('merchant_qrcode', ecjia::MSGTYPE_JSON);
+		
+		return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+	}
+	
+	/**
+	 * 下载素材
+	 */
+	public function download() {
+		$this->admin_priv('merchant_qrcode', ecjia::MSGTYPE_JSON);
+		
+		
+		$qrcode = !empty($_POST['qrcode']) ? trim($_POST['qrcode']) : '';
+		if (empty($qrcode)) {
+			return $this->showmessage('收款二维码为空，无法下载', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+		}
+		
+		$fileres = file_get_contents('');
+		header('Content-type: image/jpeg');
+		echo $fileres;
+	}
+	
 }
 
-// end
+//end
