@@ -13,16 +13,6 @@
 	text-align: center;
 }
 
-.qrcode-content .right-side {
-    width: 695px;
-    height: 430px;
-    float: left;
-    margin-left: 20px;
-	padding: 20px;
-	background-color: #F9F9F9;
-	border-radius: 8px;
-}
-
 .qrcode-content .left-side .store-logo img {
 	width: 60px;
     height: 60px;
@@ -51,21 +41,32 @@
     margin-top: 20px;
 }
 
-.right-head {
-	font-size: 18px;
-    padding: 10px 0;
-    border-bottom: 1px dashed #eee;
-    margin-bottom: 10px;
+.qrcode-content .right-side {
+    width: 695px;
+    height: 430px;
+    float: left;
+    margin-left: 20px;
+	padding: 20px;
+	background-color: #F9F9F9;
+	border-radius: 8px;
 }
 
-.right-content {
+.qrcode-content .right-side .right-head {
+	font-size: 18px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+    margin-bottom: 10px;
+	font-weight: bold;
+}
+
+.qrcode-content .right-side .right-content {
 	line-height: 25px;
 }
 
-.right-content p:first-child {
+.qrcode-content .right-side .right-content p:first-child {
 	text-indent: 2em;
 }
 
-.right-handle {
+.qrcode-content .right-side .right-handle {
 	margin-top: 30px;
 }
