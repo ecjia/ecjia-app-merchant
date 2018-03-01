@@ -81,11 +81,17 @@ class mh_qrcode extends ecjia_merchant {
 		$merchant_info = get_merchant_info($_SESSION['store_id']);
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
 
-        $this->assign('merchant_info', $merchant_info);
-        $this->assign('merchant_qrcode', '');
-        
         $this->assign('refresh_url', RC_Uri::url('merchant/mh_qrcode/refresh'));
         $this->assign('download_url', RC_Uri::url('merchant/mh_qrcode/download'));
+        
+        $disk = RC_Filesystem::disk();
+        $collectmoney_qrcode = 'data/qrcodes/collectmoney/merchant_'.$_SESSION['store_id'].'.png';
+        if ($disk->exists(RC_Upload::upload_path($collectmoney_qrcode))) {
+        	$merchant_info['collectmoney_qrcode'] = RC_Upload::upload_url($collectmoney_qrcode).'?'.time();
+        } else {
+        	$merchant_info['collectmoney_qrcode'] = with(new Ecjia\App\Mobile\Qrcode\GenerateCollectMoney($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
+        }
+        $this->assign('merchant_info', $merchant_info);
         
 		$this->display('merchant_qrcode.dwt');
 	}
@@ -96,7 +102,20 @@ class mh_qrcode extends ecjia_merchant {
 	public function refresh() {
 		$this->admin_priv('merchant_qrcode', ecjia::MSGTYPE_JSON);
 		
-		return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+		$store_id = $_SESSION['store_id'];
+		//删除生成的收款二维码
+		$disk = RC_Filesystem::disk();
+		$collectmoney_qrcode = 'data/qrcodes/collectmoney/merchant_'.$store_id.'.png';
+		if ($disk->exists(RC_Upload::upload_path($collectmoney_qrcode))) {
+			$disk->delete(RC_Upload::upload_path().$collectmoney_qrcode);
+		}
+		$merchant_info = get_merchant_info($store_id);
+		if (!empty($merchant_info['shop_logo'])) {
+			with(new Ecjia\App\Mobile\Qrcode\GenerateCollectMoney($store_id,  $merchant_info['shop_logo']));
+		}
+		ecjia_merchant::admin_log('刷新收款二维码', 'edit', 'collectmoney_qrcode');
+		
+		return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/mh_qrcode/init')));
 	}
 	
 	/**

@@ -9,10 +9,9 @@
         	$('.download_qrcode').off('click').on('click', function(e) {
         		e.preventDefault();
         		var $this = $(this),
-        			url = $this.attr('href'),
-        			qrcode = $this.attr('data-qrcode');
+        			url = $this.attr('href');
         		
-        		$.post(url, {qrcode: qrcode}, function(data) {
+        		$.post(url, function(data) {
         			ecjia.merchant.showmessage(data);
         		});
         		
