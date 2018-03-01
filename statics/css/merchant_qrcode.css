@@ -4,7 +4,7 @@
 }
 
 .qrcode-content .left-side {
-	width: 350px;
+	width: 300px;
     height: 430px;
     border: 1px solid #eee;
     float: left;
@@ -42,7 +42,7 @@
 }
 
 .qrcode-content .right-side {
-    width: 695px;
+    width: 746px;
     height: 430px;
     float: left;
     margin-left: 20px;

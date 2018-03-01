@@ -105,15 +105,6 @@ class mh_qrcode extends ecjia_merchant {
 	public function download() {
 		$this->admin_priv('merchant_qrcode', ecjia::MSGTYPE_JSON);
 		
-		
-		$qrcode = !empty($_POST['qrcode']) ? trim($_POST['qrcode']) : '';
-		if (empty($qrcode)) {
-			return $this->showmessage('收款二维码为空，无法下载', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
-		}
-		
-		$fileres = file_get_contents('');
-		header('Content-type: image/jpeg');
-		echo $fileres;
 	}
 	
 }
