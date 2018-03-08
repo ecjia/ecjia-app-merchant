@@ -83,7 +83,7 @@ class ecjia_merchant_screen extends ecjia_screen {
         if (!empty($this->_admin_notice)) :
             foreach ($this->_admin_notice as $admin_notice) :
                 ?>
-                <div class="alert alert-dismissable<?php if ($admin_notice->get_type()) echo ' '.$admin_notice->get_type(); ?>">
+                <div class="alert alert-dismissable<?php if ($admin_notice->get_type()) echo ' '.$admin_notice->get_type(); else echo ' alert-warning'; ?>">
                     <?php if ($admin_notice->get_allow_close()) :?>
                 	<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
                 	<?php endif;?>
