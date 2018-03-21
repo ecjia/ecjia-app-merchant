@@ -179,6 +179,7 @@ class validate_module extends api_admin implements api_interface {
 		//审核日志
 		RC_Loader::load_app_func('merchant_franchisee', 'franchisee');
 		$store_franchisee_info['id'] = $store_franchisee_info['store_id'];
+		unset($store_franchisee_info['store_id']);
 		add_check_log($data, $store_franchisee_info);
 
 		return array();
