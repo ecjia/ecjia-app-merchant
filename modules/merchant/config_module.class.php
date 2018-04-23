@@ -96,7 +96,34 @@ class config_module extends api_front implements api_interface {
             $store_config[$value['code']] = $value['value'];
         }
         $info = array_merge($info, $store_config);
-
+        
+        /*店铺是否打烊*/
+        $shop_closed = 0;
+        if (!empty($info['shop_trade_time'])) {
+        	$shop_trade_time = unserialize($info['shop_trade_time']);
+        	if (empty($shop_trade_time['start']) || empty($shop_trade_time['end'])) {
+        		$shop_closed =1;
+        	}
+        	$current_time = RC_Time::gmtime();
+        	$current_hour = RC_Time::local_date('H:i', $current_time);
+        	$shop_trade_start_time = $shop_trade_time['start'];
+        	$shop_trade_end_time = $shop_trade_time['end'];
+        	/*营业至次日*/
+        	if ($shop_trade_time['end'] > 24) {
+        		$shop_trade_end_time = $shop_trade_time['end'] - 24;
+        		$shop_trade_end_time = $shop_trade_end_time.':00';
+        	}
+        	$shop_trade_start_time_str = RC_Time::local_strtotime($shop_trade_start_time);
+        	$current_hour_str = RC_Time::local_strtotime($current_hour);
+        	$shop_trade_end_time_str = RC_Time::local_strtotime($shop_trade_end_time);
+        	
+        	if (($shop_trade_start_time_str < $current_hour_str) && ($current_hour_str < $shop_trade_end_time_str)) {
+        		$shop_closed = 0;
+        	} else {
+        		$shop_closed =1;
+        	}
+        }
+		
 		if(substr($info['shop_logo'], 0, 1) == '.') {
 			$info['shop_logo'] = str_replace('../', '/', $info['shop_logo']);
 		}
@@ -209,7 +236,8 @@ class config_module extends api_front implements api_interface {
 // 				'best_goods'		=> $bestgoods_list,
 				'favourable_list'	=> $favourable_list,
 				'label_trade_time'	=> $info['trade_time'],
-				'allow_use_quickpay'=> empty($allow_use_quickpay) ? 0 : 1
+				'allow_use_quickpay'=> empty($allow_use_quickpay) ? 0 : 1,
+				'shop_closed'		=> $shop_closed
 		);
 
 		return $seller_info;
