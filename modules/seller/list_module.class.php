@@ -230,14 +230,14 @@ class list_module extends api_front implements api_interface {
 					
 					//是否需要返回商品数据
 					$goods_store_data = array();
+					$goods_options = array('store_id' => $row['id'], 'cat_id' => $goods_category, 'keywords' => $keywords, 'page' => 1, 'size' => 10);
+					/* 如有查询添加，不限制分页*/
+					if (!empty($goods_category) || !empty($keywords)) {
+						$goods_options['size'] = $goods_options['page'] = 0;
+					}
 					if (empty($no_need_goods)) {
-						$goods_options = array('store_id' => $row['id'], 'cat_id' => $goods_category, 'keywords' => $keywords, 'page' => 1, 'size' => 10);
-						/* 如有查询添加，不限制分页*/
-						if (!empty($goods_category) || !empty($keywords)) {
-							$goods_options['size'] = $goods_options['page'] = 0;
-						}
+						$goods_list = array();
 						$goods_result = RC_Api::api('goods', 'goods_list', $goods_options);
-						$goods_count = $goods_result['page']->total_records;
 						if (!empty($goods_result['list'])) {
 							foreach ($goods_result['list'] as $val) {
 								/* 判断是否有促销价格*/
@@ -245,7 +245,7 @@ class list_module extends api_front implements api_interface {
 								$activity_type = ($val['unformatted_shop_price'] > $val['unformatted_promote_price'] && $val['unformatted_promote_price'] > 0) ? 'PROMOTE_GOODS' : 'GENERAL_GOODS';
 								/* 计算节约价格*/
 								$saving_price = ($val['unformatted_shop_price'] > $val['unformatted_promote_price'] && $val['unformatted_promote_price'] > 0) ? $val['unformatted_shop_price'] - $val['unformatted_promote_price'] : (($val['unformatted_market_price'] > 0 && $val['unformatted_market_price'] > $val['unformatted_shop_price']) ? $val['unformatted_market_price'] - $val['unformatted_shop_price'] : 0);
-									
+				
 								$goods_list[] = array(
 										'goods_id'		=> $val['goods_id'],
 										'name'			=> $val['name'],
