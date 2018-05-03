@@ -118,7 +118,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                         <p>您可以将此二维码通过网上或线下宣传展示给您的用户；用户使用手机扫描该二维码，就可以访问您的店铺网页并下单哦！</p>
                                     </div>
                                     <a class="btn btn-primary btn-sm fileupload-exists" {if $data.store_qrcode}data-toggle="ajax_remove"{else}data-dismiss="fileupload"{/if} href="{url path='merchant/merchant/refresh_qrcode'}" style="margin-top: 35px; margin-left: 10px;">刷新</a>
-                                    <a class="btn btn-primary btn-sm" style="margin-top: 35px;">下载二维码</a>
+                                    <a class="btn btn-primary btn-sm" href="{url path='merchant/merchant/download_qrcode'}&type=merchant_qrcode" style="margin-top: 35px;">下载二维码</a>
                                 </div>
                                 {else}
                                 <a class="btn btn-primary btn-sm fileupload-exists" data-toggle="ajax_remove" href="{url path='merchant/merchant/refresh_qrcode'}">刷新</a>
@@ -141,7 +141,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                          <p>抓住新的推广方式，快来试试吧！</p>
                                     </div>
                                     <a class="btn btn-primary btn-sm fileupload-exists" {if $data.store_weapp_qrcode}data-toggle="ajax_remove"{else}data-dismiss="fileupload"{/if} href="{url path='merchant/merchant/refresh_weapp_qrcode'}" style="margin-top: 5px; margin-left: 10px;">刷新</a>
-                                    <a class="btn btn-primary btn-sm" style="margin-top: 5px;">下载二维码</a>
+                                    <a class="btn btn-primary btn-sm" href="{url path='merchant/merchant/download_qrcode'}&type=merchant_weapp_qrcode" style="margin-top: 5px;">下载二维码</a>
                                 </div>
                                 {else}
                                 <a class="btn btn-primary btn-sm fileupload-exists" data-toggle="ajax_remove" href="{url path='merchant/merchant/refresh_weapp_qrcode'}">刷新</a>

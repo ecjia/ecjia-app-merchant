@@ -455,9 +455,43 @@ class merchant extends ecjia_merchant {
         
         $merchant_info = get_merchant_info($_SESSION['store_id']);
         if (!empty($merchant_info['shop_logo'])) {
-            with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
+            // with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
         }
         return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/init')));
+    }
+
+    /**
+    * 下载二维码
+    */
+    public function download_qrcode() {
+        $type = trim($_GET['type']);
+        $file = '';
+
+        $disk = RC_Filesystem::disk();
+        if ($type == 'merchant_qrcode') {
+            $store_qrcode = 'data/qrcodes/merchants/merchant_'.$_SESSION['store_id'].'.png';
+            if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
+                $file = RC_Upload::upload_url($store_qrcode).'?'.time();
+            } 
+            $filename = 'merchant_qrcode.png';
+        } else if ($type == 'merchant_weapp_qrcode') {
+            $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_'.$_SESSION['store_id'].'.png';
+            if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
+                $file = RC_Upload::upload_url($store_weapp_qrcode).'?'.time();
+            }
+            $filename = 'merchant_weapp_qrcode.png';
+        }
+
+        if (empty($file)) {
+            return false;
+        }
+        //文件的类型
+        header('Content-type: application/octet-stream');
+        //下载显示的名字
+        header('Content-Disposition: attachment; filename='.$filename);
+        readfile($file);
+
+        exit();
     }
     
     /**
