@@ -141,7 +141,6 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                     </div>
                                     <a class="btn btn-primary btn-sm" href="{url path='merchant/merchant/download'}&type=merchant_weapp_qrcode" style="margin-top: 5px;margin-left: 10px;">下载二维码</a>
                                 </div>
-                                <span class="help-block">上传店铺logo后，点击刷新按钮可生成店铺小程序二维码。删除店铺logo后，需手动刷新才可删除店铺小程序二维码。</span>
                             </div>
                         </div>
 
