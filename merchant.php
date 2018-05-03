@@ -110,6 +110,11 @@ class merchant extends ecjia_merchant {
         if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
 			$merchant_info['store_qrcode'] = RC_Upload::upload_url($store_qrcode).'?'.time();
 		} 
+
+        $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_'.$_SESSION['store_id'].'.png';
+        if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
+            $merchant_info['store_weapp_qrcode'] = RC_Upload::upload_url($store_weapp_qrcode).'?'.time();
+        } 
 		$this->assign('data', $merchant_info);
         $this->assign('form_action', RC_Uri::url('merchant/merchant/update'));
 
@@ -430,9 +435,29 @@ class merchant extends ecjia_merchant {
     	
     	$merchant_info = get_merchant_info($_SESSION['store_id']);
     	if (!empty($merchant_info['shop_logo'])) {
-    		$merchant_info['store_qrcode'] = with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
+    		with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
     	}
     	return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/init')));
+    }
+
+    /**
+     * 刷新店铺小程序二维码
+     */
+    public function refresh_weapp_qrcode() {
+        $store_id = $_SESSION['store_id'];
+        //删除生成的店铺小程序二维码
+        $disk = RC_Filesystem::disk();
+        $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_'.$store_id.'.png';
+        if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
+            $disk->delete(RC_Upload::upload_path().$store_weapp_qrcode);
+        }
+        ecjia_merchant::admin_log('刷新店铺二维码', 'edit', 'merchant');
+        
+        $merchant_info = get_merchant_info($_SESSION['store_id']);
+        if (!empty($merchant_info['shop_logo'])) {
+            with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($_SESSION['store_id'],  $merchant_info['shop_logo']))->getQrcodeUrl();
+        }
+        return $this->showmessage('刷新成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/init')));
     }
     
     /**
