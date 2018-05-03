@@ -132,7 +132,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                             <div class="col-lg-10">
                                 <div class="fileupload fileupload-exists" data-provides="fileupload">
                                     <div class="fileupload-exists thumbnail fileupload-store-weapp-qrcode f_l">
-                                        <img src="{RC_Uri::url('weapp/wxacode/init')}&store_id={$store_id}" alt="店铺二维码" style="width:150px; height:150px;"/>
+                                        <img src="{RC_Uri::url('weapp/wxacode/init')}&storeid={$store_id}" alt="店铺二维码" style="width:150px; height:150px;"/>
                                     </div>
                                     <div class="help-block f_l" style="width: 700px;margin-left: 10px;">
                                         <p>该二维码是外卖小程序您店铺的手机网址；</p>
