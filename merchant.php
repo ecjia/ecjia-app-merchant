@@ -451,7 +451,7 @@ class merchant extends ecjia_merchant {
         if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
             $disk->delete(RC_Upload::upload_path().$store_weapp_qrcode);
         }
-        ecjia_merchant::admin_log('刷新店铺二维码', 'edit', 'merchant');
+        ecjia_merchant::admin_log('刷新店铺小程序二维码', 'edit', 'merchant');
         
         $merchant_info = get_merchant_info($_SESSION['store_id']);
         if (!empty($merchant_info['shop_logo'])) {
