@@ -111,12 +111,10 @@ class merchant extends ecjia_merchant {
 			$merchant_info['store_qrcode'] = RC_Upload::upload_url($store_qrcode).'?'.time();
 		} 
 
-        $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_'.$_SESSION['store_id'].'.png';
-        if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
-            $merchant_info['store_weapp_qrcode'] = RC_Upload::upload_url($store_weapp_qrcode).'?'.time();
-        } 
 		$this->assign('data', $merchant_info);
         $this->assign('form_action', RC_Uri::url('merchant/merchant/update'));
+
+        $this->assign('store_id', $_SESSION['store_id']);
 
 		$this->display('merchant_basic_info.dwt');
 	}
@@ -463,7 +461,7 @@ class merchant extends ecjia_merchant {
     /**
     * 下载二维码
     */
-    public function download_qrcode() {
+    public function download() {
         $type = trim($_GET['type']);
         $file = '';
 
@@ -475,10 +473,7 @@ class merchant extends ecjia_merchant {
             } 
             $filename = 'merchant_qrcode.png';
         } else if ($type == 'merchant_weapp_qrcode') {
-            $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_'.$_SESSION['store_id'].'.png';
-            if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
-                $file = RC_Upload::upload_url($store_weapp_qrcode).'?'.time();
-            }
+            $file = RC_Uri::url('weapp/wxacode/init', array('store_id' => $_SESSION['store_id']));
             $filename = 'merchant_weapp_qrcode.png';
         }
 
