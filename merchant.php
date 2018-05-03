@@ -473,7 +473,7 @@ class merchant extends ecjia_merchant {
             } 
             $filename = 'merchant_qrcode.png';
         } else if ($type == 'merchant_weapp_qrcode') {
-            $file = RC_Uri::url('weapp/wxacode/init', array('store_id' => $_SESSION['store_id']));
+            $file = RC_Uri::url('weapp/wxacode/init', array('storeid' => $_SESSION['store_id']));
             $filename = 'merchant_weapp_qrcode.png';
         }
 
