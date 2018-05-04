@@ -198,6 +198,8 @@ class config_module extends api_front implements api_interface {
 		//$info['trade_time'] = !empty($info['shop_trade_time']) ? unserialize($info['shop_trade_time']) : array('start' => '8:00', 'end' => '21:00');
 		//是否开启闪惠功能
 		$allow_use_quickpay = RC_DB::table('merchants_config')->where('store_id', $seller_id)->where('code', 'quickpay_enabled')->pluck('value');
+		/*店铺小程序二维码*/
+		$seller_weapp_qrcode  = RC_Uri::url('weapp/wxacode/init', array('storeid' => $info['store_id']));
 		
 		$seller_info = array(
 				'id'					=> $info['store_id'],
@@ -206,6 +208,7 @@ class config_module extends api_front implements api_interface {
 				'seller_logo'			=> empty($info['shop_logo']) ?  '' : RC_Upload::upload_url($info['shop_logo']),
 		        'seller_banner'			=> empty($info['shop_banner_pic']) ?  '' : RC_Upload::upload_url($info['shop_banner_pic']),
 		        'seller_qrcode'			=> with(new Ecjia\App\Mobile\Qrcode\GenerateMerchant($info['store_id'], empty($info['shop_logo']) ?  '' : RC_Upload::upload_url($info['shop_logo'])))->getQrcodeUrl(),
+				'seller_weapp_qrcode'   => $seller_weapp_qrcode,
 				'seller_category'		=> $info['cat_name'],
 				'shop_name'				=> $info['company_name'],
 				'shop_address'			=> $province_name.$city_name.$district_name.$street_name.' '.$info['address'],
