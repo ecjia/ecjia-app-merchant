@@ -99,13 +99,17 @@ class list_module extends api_front implements api_interface {
 					'limit'				=> 'all',
 					'seller_category' 	=> $seller_category,
 					'district_id'		=> $district_id,
+					'city_id'			=> $city_id
 			);
-				
+			
 			/*经纬度为空判断*/
-			if ((is_array($location) || !empty($location['longitude']) || !empty($location['latitude']))) {
+			if ((is_array($location) && !empty($location['longitude']) && !empty($location['latitude'])) && empty($city_id)) {
 				$geohash      = RC_Loader::load_app_class('geohash', 'store');
 				$geohash_code = $geohash->encode($location['latitude'] , $location['longitude']);
 				$options['store_id']   = RC_Api::api('store', 'neighbors_store_id', array('geohash' => $geohash_code, 'city_id' => $city_id));
+			} elseif ((is_array($location) && !empty($location['longitude']) && !empty($location['latitude'])) && !empty($city_id)) {
+				 $store_ids = RC_DB::table('store_franchisee')->where('city', $city_id)->where('shop_close', '0')->lists('store_id');
+				 $options['store_id'] = $store_ids;
 			} else {
 				$seller_list = array();
 				$page = array(
@@ -305,10 +309,13 @@ class list_module extends api_front implements api_interface {
 			);
 			
 			/*经纬度为空判断*/
-			if ((is_array($location) || !empty($location['longitude']) || !empty($location['latitude']))) {
+			if ((is_array($location) && !empty($location['longitude']) && !empty($location['latitude'])) && empty($city_id)) {
 				$geohash      = RC_Loader::load_app_class('geohash', 'store');
 				$geohash_code = $geohash->encode($location['latitude'] , $location['longitude']);
 				$options['store_id']   = RC_Api::api('store', 'neighbors_store_id', array('geohash' => $geohash_code, 'city_id' => $city_id));
+			} elseif ((is_array($location) && !empty($location['longitude']) && !empty($location['latitude'])) && !empty($city_id)) {
+				$store_ids = RC_DB::table('store_franchisee')->where('city', $city_id)->where('shop_close', '0')->lists('store_id');
+				$options['store_id'] = $store_ids;
 			} else {
 				$seller_list = array();
 				$page = array(
