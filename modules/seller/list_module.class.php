@@ -496,12 +496,21 @@ class list_module extends api_front implements api_interface {
 			}
 		}
 		
-
-		
-
 		array_multisort($distance_list, SORT_ASC, $sort_order, SORT_ASC, $seller_list);
-
-		$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
+		
+		/*页数为2，第二次请求$size大于列表总数时处理*/
+		if ($store_data['page']->total_pages == '2') {
+			if ($store_data['page']->total_records > $size) {
+				if ($page == '1' && $store_data['page']->total_records > $size) {
+					$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
+				}
+			}
+			if (($page == '2') && ($store_data['page']->total_records < $size)) {
+				$seller_list = array_slice($seller_list, $store_data['page']->end_id, $size);
+			}
+		} else {
+			$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
+		}
 		
 		$page = array(
 			'total'	=> $store_data['page']->total_records,
