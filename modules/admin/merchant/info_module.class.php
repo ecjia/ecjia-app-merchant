@@ -109,10 +109,14 @@ class info_module extends api_admin implements api_interface {
 				$shop_closed = 1;
 			}
 			
+			/*店长手机号码*/
+			$shopkeeper_mobile = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
+			
 			$seller_info = array(
     	  		'id'					=> $info['store_id'],
     	  		'seller_name'			=> $info['merchants_name'],
 				'shop_closed'			=> $shop_closed,
+				'shopkeeper_mobile'		=> empty($shopkeeper_mobile) ? '' : $shopkeeper_mobile,
     	  		'seller_logo'			=> RC_Upload::upload_url(RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_logo')->pluck('value')),
     	  		'seller_category'		=> RC_DB::table('store_category')->where('cat_id', $info['cat_id'])->pluck('cat_name'),
     	  		'seller_telephone'		=> RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_kf_mobile')->pluck('value'),
