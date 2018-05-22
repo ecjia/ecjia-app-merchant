@@ -128,6 +128,11 @@ class config_module extends api_front implements api_interface {
         		}
         	}
         }
+        
+        /*店铺关闭*/
+        if ($shop_closed == 0 && $info['shop_close'] == '1') {
+        	$shop_closed = 1;
+        }
 		
 		if(substr($info['shop_logo'], 0, 1) == '.') {
 			$info['shop_logo'] = str_replace('../', '/', $info['shop_logo']);

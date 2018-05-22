@@ -156,6 +156,13 @@ class list_module extends api_front implements api_interface {
 							$shop_closed =1;
 						}
 					}
+					
+					/*店铺关闭*/
+					$store_franchisee_shop_close = RC_DB::table('store_franchisee')->where('store_id', $row['id'])->pluck('shop_close');
+					if ($store_franchisee_shop_close == '1' && $shop_closed == 0) {
+						$shop_closed =1;
+					}
+					
 					$row['shop_closed'] = $shop_closed;
 					
 					$favourable_list = array();

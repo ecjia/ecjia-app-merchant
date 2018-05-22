@@ -104,6 +104,10 @@ class info_module extends api_admin implements api_interface {
 					}
 				}
 			}
+			/*店铺关闭*/
+			if ($shop_closed == 0 && $info['shop_close'] == '1') {
+				$shop_closed = 1;
+			}
 			
 			$seller_info = array(
     	  		'id'					=> $info['store_id'],
