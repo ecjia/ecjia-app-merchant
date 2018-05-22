@@ -93,6 +93,7 @@ class sms_module extends api_admin implements api_interface {
     		'code' => $code,
     		'lifetime' => RC_Time::gmtime() + 1800,
     		'sendtime' => RC_Time::gmtime(),
+	    	'is_used'  => 0,
 	    );
 	    $_SESSION['captcha']['sms']['sendtime'] = RC_Time::gmtime();
 	    

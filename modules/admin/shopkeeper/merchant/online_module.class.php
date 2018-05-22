@@ -77,8 +77,10 @@ class online_module extends api_admin implements api_interface {
     			return new ecjia_error('smscode_error', '验证码错误！');
     		} elseif ($_SESSION['captcha']['sms']['toboss']['lifetime'] < RC_Time::gmtime()) {
     			return new ecjia_error('smscode_error', '验证码已过期！');
-    		}elseif ($_SESSION['captcha']['sms']['toboss']['value'] != $staff_info['mobile']) {
+    		} elseif ($_SESSION['captcha']['sms']['toboss']['value'] != $staff_info['mobile']) {
     			return new ecjia_error('smscode_error', '接收验证码手机号与当前店铺店长手机号码不一致！');
+    		} elseif (empty($_SESSION['captcha']['sms']['toboss']['code'])) {
+    			return new ecjia_error('smscode_error', '验证码不可重复使用！');
     		}
     	}
     	
@@ -90,6 +92,12 @@ class online_module extends api_admin implements api_interface {
     	
     	/*切换店铺上线*/
     	RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->update(array('shop_close' => 0));
+    	
+    	unset($_SESSION['captcha']['sms']['toboss']['lifetime']);
+    	unset($_SESSION['captcha']['sms']['toboss']['value']);
+    	unset($_SESSION['captcha']['sms']['toboss']['code']);
+    	unset($_SESSION['captcha']['sms']['toboss']['sendtime']);
+    	unset($_SESSION['captcha']['sms']['toboss']['is_used']);
     	
     	/*释放app缓存*/
     	$store_franchisee_db = RC_Model::model('merchant/orm_store_franchisee_model');
