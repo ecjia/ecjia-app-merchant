@@ -93,6 +93,10 @@ class online_module extends api_admin implements api_interface {
     	/*切换店铺上线*/
     	RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->update(array('shop_close' => 0));
     	
+    	//记录管理员日志
+    	Ecjia\App\Merchant\Helper::assign_adminlog_content();
+    	RC_Api::api('merchant', 'admin_log', array('text'=> $_SESSION['staff_name'].'切换店铺上线'.'【来源掌柜】', 'action'=>'setup', 'object'=>'store'));
+    	
     	unset($_SESSION['captcha']['sms']['toboss']['lifetime']);
     	unset($_SESSION['captcha']['sms']['toboss']['value']);
     	unset($_SESSION['captcha']['sms']['toboss']['code']);

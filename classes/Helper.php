@@ -57,6 +57,7 @@ class Helper
      */
     public static function assign_adminlog_content() {
     	ecjia_admin_log::instance()->add_object('merchant', '我的店铺');
+    	ecjia_admin_log::instance()->add_object('store', '店铺');
     }
     
 }
