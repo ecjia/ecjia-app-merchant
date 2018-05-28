@@ -1,5 +1,5 @@
 <?php defined('IN_ECJIA') or exit('No permission resources.');?> 
-<!-- {extends file="ecjia-merchant.dwt.php"} -->
+<!-- {extends file="ecjia-platform.dwt.php"} -->
 
 <!-- {block name="home-content"} -->
 <div class="row">
