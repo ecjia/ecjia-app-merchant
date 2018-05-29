@@ -156,6 +156,13 @@ class list_module extends api_front implements api_interface {
 							$shop_closed =1;
 						}
 					}
+					
+					/*店铺关闭*/
+					$store_franchisee_shop_close = RC_DB::table('store_franchisee')->where('store_id', $row['id'])->pluck('shop_close');
+					if ($store_franchisee_shop_close == '1' && $shop_closed == 0) {
+						$shop_closed =1;
+					}
+					
 					$row['shop_closed'] = $shop_closed;
 					
 					$favourable_list = array();
@@ -498,19 +505,7 @@ class list_module extends api_front implements api_interface {
 		
 		array_multisort($distance_list, SORT_ASC, $sort_order, SORT_ASC, $seller_list);
 		
-		/*页数为2，第二次请求$size大于列表总数时处理*/
-		if ($store_data['page']->total_pages == '2') {
-			if ($store_data['page']->total_records > $size) {
-				if ($page == '1' && $store_data['page']->total_records > $size) {
-					$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
-				}
-			}
-			if (($page == '2') && ($store_data['page']->total_records < $size)) {
-				$seller_list = array_slice($seller_list, $store_data['page']->end_id, $size);
-			}
-		} else {
-			$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
-		}
+		$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
 		
 		$page = array(
 			'total'	=> $store_data['page']->total_records,
