@@ -138,9 +138,7 @@ class list_module extends api_front implements api_interface {
 						if (empty($shop_trade_time['start']) || empty($shop_trade_time['end'])) {
 							$shop_closed = 1;
 						} else {
-							// $current_time = RC_Time::gmtime();
-							// $current_time = 1528299000;//test 2018-06-07 07:30:00
-							$current_time = 1528354800;//test 2018-06-07 23:00:00
+							$current_time = RC_Time::gmtime();
 							RC_Logger::getLogger('info')->info(RC_Time::local_date('Y-m-d H:i:s', $current_time));
 
 							$start_time = RC_Time::local_strtotime($shop_trade_time['start']);
