@@ -2,9 +2,9 @@
 
 namespace Ecjia\App\Merchant;
 
-use Royalcms\Component\App\AppServiceProvider;
+use Royalcms\Component\App\AppParentServiceProvider;
 
-class MerchantServiceProvider extends  AppServiceProvider
+class MerchantServiceProvider extends  AppParentServiceProvider
 {
     
     public function boot()
