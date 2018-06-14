@@ -9,7 +9,7 @@ use Royalcms\Component\Repository\Repositories\AbstractRepository;
 class StaffUser extends AbstractRepository implements UserInterface
 {
     
-    protected $model = 'Ecjia\App\Platform\Models\StaffUserModel';
+    protected $model = 'Ecjia\App\Merchant\Models\StaffUserModel';
     
     protected $user;
     
@@ -41,7 +41,7 @@ class StaffUser extends AbstractRepository implements UserInterface
      */
     public function getUserName()
     {
-        return $this->user->user_name;
+        return $this->user->name;
     }
     
     /**
