@@ -1,15 +1,15 @@
 <?php
 
-namespace Ecjia\App\Platform\Frameworks\Users;
+namespace Ecjia\App\Merchant\Frameworks\Users;
 
 use Ecjia\System\Frameworks\Contracts\UserInterface;
 use Ecjia\App\Platform\Frameworks\Users\AdminUserAllotPurview;
 use Royalcms\Component\Repository\Repositories\AbstractRepository;
 
-class AdminUser extends AbstractRepository implements UserInterface
+class StaffUser extends AbstractRepository implements UserInterface
 {
     
-    protected $model = 'Ecjia\App\Platform\Models\AdminUserModel';
+    protected $model = 'Ecjia\App\Platform\Models\StaffUserModel';
     
     protected $user;
     
