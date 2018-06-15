@@ -23,7 +23,7 @@ class StaffUser extends AbstractRepository implements UserInterface
     {
         parent::__construct();
         
-        $this->user = $this->findWhere(['user_id' => $userid, 'store_id' => $storeid]);
+        $this->user = $this->findWhere(['user_id' => $userid, 'store_id' => $storeid])->first();
         
         if (is_string($purviewClass) && class_exists($purviewClass)) {
             $this->purview = new $purviewClass($userid, $storeid);
