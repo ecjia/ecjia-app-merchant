@@ -57,7 +57,7 @@ class StaffUser extends AbstractRepository implements UserInterface
      */
     public function getUserType()
     {
-        return 'admin';
+        return 'merchant';
     }
     
     /**
@@ -108,7 +108,7 @@ class StaffUser extends AbstractRepository implements UserInterface
      */
     public function getLangType()
     {
-        return $this->user->lang_type;
+        return null;
     }
     
     /**
