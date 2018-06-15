@@ -3,7 +3,7 @@
 namespace Ecjia\App\Merchant\Frameworks\Users;
 
 use Ecjia\System\Frameworks\Contracts\UserInterface;
-use Ecjia\App\Platform\Frameworks\Users\AdminUserAllotPurview;
+use Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview;
 use Royalcms\Component\Repository\Repositories\AbstractRepository;
 
 class StaffUser extends AbstractRepository implements UserInterface
@@ -19,20 +19,20 @@ class StaffUser extends AbstractRepository implements UserInterface
      */
     protected $purview;
     
-    public function __construct($userid, $purviewClass = null)
+    public function __construct($userid, $storeid, $purviewClass = null)
     {
         parent::__construct();
         
-        $this->user = $this->find($userid);
+        $this->user = $this->findWhere(['user_id' => $userid, 'store_id' => $storeid]);
         
         if (is_string($purviewClass) && class_exists($purviewClass)) {
-            $this->purview = new $purviewClass($userid);
+            $this->purview = new $purviewClass($userid, $storeid);
         }
         elseif (is_callable($purviewClass)) {
-            $this->purview = $purviewClass($userid);
+            $this->purview = $purviewClass($userid, $storeid);
         }
         elseif (is_null($purviewClass)) {
-            $this->purview = new AdminUserAllotPurview($userid);
+            $this->purview = new StaffUserDefaultAllotPurview($userid, $storeid);
         }
     }
     
