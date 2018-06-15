@@ -137,6 +137,14 @@ class StaffUser extends AbstractRepository implements UserInterface
     }
     
     /**
+     * 获取登录地址
+     */
+    public function getLoginUrl()
+    {
+        return str_replace('sites/platform/index.php', 'sites/merchant/index.php', RC_Uri::url('staff/privilege/login'));
+    }
+    
+    /**
      * 获取个人设置地址
      */
     public function getProfileSettingUrl()
