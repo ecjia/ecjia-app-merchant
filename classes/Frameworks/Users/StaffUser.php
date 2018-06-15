@@ -116,7 +116,7 @@ class StaffUser extends AbstractRepository implements UserInterface
      */
     public function getRoleId()
     {
-        return $this->user->role_id;
+        return $this->user->group_id;
     }
     
     /**
