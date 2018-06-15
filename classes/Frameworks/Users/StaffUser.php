@@ -5,6 +5,7 @@ namespace Ecjia\App\Merchant\Frameworks\Users;
 use Ecjia\System\Frameworks\Contracts\UserInterface;
 use Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview;
 use Royalcms\Component\Repository\Repositories\AbstractRepository;
+use RC_Uri;
 
 class StaffUser extends AbstractRepository implements UserInterface
 {
@@ -125,6 +126,22 @@ class StaffUser extends AbstractRepository implements UserInterface
     public function getAddTime()
     {
         return $this->user->add_time;
+    }
+    
+    /**
+     * 获取退出登录地址
+     */
+    public function getLogoutUrl()
+    {
+        return str_replace('sites/platform/index.php', 'sites/merchant/index.php', RC_Uri::url('staff/privilege/logout'));
+    }
+    
+    /**
+     * 获取个人设置地址
+     */
+    public function getProfileSettingUrl()
+    {
+        return str_replace('sites/platform/index.php', 'sites/merchant/index.php', RC_Uri::url('staff/mh_profile/init'));
     }
     
 }
