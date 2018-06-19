@@ -6,6 +6,7 @@ use Ecjia\System\Frameworks\Contracts\UserInterface;
 use Ecjia\App\Merchant\Frameworks\Users\StaffUserDefaultAllotPurview;
 use Royalcms\Component\Repository\Repositories\AbstractRepository;
 use RC_Uri;
+use RC_Upload;
 
 class StaffUser extends AbstractRepository implements UserInterface
 {
@@ -151,5 +152,14 @@ class StaffUser extends AbstractRepository implements UserInterface
     {
         return str_replace('sites/platform/index.php', 'sites/merchant/index.php', RC_Uri::url('staff/mh_profile/init'));
     }
+    
+    /**
+     * 获取个人头像地址
+     */
+    public function getAvatarUrl()
+    {
+        return RC_Upload::upload_url($this->user->avatar);
+    }
+    
     
 }
