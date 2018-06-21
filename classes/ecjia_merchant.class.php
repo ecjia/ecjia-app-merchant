@@ -313,7 +313,7 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 
 		if (!empty($staff_id) && !empty($staff_pass)) {
 			// 找到了cookie, 验证cookie信息
-			$row = RC_DB::TABLE('staff_user')->where('user_id', intval($staff_id))->select('user_id', 'name', 'password', 'action_list', 'last_login')->get();
+			$row = RC_DB::table('staff_user')->where('user_id', intval($staff_id))->select('user_id', 'name', 'password', 'action_list', 'last_login')->get();
 			if (!empty($row)) {
 				// 检查密码是否正确
 				if (md5($row['password'] . ecjia::config('hash_code')) == $staff_pass) {
