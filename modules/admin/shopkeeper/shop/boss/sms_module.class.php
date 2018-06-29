@@ -73,10 +73,14 @@ class sms_module extends api_admin implements api_interface {
     	}
     	
 		$code = rand(100001, 999999);
-	    $chars = "/^1(3|4|5|6|7|8|9)\d{9}$/s";
-	    if (!preg_match($chars, $staff_info['mobile'])) {
-	        return new ecjia_error('mobile_error', '手机号码格式错误');
-	    }
+// 	    $chars = "/^1(3|4|5|6|7|8|9)\d{9}$/s";
+// 	    if (!preg_match($chars, $staff_info['mobile'])) {
+// 	        return new ecjia_error('mobile_error', '手机号码格式错误');
+// 	    }
+		$check_mobile = Ecjia\App\Sms\Helper::check_mobile($staff_info['mobile']);
+		if (is_ecjia_error($check_mobile)) {
+		    return $check_mobile;
+		}
 	    
 	    //发送短信
 	    $options = array(
