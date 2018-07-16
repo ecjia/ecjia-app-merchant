@@ -118,15 +118,15 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		    if (is_pjax()) {
 		        ecjia_screen::$current_screen->add_nav_here(new admin_nav_here(__('系统提示')));
 		        $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR, array('links' => array(array('text' => __('重新登录'), 'href' => RC_Uri::url('staff/privilege/login')))));
-                RC_Response::send();
+                royalcms('response')->send();
 		        exit();
 		    } elseif (is_ajax()) {
 		        $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
-                RC_Response::send();
+                royalcms('response')->send();
 		        exit();
 		    } else {
 		        $this->redirect(RC_Uri::url('staff/privilege/login'));
-                RC_Response::send();
+                royalcms('response')->send();
 		        exit();
 		    }
 		}
