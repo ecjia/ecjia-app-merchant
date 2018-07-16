@@ -117,11 +117,14 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		    RC_Session::destroy();
 		    if (is_pjax()) {
 		        ecjia_screen::$current_screen->add_nav_here(new admin_nav_here(__('系统提示')));
-		        return $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR, array('links' => array(array('text' => __('重新登录'), 'href' => RC_Uri::url('staff/privilege/login')))));
+		        $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR, array('links' => array(array('text' => __('重新登录'), 'href' => RC_Uri::url('staff/privilege/login')))));
+		        exit();
 		    } elseif (is_ajax()) {
-		        return $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+		        $this->showmessage(RC_Lang::get('system::system.priv_error'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+                exit();
 		    } else {
-		        return $this->redirect(RC_Uri::url('staff/privilege/login'));
+		        $this->redirect(RC_Uri::url('staff/privilege/login'));
+                exit();
 		    }
 		}
 
