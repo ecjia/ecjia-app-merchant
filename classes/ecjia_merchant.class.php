@@ -480,10 +480,14 @@ abstract class ecjia_merchant extends ecjia_base implements ecjia_template_filel
 		} else {
 		    if ($msg_output) {
 		        if ($msg_type == ecjia::MSGTYPE_JSON && is_ajax() && !is_pjax()) {
-		            return $this->showmessage(__('对不起，您没有执行此项操作的权限！'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+		            $this->showmessage(__('对不起，您没有执行此项操作的权限！'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+                    royalcms('response')->send();
+                    die();
 		        } else {
 		            ecjia_screen::$current_screen->add_nav_here(new admin_nav_here(__('系统提示')));
-		            return $this->showmessage(__('对不起，您没有执行此项操作的权限！'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR);
+		            $this->showmessage(__('对不起，您没有执行此项操作的权限！'), ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR);
+                    royalcms('response')->send();
+                    die();
 		        }
 		    } else {
 		        return false;
