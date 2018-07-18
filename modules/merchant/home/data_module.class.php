@@ -444,8 +444,7 @@ function new_goods_data($response, $request) {
 
 
 function group_goods_data($response, $request) {
-	$request = royalcms('request');
-	$api_version = $request->header('api-version');
+	$api_version = royalcms('request')->header('api-version');
 	if (version_compare($api_version, '1.18', '>=')) {
 		$store_id = $request['seller_id'];
 		
