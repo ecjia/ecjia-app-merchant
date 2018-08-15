@@ -3,6 +3,9 @@
 
 <!-- {block name="footer"} -->
 <script type="text/javascript">
+    ecjia.merchant.merchant_info.confirm_link();
+</script>
+<script type="text/javascript">
 	//腾讯地图
 	var step='{$step}';
 	var map, markersArray = [];
@@ -202,6 +205,7 @@
         <div class="form-group ">
             <div class="col-lg-6 col-md-offset-4">
                 <a class="btn btn-info data-pjax" href="{url path="merchant/mh_franchisee/request_edit"}">申请修改</a>
+				<a class="btn btn-info no-pjax m_l20" data-toggle="confirm_link" data-msg="您确定要升级为企业入驻吗？升级成功后不可撤销！" href='{url path="merchant/mh_franchisee/request_edit" args="&type=company"}'>升级企业入驻</a>
             </div>
         </div>
     </div>
