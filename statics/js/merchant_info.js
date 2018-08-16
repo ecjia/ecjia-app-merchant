@@ -121,7 +121,7 @@
             var hours = String(value).substr(0, 2);
             var mins = String(value).substr(3, 2);
 
-            if (hours > 24) {
+            if (hours >= 24) {
                 hours = hours - 24;
                 hours = (hours < 10 ? "0" + hours : hours);
                 value = hours + ':' + mins;
