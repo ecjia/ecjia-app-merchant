@@ -109,13 +109,13 @@ class config_module extends api_front implements api_interface {
 	            $end_time = strtotime($shop_trade_time['end']);
 	            $start = $shop_trade_time['start'];
 	            $end = explode(':', $shop_trade_time['end']);
-	            if ($end[0] > 24) {
+	            if ($end[0] >= 24) {
 	                $hour = $end[0] - 24;
 	            	$end[0] = '次日'. ($hour);
 	                $end_str = $hour. ':' . $end[1];
 	                $end_time = strtotime($end_str) + 24*3600;
 	            }
-	            //0为不营业，1为营业
+	            //0为营业，1为不营业
 	            if ($start_time < $current_time && $current_time < $end_time) {
 	                $shop_closed = 0;
 	            } else {
