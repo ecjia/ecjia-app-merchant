@@ -5512,3 +5512,27 @@ table tr th.sorting-desc{
 .merchant_shop_notice img {
 	width: 100% !important;
 }
+
+/*商家店铺首页*/
+.task-progress-content {
+	display: -webkit-box;
+  	display: -ms-flexbox;
+  	display: -webkit-flex;
+  	display: flex;
+    margin: 10px 0;
+}
+.task-progress-content .item-column {
+	width: 25%;
+}
+.task-progress-content .item-column .title {
+	font-size: 15px;
+    font-weight: bold;
+    color: #aaa;
+    margin: 10px 0 10px 0;
+}
+
+.task-progress-content .item-column .price {
+	font-size: 20px;
+    font-weight: bold;
+}
+
