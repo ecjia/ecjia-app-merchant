@@ -102,6 +102,12 @@ class merchant extends ecjia_merchant {
        		$data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'min_goods_amount', 'type' => 'text', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
        		$db->insert($data);
        	}
+       	
+       	//接单类型
+       	
+       	
+       	//拒绝接单时间
+       	
         
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
         

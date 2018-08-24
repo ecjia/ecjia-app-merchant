@@ -177,7 +177,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                         
                         <div class="form-group ">
                             <label class="control-label col-lg-2">{t}自动派单：{/t}</label>
-                            <div class="col-lg-6">
+                            <div class="col-lg-10">
                                 <input id="open" type="radio" name="express_assign_auto" value="1" {if $data.express_assign_auto eq 1} checked="true" {/if}  />
                                 <label for="open">开启</label>
                                 <input id="close" type="radio" name="express_assign_auto" value="0" {if $data.express_assign_auto eq 0} checked="true" {/if}  />
@@ -192,6 +192,25 @@ label + div.col-lg-6, label + div.col-lg-2 {
                             <div class="col-lg-6">
                                 <input class="form-control" name="min_goods_amount" type="text" value="{$data.min_goods_amount}"/>
                                 <span class="help-block">用户下单时达到此购物金额，才能提交订单</span>
+                            </div>
+                        </div>
+                        
+             			<div class="form-group">
+                            <label class="control-label col-lg-2">{t}接单类型：{/t}</label>
+                            <div class="col-lg-8">
+                                <input id="open" type="radio" name="express_auto_confirm" value="1" {if $data.express_auto_confirm eq 1} checked="true" {/if}  />
+                                <label for="open">自动接单</label>
+                                <input id="close" type="radio" name="express_auto_confirm" value="0" {if $data.express_auto_confirm eq 0} checked="true" {/if}  />
+                                <label for="close">手动接单</label>
+                                <span class="help-block">启用自动接单后，所有订单将无需人工处理接单，自动由系统接单，您可以随时切回手动接单模式</span>
+                            </div>
+                        </div>
+                        
+               			<div class="form-group">
+                            <label class="control-label col-lg-2">{t}拒绝接单时间：{/t}</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="refund_order_time" type="text" value="{$data.refund_order_time}"/>
+                                <span class="help-block">设置用户下单成功后，多久系统会自动拒绝接单</span>
                             </div>
                         </div>
 						
