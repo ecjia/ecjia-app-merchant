@@ -5624,3 +5624,7 @@ table tr th.sorting-desc{
 .symbol-order-type img {
 	margin-top: 25px;
 }
+
+.table.m_b0 {
+	margin-bottom: 0;
+}
