@@ -5628,3 +5628,21 @@ table tr th.sorting-desc{
 .table.m_b0 {
 	margin-bottom: 0;
 }
+
+.panel-body-fastenter .fastenter-item {
+	width: 50%;
+    float: left;
+    display: flex;
+    line-height: 40px;
+    padding-left: 15px;
+}
+
+.panel-body-fastenter .fastenter-item a {
+	color: #333;
+}
+
+.panel-body-fastenter .fastenter-item img {
+	width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
