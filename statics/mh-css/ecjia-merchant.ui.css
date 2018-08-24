@@ -5536,3 +5536,31 @@ table tr th.sorting-desc{
     font-weight: bold;
 }
 
+/*商家店铺首页 店铺类型*/
+.panel-type {
+	display: -webkit-box;
+  	display: -ms-flexbox;
+  	display: -webkit-flex;
+	display: flex;
+	margin-top: 20px;
+}
+
+.panel-type .panel-type-item {
+	display: -webkit-box;
+  	display: -ms-flexbox;
+  	display: -webkit-flex;
+	display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-right: 30px;
+}
+
+.panel-type .panel-type-item img {
+	width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.panel-type .panel-type-item .type {
+	font-size: 15px;
+}
