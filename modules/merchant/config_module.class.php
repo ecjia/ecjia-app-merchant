@@ -73,11 +73,11 @@ class config_module extends api_front implements api_interface {
 // 							->where($where)
 // 							->find();
         $info = RC_DB::table('store_franchisee as sf')
-        ->leftJoin('store_category as sc', RC_DB::raw('sf.cat_id'), '=', RC_DB::raw('sc.cat_id'))
-        ->leftJoin('collect_store as cs', RC_DB::raw('sf.store_id'), '=', RC_DB::raw('cs.store_id'))
-        ->selectRaw('sf.*, sc.cat_name, count(cs.store_id) as follower, SUM(IF(cs.user_id = '.$user_id.',1,0)) as is_follower')
-        ->where(RC_DB::raw('sf.status'), 1)->where(RC_DB::raw('sf.store_id'), $seller_id)
-        ->first();
+            ->leftJoin('store_category as sc', RC_DB::raw('sf.cat_id'), '=', RC_DB::raw('sc.cat_id'))
+            ->leftJoin('collect_store as cs', RC_DB::raw('sf.store_id'), '=', RC_DB::raw('cs.store_id'))
+            ->select(RC_DB::raw('sf.*, sc.cat_name, count(cs.store_id) as follower, SUM(IF(cs.user_id = '.$user_id.',1,0)) as is_follower'))
+            ->where(RC_DB::raw('sf.status'), 1)->where(RC_DB::raw('sf.store_id'), $seller_id)
+            ->first();
         $store_config = array(
             'shop_title'                => '', // 店铺标题
             'shop_kf_mobile'            => '', // 客服手机号码
