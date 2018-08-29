@@ -728,8 +728,8 @@ input[type="radio"]{display: none;}
 }
 
 .state-overview .value {
-    width: 60%;
-    padding-top: 31px;
+    width: 203px;
+    padding-top: 35px;
 }
 
 .state-overview .terques {
@@ -5516,18 +5516,27 @@ table tr th.sorting-desc{
 /*商家店铺首页*/
 .task-progress-content {
 	display: -webkit-box;
-  	display: -ms-flexbox;
-  	display: -webkit-flex;
-  	display: flex;
+	display: -moz-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
     margin: 10px 0;
 }
 .task-progress-content .item-column {
 	width: 25%;
 	display: -webkit-box;
-  	display: -ms-flexbox;
-  	display: -webkit-flex;
-  	display: flex;
+	display: -moz-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
     flex-direction: column;
+    -webkit-flex-direction: column;
 }
 
 .task-progress-content .item-row {
@@ -5538,6 +5547,10 @@ table tr th.sorting-desc{
   	display: flex;
     flex-direction: row;
 	align-items: center;
+	-webkit-align-items: center;
+	box-align: center;
+	-moz-box-align: center;
+	-webkit-box-align: center;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -5578,12 +5591,22 @@ table tr th.sorting-desc{
 }
 
 .panel-type .panel-type-item {
-	display: -webkit-box;
-  	display: -ms-flexbox;
-  	display: -webkit-flex;
-	display: flex;
+	display:-webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     align-items: center;
+	-webkit-align-items: center;
+	box-align: center;
+	-moz-box-align: center;
+	-webkit-box-align: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -moz-box-orient: vertical;
+    -moz-box-direction: normal;
     flex-direction: column;
+    -webkit-flex-direction: column;
     margin-right: 30px;
 }
 
