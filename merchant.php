@@ -330,10 +330,32 @@ class merchant extends ecjia_merchant {
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('店铺开关'));
         $this->assign('app_url', RC_App::apps_url('statics', __FILE__));
 
-        $this->assign('ur_here', '店铺上下线');
+        $this->assign('ur_here', '店铺打烊');
         $merchant_info = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
         $merchant_info['mobile'] = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
 
+        $shop_trade_time = RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_trade_time')->pluck('value');
+        //判断营业时间
+        $shop_hours = unserialize($shop_trade_time);
+        $now_time = time();
+        if (!empty($shop_hours)) {
+        	$start_time = strtotime($shop_hours['start']);
+        	$end_time = strtotime($shop_hours['end']);
+        	//处理营业时间格式例：7:00--次日5:30
+        	$start = $shop_hours['start'];
+        	$end = explode(':', $shop_hours['end']);
+        	if ($end[0] > 24) {
+        		$hour = $end[0] - 24;
+        		$end[0] = '次日' . ($hour);
+        		$end_time = $hour . ':' . $end[1];
+        		$end_time = strtotime($end_time) + 24 * 3600;
+        	}
+        	$shop_hours = $start . '--' . $end[0] . ':' . $end[1];
+        } else {
+        	$shop_hours = '暂未设置';
+        }
+        $merchant_info['shop_trade_time'] = $shop_hours;
+        
         $this->assign('merchant_info', $merchant_info);
         $this->assign('form_action', RC_Uri::url('merchant/merchant/mh_switch_update'));
 
@@ -350,13 +372,15 @@ class merchant extends ecjia_merchant {
     public function mh_switch_update() {
         $this->admin_priv('merchant_switch', ecjia::MSGTYPE_JSON);
 
-        $shop_close = isset($_POST['shop_close']) ? $_POST['shop_close'] : null;
         $code = !empty($_POST['code'])   ? $_POST['code'] 		: '';
         $mobile = !empty($_POST['mobile']) ? trim($_POST['mobile']) : '';
-        if (is_null($shop_close)) {
-            return $this->showmessage('错误的提交', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
-        }
-
+        
+        $shop_close = 0;
+        $merchant_info = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
+		if (empty($merchant_info['shop_close'])) {
+			$shop_close = 1;
+		}
+		
         $past_time = RC_Time::gmtime()-1800;
         $staff_mobile = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
         if (empty($code) || $code != $_SESSION['temp_code'] || $past_time >= $_SESSION['temp_code_time'] || $mobile != $_SESSION['temp_mobile'] || $staff_mobile != $_SESSION['temp_mobile']) {
@@ -384,9 +408,9 @@ class merchant extends ecjia_merchant {
             $_SESSION['temp_code_time'] = '';
             // 记录日志
             if ($shop_close == 0) {
-                ecjia_merchant::admin_log('店铺上线', 'edit', 'merchant');
+                ecjia_merchant::admin_log('店铺营业', 'edit', 'merchant');
             } else if ($shop_close == 1) {
-                ecjia_merchant::admin_log('店铺下线', 'edit', 'merchant');
+                ecjia_merchant::admin_log('店铺打烊', 'edit', 'merchant');
             }
             return $this->showmessage('编辑成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/mh_switch')));
         } else if ($switch_update == 0) {
