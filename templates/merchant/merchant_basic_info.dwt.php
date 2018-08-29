@@ -206,15 +206,15 @@ label + div.col-lg-6, label + div.col-lg-2 {
                             </div>
                         </div>
                         
-               			<div class="form-group">
+               			<div class="form-group orders_auto_rejection_time {if $data.orders_auto_confirm eq 1}hide{/if}">
                             <label class="control-label col-lg-2">{t}拒绝接单时间：{/t}</label>
                             <div class="col-lg-6">
                                 <input class="form-control" name="orders_auto_rejection_time" type="text" value="{$data.orders_auto_rejection_time}"/>
-                                <span class="help-block">设置用户下单成功后，多久系统会自动拒绝接单</span>
+                                <span class="help-block">若管理员未操作手动接单，系统将会在设置时间（单位：分钟）后自动拒绝接单，<br/>默认0代表不设置，不设置则需要管理员手动拒单</span>
                             </div>
                         </div>
 						
-                        <div class="form-group ">
+                        <div class="form-group">
                             <div class="col-lg-6 col-md-offset-2">
                                 <input class="btn btn-info" type="submit" name="name" value="提交信息">
                             </div>

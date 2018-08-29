@@ -154,8 +154,10 @@ class merchant extends ecjia_merchant {
 		$merchants_config['express_assign_auto'] 		= $express_assign_auto;
 		$merchants_config['min_goods_amount'] 	 		= $min_goods_amount;
 		$merchants_config['orders_auto_confirm'] 		= $orders_auto_confirm;
-		$merchants_config['orders_auto_rejection_time'] = $orders_auto_rejection_time;
 		
+		if (empty($orders_auto_confirm)) {
+			$merchants_config['orders_auto_rejection_time'] = $orders_auto_rejection_time;
+		}
 		$shop_nav_background = get_merchant_config('shop_nav_background');
         $shop_logo           = get_merchant_config('shop_logo');
         $shop_thumb_logo     = get_merchant_config('shop_thumb_logo');
