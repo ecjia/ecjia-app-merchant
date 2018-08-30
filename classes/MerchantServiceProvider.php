@@ -9,7 +9,7 @@ class MerchantServiceProvider extends  AppParentServiceProvider
     
     public function boot()
     {
-        $this->package('ecjia/app-merchant', null, dirname(__DIR__));
+        $this->package('ecjia/app-merchant');
     }
     
     public function register()
