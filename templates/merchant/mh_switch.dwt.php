@@ -51,7 +51,7 @@
 				        <label class="control-label col-lg-2">{t}营业时间：{/t}</label>
 				        <div class="col-lg-6 l_h30">
 				        	<span class="trade_time">{$merchant_info.shop_trade_time}</span>
-				        	{if $merchant_info.shop_close eq 0}
+				        	{if $shop_closed eq 0 && $merchant_info eq 0}
 								<span class="unclose">营业中</span>
 				           	{else}
 								<span class="closed">休息中</span>

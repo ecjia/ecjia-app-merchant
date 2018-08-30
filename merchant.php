@@ -353,6 +353,7 @@ class merchant extends ecjia_merchant {
         //判断营业时间
         $shop_hours = unserialize($shop_trade_time);
         $now_time = time();
+        $shop_closed = 0;
         if (!empty($shop_hours)) {
         	$start_time = strtotime($shop_hours['start']);
         	$end_time = strtotime($shop_hours['end']);
@@ -366,11 +367,18 @@ class merchant extends ecjia_merchant {
         		$end_time = strtotime($end_time) + 24 * 3600;
         	}
         	$shop_hours = $start . '--' . $end[0] . ':' . $end[1];
+        	//1为不营业，0为营业
+        	if ($start_time < $now_time && $now_time < $end_time) {
+        		$shop_closed = 0;
+        	} else {
+        		$shop_closed = 1;
+        	}
         } else {
         	$shop_hours = '暂未设置';
         }
         $merchant_info['shop_trade_time'] = $shop_hours;
         
+        $this->assign('shop_closed', $shop_closed);
         $this->assign('merchant_info', $merchant_info);
         $this->assign('form_action', RC_Uri::url('merchant/merchant/mh_switch_update'));
 
