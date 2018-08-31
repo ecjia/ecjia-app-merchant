@@ -214,6 +214,17 @@ label + div.col-lg-6, label + div.col-lg-2 {
                             </div>
                         </div>
 						
+						<div class="form-group">
+                            <label class="control-label col-lg-2">{t}小票离线打印：{/t}</label>
+                            <div class="col-lg-8">
+                                <input id="printer_offline_send_1" type="radio" name="printer_offline_send" value="1" {if $data.printer_offline_send eq 1} checked="true" {/if}  />
+                                <label for="printer_offline_send_1">开启</label>
+                                <input id="printer_offline_send_0" type="radio" name="printer_offline_send" value="0" {if $data.printer_offline_send eq 0} checked="true" {/if}  />
+                                <label for="printer_offline_send_0">关闭</label>
+                                <span class="help-block">开启后，已支付的订单自动加入打印队列，只要小票机在线后，将自动打印订单</span>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <div class="col-lg-6 col-md-offset-2">
                                 <input class="btn btn-info" type="submit" name="name" value="提交信息">
