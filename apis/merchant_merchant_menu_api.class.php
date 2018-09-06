@@ -64,7 +64,7 @@ class merchant_merchant_menu_api extends Component_Event_Api {
             ecjia_merchant::make_admin_menu('06_merchant_template', __('小程序模版'), RC_Uri::url('merchant/merchant/template'), 6)->add_purview('merchant_template')->add_icon('fa-navicon'), 
         		
        		ecjia_merchant::make_admin_menu('07_merchant_printer', __('小票机'), RC_Uri::url('printer/mh_print/init'), 7)->add_purview('mh_printer_manage')->add_icon('fa-print'),
-        	//ecjia_merchant::make_admin_menu('08_merchant_cashdesk_scales', __('电子秤'), RC_Uri::url('cashier/cashdesk_scales/init'), 7)->add_purview('mh_cashdesk_scales')->add_icon('fa-hdd-o'),
+        	ecjia_merchant::make_admin_menu('08_merchant_cashdesk_scales', __('电子秤'), RC_Uri::url('cashier/cashdesk_scales/init'), 7)->add_purview('mh_cashdesk_scales')->add_icon('fa-hdd-o'),
         );
         
         $mymenus->add_submenu($submenus);
