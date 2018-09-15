@@ -51,6 +51,13 @@ defined('IN_ECJIA') or exit('No permission resources.');
  * @author will.chen
  */
 class data_module extends api_front implements api_interface {
+	
+	public function __construct()
+	{
+		parent::__construct();
+		RC_Hook::add_filter('api_seller_home_data_runloop', [$this , 'adsense_data'], 10, 2);
+	}
+	
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
     		
     	$this->authSession();
@@ -65,37 +72,37 @@ class data_module extends api_front implements api_interface {
 		//流程逻辑结束
 		return $response;
 	}
-}
-
-
-function adsense_data($response, $request) {
-	$ad_view = RC_Model::model('adsense/ad_model');
 	
-	$adsense = array(
-		'position_id'	=> ecjia::config('mobile_seller_home_adsense'),
-		'start_time'	=> array('elt' => RC_Time::gmtime()),
-		'end_time'		=> array('egt' => RC_Time::gmtime()),
-	);
-	$adsense_result = $ad_view->where($adsense)->order('ad_id')->limit(4)->select();
-
-	$adsense_data = array();
-	if (!empty($adsense_result)) {
-		foreach ($adsense_result as $val) {
-			if (substr($val['ad_code'], 0, 4) != 'http') {
-				$val['ad_code'] = RC_Upload::upload_url($val['ad_code']);
+	public function adsense_data($response, $request) {
+		$ad_view = RC_Model::model('adsense/ad_model');
+	
+		$adsense = array(
+				'position_id'	=> ecjia::config('mobile_seller_home_adsense'),
+				'start_time'	=> array('elt' => RC_Time::gmtime()),
+				'end_time'		=> array('egt' => RC_Time::gmtime()),
+		);
+		$adsense_result = $ad_view->where($adsense)->order('ad_id')->limit(4)->select();
+	
+		$adsense_data = array();
+		if (!empty($adsense_result)) {
+			foreach ($adsense_result as $val) {
+				if (substr($val['ad_code'], 0, 4) != 'http') {
+					$val['ad_code'] = RC_Upload::upload_url($val['ad_code']);
+				}
+				$adsense_data[] = array(
+						'image'	=> $val['ad_code'],
+						'text'	=> $val['ad_name'],
+						'url'	=> $val['ad_link'],
+				);
 			}
-			$adsense_data[] = array(
-				'image'	=> $val['ad_code'],
-				'text'	=> $val['ad_name'],
-				'url'	=> $val['ad_link'],
-			);
 		}
+	
+		$response['adsense'] = $adsense_data;
+		return $response;
 	}
-
-	$response['adsense'] = $adsense_data;
-	return $response;
 }
 
-RC_Hook::add_filter('api_seller_home_data_runloop', 'adsense_data', 10, 2);
+
+
 
 // end
