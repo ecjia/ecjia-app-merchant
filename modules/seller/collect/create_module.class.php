@@ -54,7 +54,7 @@ class seller_collect_create_module extends api_front implements api_interface {
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
 
     	$this->authSession();
-		$user_id   = EM_Api::$session['uid'];
+		$user_id   = session('user_id');
 		$seller_id = $this->requestData('seller_id');
 
 		if (empty($seller_id)) {
