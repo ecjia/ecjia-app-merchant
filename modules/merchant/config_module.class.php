@@ -50,7 +50,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
  * 店铺配置信息，从店铺首页信息改变 v1.6
  * @author will.chen
  */
-class config_module extends api_front implements api_interface {
+class merchant_config_module extends api_front implements api_interface {
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
 
     	$this->authSession();

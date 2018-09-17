@@ -50,7 +50,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
  * 附近店铺列表
  * @author hyy
  */
-class nearby_module extends api_front implements api_interface {
+class merchant_nearby_module extends api_front implements api_interface {
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
 
 		$keywords 		= $this->requestData('keywords');
