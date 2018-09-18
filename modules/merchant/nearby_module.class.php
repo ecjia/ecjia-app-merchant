@@ -72,7 +72,7 @@ class merchant_nearby_module extends api_front implements api_interface {
 		
 		/*判断当前门店模式*/
 		$store_model = trim(ecjia::config('store_model'));
-		if ($store_model == 'nearby' || empty($store_model)) {
+		if ($store_model == 'nearby' || empty($store_model) || $store_model == 'b2b2c') {
 			/*经纬度为空判断*/
 			if ((is_array($location) && !empty($location['longitude']) && !empty($location['latitude']))) {
 				$geohash      = RC_Loader::load_app_class('geohash', 'store');
@@ -87,7 +87,7 @@ class merchant_nearby_module extends api_front implements api_interface {
 				);
 				return array('data' => $seller_list, 'pager' => $page);
 			}
-		} elseif (!empty($store_model) && $store_model !='nearby') {
+		} elseif (!empty($store_model) && ($store_model !='nearby' || $store_model !='b2b2c')) {
 			$store_id = $store_model;
 			$store_id_new = explode(',', $store_model);
 			$options['store_id'] = $store_id_new;
