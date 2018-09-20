@@ -63,7 +63,6 @@ class admin_merchant_update_module extends api_admin implements api_interface {
     	    return $result;
     	}
     	//$ssi_db				= RC_Loader::load_app_model('seller_shopinfo_model', 'seller');
-    	//$msi_category_db 	= RC_Loader::load_app_model('merchants_shop_information_model', 'seller');
 		
 		//$seller_category 	= $this->requestData('seller_category', '');
 		$seller_telephone 	= $this->requestData('seller_telephone', '');
