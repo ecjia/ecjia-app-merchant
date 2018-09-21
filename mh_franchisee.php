@@ -51,7 +51,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
  */
 class mh_franchisee extends ecjia_merchant {
 
-    private $store_preaudit;
+    //private $store_preaudit;
     private $store_franchisee;
     //private $db_store_category;
 
@@ -84,7 +84,7 @@ class mh_franchisee extends ecjia_merchant {
         RC_Loader::load_app_func('merchant');
         Ecjia\App\Merchant\Helper::assign_adminlog_content();
 
-        $this->store_preaudit = RC_Model::model('merchant/store_preaudit_model');
+        //$this->store_preaudit = RC_Model::model('merchant/store_preaudit_model');
         //$this->db_store_category = RC_Model::model('merchant/store_category_model');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('我的店铺', RC_Uri::url('merchant/mh_franchisee/init')));
@@ -384,9 +384,9 @@ class mh_franchisee extends ecjia_merchant {
         $data['check_status'] = 2;
         $count = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->count();
         if (empty($count)) {
-            $preaudit = $this->store_preaudit->insert($data);
+            $preaudit = RC_DB::table('store_preaudit')->insert($data);
         } else {
-            $preaudit = $this->store_preaudit->where(array('store_id' => $_SESSION['store_id']))->update($data);
+            $preaudit = RC_DB::table('store_preaudit')->where('store_id', $_SESSION['store_id'])->update($data);
         }
 
         if (!empty($preaudit)) {
