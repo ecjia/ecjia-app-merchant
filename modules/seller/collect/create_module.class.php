@@ -60,18 +60,12 @@ class seller_collect_create_module extends api_front implements api_interface {
 		if (empty($seller_id)) {
 			return new ecjia_error( 'invalid_parameter', RC_Lang::get ('system::system.invalid_parameter' ));
 		}
-		$cs_db = RC_Model::model('store/collect_store_model');
-		$row   = $cs_db->find(array('user_id' => $user_id, 'store_id' => $seller_id));
+		$row	 = RC_DB::table('collect_store')->where('user_id', $user_id)->where('store_id', $seller_id)->first();
 		if (!empty($row)) {
 			$result = new ecjia_error('is_collected', __('该店铺已收藏！'));
 			return $result;
 		}
 
-		// $ssi_db = RC_Model::model('store/seller_shopinfo_model');
-// 		$msi_dbview = RC_Loader::load_app_model('merchants_shop_information_viewmodel', 'seller');
-		$where            = array();
-		$where['status']  = 1;
-		$where['id']      = $seller_id;
 		$count            = RC_DB::table('store_franchisee')->where('status', '1')->where('store_id', $seller_id)->count();
 		if ($count == 0 ) {
 			$result = new ecjia_error('shop_error', __('店铺不存在！'));
@@ -83,7 +77,7 @@ class seller_collect_create_module extends api_front implements api_interface {
 				'add_time'	     => RC_Time::gmtime(),
 				'is_attention'   => 1,
 		);
-		$cs_db->insert($data);
+		RC_DB::table('collect_store')->insert($data);
 
 		return array();
 	}
