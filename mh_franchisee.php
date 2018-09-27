@@ -84,9 +84,6 @@ class mh_franchisee extends ecjia_merchant {
         RC_Loader::load_app_func('merchant');
         Ecjia\App\Merchant\Helper::assign_adminlog_content();
 
-        //$this->store_preaudit = RC_Model::model('merchant/store_preaudit_model');
-        //$this->db_store_category = RC_Model::model('merchant/store_category_model');
-
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('我的店铺', RC_Uri::url('merchant/mh_franchisee/init')));
 
         ecjia_merchant_screen::get_current_screen()->set_parentage('store', 'store/mh_franchisee.php');

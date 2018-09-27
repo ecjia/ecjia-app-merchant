@@ -62,7 +62,6 @@ class admin_merchant_update_module extends api_admin implements api_interface {
     	if (is_ecjia_error($result)) {
     	    return $result;
     	}
-    	//$ssi_db				= RC_Loader::load_app_model('seller_shopinfo_model', 'seller');
 		
 		//$seller_category 	= $this->requestData('seller_category', '');
 		$seller_telephone 	= $this->requestData('seller_telephone', '');
