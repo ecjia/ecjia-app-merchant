@@ -55,7 +55,6 @@ class seller_collect_list_module extends api_front implements api_interface {
 
     	$this->authSession();
 		$user_id   = $_SESSION['user_id'];
-		$cs_dbview = RC_Model::model('store/collect_store_viewmodel');
 
 		$where = array();
 		$count = RC_DB::table('collect_store as cs')
