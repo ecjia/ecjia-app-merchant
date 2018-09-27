@@ -56,7 +56,6 @@ class seller_category_module extends api_front implements api_interface {
     	$this->authSession();
 		$location = $this->requestData('location');
 		RC_Loader::load_app_class('store_category', 'store');
-		$scs_view = RC_Model::model('store/store_franchisee_viewmodel');
 		$shop_cat			= RC_DB::table('store_category')->where('parent_id', 0)->where('is_show', 1)->get();
 		
 		$shop_cat           = array_column($shop_cat, 'cat_id');
