@@ -135,6 +135,13 @@ class merchant_config_module extends api_front implements api_interface {
         	$collect_store_info = RC_DB::table('collect_store')->where('user_id', $_SESSION['user_id'])->where('store_id', $seller_id)->first();
         	if (!empty($collect_store_info)) {
         		$is_collected = 1;
+        		//访问记录
+        		RC_Api::api('customer', 'merchant_fans_visit', [
+        		    'user_id'  => $_SESSION['user_id'],
+        		    'store_id' => $seller_id,
+        		    'longitude'=> $location['longitude'],
+        		    'latitude' => $location['latitude'],
+        		]);
         	}
         }
         

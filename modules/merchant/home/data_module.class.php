@@ -558,11 +558,8 @@ class merchant_home_data_module extends api_front implements api_interface {
 	}
 	
 	public function merchant_fans_visit($response, $request_params) {
-	    $request = royalcms('request');
 	    
-	    $device_client = $request->header('device-client', 'iphone');
-	    
-	    RC_Api::api('customer',  'merchant_fans_visit', [
+	    RC_Api::api('customer', 'merchant_fans_visit', [
 	        'user_id'  => $_SESSION['user_id'],
 	        'store_id' => $request_params['seller_id'],
 	        'longitude'=> $request_params['location']['longitude'],
