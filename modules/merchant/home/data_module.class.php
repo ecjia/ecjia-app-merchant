@@ -62,6 +62,7 @@ class merchant_home_data_module extends api_front implements api_interface {
 		RC_Hook::add_filter('api_merchant_home_data_runloop', [$this , 'new_goods_data'], 10, 2);
 		RC_Hook::add_filter('api_merchant_home_data_runloop', [$this , 'group_goods_data'], 10, 2);
 		RC_Hook::add_filter('api_merchant_home_data_runloop', [$this , 'mobile_home_adsense_group'], 10, 2);
+		RC_Hook::add_filter('api_merchant_home_data_runloop', [$this , 'merchant_fans_visit'], 10, 2);
 		RC_Hook::add_filter('filter_merchant_adsense_group_data', [$this , 'filter_merchant_adsense_group_data']);
 		
 	}
@@ -554,6 +555,21 @@ class merchant_home_data_module extends api_front implements api_interface {
 		$response['adsense_group'] = $mobile_home_adsense_group;
 	
 		return $response;
+	}
+	
+	public function merchant_fans_visit($response, $request_params) {
+	    $request = royalcms('request');
+	    
+	    $device_client = $request->header('device-client', 'iphone');
+	    
+	    RC_Api::api('customer',  'merchant_fans_visit', [
+	        'user_id'  => $_SESSION['user_id'],
+	        'store_id' => $request_params['seller_id'],
+	        'longitude'=> $request_params['location']['longitude'],
+	        'latitude' => $request_params['location']['latitude'],
+	    ]);
+	    
+	    return true;
 	}
 }
 
