@@ -283,6 +283,8 @@ class seller_list_module extends api_front implements api_interface {
 						
 					$distance_list[]	= $distance;
 					$sort_order[]	 	= $row['sort_order'];
+					
+					$is_collect[] = in_array($row['id'], $collect_store_id) ? 1 : 0;
 						
 					$seller_list[] = array(
 							'id'						=> $row['id'],
@@ -341,7 +343,7 @@ class seller_list_module extends api_front implements api_interface {
 			$seller_list = $distance_list = $sort_order = array();
 			if (!empty($store_data['seller_list'])) {
 				$collect_store_id = RC_DB::table('collect_store')->where('user_id', $_SESSION['user_id'])->lists('store_id');
-			
+				
 				foreach ($store_data['seller_list'] as $key => $row) {
 					//打烊时间处理
 					$shop_trade_time =  RC_DB::table('merchants_config')->where('store_id', $row['id'])->where('code', 'shop_trade_time')->pluck('value');
@@ -482,6 +484,7 @@ class seller_list_module extends api_front implements api_interface {
 			
 					$distance_list[]	= $distance;
 					$sort_order[]	 	= $row['sort_order'];
+					$is_collect[] = in_array($row['id'], $collect_store_id) ? 1 : 0;
 			
 					$seller_list[] = array(
 							'id'				=> $row['id'],
@@ -505,7 +508,7 @@ class seller_list_module extends api_front implements api_interface {
 			}
 		}
 		
-		array_multisort($distance_list, SORT_ASC, $sort_order, SORT_ASC, $seller_list);
+		array_multisort($is_collect, SORT_DESC, $distance_list, SORT_ASC, $sort_order, SORT_ASC, $seller_list);
 		
 		$seller_list = array_slice($seller_list, ($page-1) * $size, $size);
 		
