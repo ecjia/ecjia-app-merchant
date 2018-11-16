@@ -392,7 +392,7 @@ class merchant extends ecjia_merchant
                 }
                 $end_time = $start_time + ($dif_hour*3600 + $dif_min*60) + ($hour*3600 + $end['1'] *60);
             }
-            $shop_hours = $start . '--' . $end[0] . ':' . $end[1];
+            $shop_hours = $shop_hours['start'] . '--' . $end[0] . ':' . $end[1];
             //1为不营业，0为营业
             if ($start_time < $now_time && $now_time < $end_time) {
                 $shop_closed = 0;
