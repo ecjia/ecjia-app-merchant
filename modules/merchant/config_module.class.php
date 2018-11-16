@@ -99,45 +99,66 @@ class merchant_config_module extends api_front implements api_interface {
         
         /*店铺是否打烊*/
         $shop_closed = 0;
-        if (!empty($info['shop_trade_time'])) {
-			$shop_trade_time = unserialize($info['shop_trade_time']);
-			if (empty($shop_trade_time['start']) || empty($shop_trade_time['end'])) {
-				$shop_closed = 1;
-			} else {
-				$current_time = time();
-				$start_time = strtotime($shop_trade_time['start']);
-	            $end_time = strtotime($shop_trade_time['end']);
-	            $start = explode(':', $shop_trade_time['start']);
-	            $end = explode(':', $shop_trade_time['end']);
-	            if ($end[0] >= 24) {
-	                $hour = $end[0] - 24;
-	            	$end[0] = '次日'. ($hour);
-	                $end_str = $hour. ':' . $end[1];
-	                //$end_time = strtotime($end_str) + 24*3600;
-	                //开始时间至00:00时间差
-	                $dif_hour = 23 - $start['0'];
-	                $dif_min = 60 - $start['1'];
-		            $now_time_str = date('H:i');
-	                $now_time_arr = explode(':', $now_time_str);
-	                if ($now_time_arr['0'] < 12) {
-	                	$start_time = $start_time - 24*3600;
-	                }
-	                $end_time = $start_time + ($dif_hour*3600 + $dif_min*60) + ($hour*3600 + $end['1'] *60);
-	            }
-	            //0为营业，1为不营业
-	            if ($start_time < $current_time && $current_time < $end_time) {
-	                $shop_closed = 0;
-	            } else {
-	                $shop_closed = 1;
-	            }
-			}
+        /*店铺关闭*/
+        if ($info['shop_close'] == '1') {
+            $shop_closed = 1;
+        } else {
+            if (!empty($info['shop_trade_time'])) {
+                $shop_trade_time = unserialize($info['shop_trade_time']);
+                if (empty($shop_trade_time['start']) || empty($shop_trade_time['end'])) {
+                    $shop_closed = 1;
+                } else {
+//                     $current_time = time();
+//                     $start_time = strtotime($shop_trade_time['start']);
+//                     $end_time = strtotime($shop_trade_time['end']);
+//                     $start = explode(':', $shop_trade_time['start']);
+//                     $end = explode(':', $shop_trade_time['end']);
+//                     if ($end[0] >= 24) {
+//                         $hour = $end[0] - 24;
+//                         $end[0] = '次日'. ($hour);
+//                         $end_str = $hour. ':' . $end[1];
+//                         //$end_time = strtotime($end_str) + 24*3600;
+//                         //开始时间至00:00时间差
+//                         $dif_hour = 23 - $start['0'];
+//                         $dif_min = 60 - $start['1'];
+//                         $now_time_str = date('H:i');
+//                         $now_time_arr = explode(':', $now_time_str);
+//                         if ($now_time_arr['0'] < 12) {
+//                             $start_time = $start_time - 24*3600;
+//                         }
+//                         $end_time = $start_time + ($dif_hour*3600 + $dif_min*60) + ($hour*3600 + $end['1'] *60);
+//                     }
+//                     //0为营业，1为不营业
+//                     if ($start_time < $current_time && $current_time < $end_time) {
+//                         $shop_closed = 0;
+//                     } else {
+//                         $shop_closed = 1;
+//                     }
+
+                    $end = explode(':', $shop_trade_time['end']);
+                    $now = date('H:i');
+                    if ($end[0] >= 24) {
+                        //次日
+                        $hour = $end[0] - 24;
+                        if($hour < 10) {
+                            $hour = '0'.$hour;
+                        }
+                        $new_end = $hour.':'.$end[1];//4:00
+                        if($now > $new_end && $now < $shop_trade_time['start']) {
+                            //时:分 对比
+                            $shop_closed = 1;
+                        }
+                    } else {
+                        //当天
+                        if($now < $shop_trade_time['start'] || $now > $shop_trade_time['end']) {
+                            $shop_closed = 1;
+                        }
+                    }
+                    //0为营业，1为不营业
+                }
+            }
         }
         
-        /*店铺关闭*/
-        if ($shop_closed == 0 && $info['shop_close'] == '1') {
-        	$shop_closed = 1;
-        }
-		
         //用户是否收藏此店铺
         $is_collected = 0;
         if ($_SESSION['user_id'] > 0) {
