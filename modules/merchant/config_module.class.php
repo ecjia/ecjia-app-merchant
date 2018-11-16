@@ -98,6 +98,7 @@ class merchant_config_module extends api_front implements api_interface {
         $info = array_merge($info, $store_config);
         
         /*店铺是否打烊*/
+        RC_Loader::load_app_func('merchant', 'merchant');
         $shop_closed = get_shop_close($info['shop_close'], $info['shop_trade_time']);
         
         //用户是否收藏此店铺
