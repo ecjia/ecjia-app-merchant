@@ -83,7 +83,7 @@ class BannerThumb
      */
     public function getStoreBannerThumbUrl()
     {
-        if (RC_Storage::disk()->exists($this->getStoreBannerThumbPath())) {
+        if (! RC_Storage::disk()->exists($this->getStoreBannerThumbPath())) {
             return $this->getStoreBannerUrl();
         }
         return RC_Upload::upload_url($this->transformBannerThumbFileName());
