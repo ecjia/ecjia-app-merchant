@@ -66,8 +66,22 @@ class BannerThumb
     /**
      * 获取店铺Banner的缩略图的图片路径
      */
+    public function hasStoreBannerThumbPath()
+    {
+        if (RC_Storage::disk()->exists($this->getStoreBannerThumbPath())) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 获取店铺Banner的缩略图的图片路径
+     */
     public function getStoreBannerThumbPath()
     {
+        if (empty($this->transformBannerThumbFileName())) {
+            return $this->transformBannerThumbFileName();
+        }
         return RC_Upload::upload_path($this->transformBannerThumbFileName());
     }
 
@@ -76,6 +90,9 @@ class BannerThumb
      */
     public function getStoreBannerThumbUrl()
     {
+        if (empty($this->transformBannerThumbFileName())) {
+            return $this->transformBannerThumbFileName();
+        }
         return RC_Upload::upload_url($this->transformBannerThumbFileName());
     }
 
@@ -86,6 +103,9 @@ class BannerThumb
      */
     protected function transformBannerThumbFileName()
     {
+        if (empty($this->model->shop_banner_pic)) {
+            return null;
+        }
         return str_replace('.', $this->suffix . '.', $this->model->shop_banner_pic);
     }
 
@@ -95,12 +115,15 @@ class BannerThumb
     public function createBannerThumbFile()
     {
         if (RC_Storage::disk()->exists($this->getStoreBannerPath())) {
+            // dd($this->getStoreBannerPath());
             $img = RC_Image::make($this->getStoreBannerPath());
+            // dd($img);
             $img->resize($this->thumb_width, $this->thumb_height, function ($constraint) {
                 $constraint->aspectRatio();
             });
 
             $tempPath = $this->getTempPath();
+            // dd($tempPath);
             $img->save($tempPath);
 
             //上传临时文件到指定目录

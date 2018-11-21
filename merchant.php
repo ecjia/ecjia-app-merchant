@@ -143,6 +143,13 @@ class merchant extends ecjia_merchant
         $this->assign('store_id', $_SESSION['store_id']);
         $this->assign('make_thumb_url', RC_Uri::url('merchant/merchant/make_thumb'));
 
+        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+        if (!empty($banner->getStoreBannerThumbPath())) {
+            $banner_url = $banner->getStoreBannerThumbUrl();
+            $this->assign('banner_thumb_url', $banner_url);
+            $this->assign('banner_thumb_exists', $banner->hasStoreBannerThumbPath());
+        }
+
         $this->display('merchant_basic_info.dwt');
     }
 
@@ -584,6 +591,9 @@ class merchant extends ecjia_merchant
         } elseif ($type == 'refresh') {
             $message = '刷新成功';
         }
+
+        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+        $banner->createBannerThumbFile();
         
         return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
     }

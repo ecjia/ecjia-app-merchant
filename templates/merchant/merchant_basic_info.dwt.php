@@ -105,10 +105,10 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                 <div>
                                     <p>缩略图：</p>
                                     <p>
-                                        {if 0}
+                                        {if !$banner_thumb_exists}
                                         <a class="btn btn-primary" href="javascript:;" data-toggle="make_thumb" data-url="{$make_thumb_url}" data-type="make">手动生成</a>
                                         {else}
-                                        <img src="{$data.shop_banner_pic}" alt="banner图" style="width: 120px;height: 40px;"/>
+                                        <img src="{$banner_thumb_url}" alt="banner图" style="width: 120px;height: 40px;"/>
                                         <a class="btn btn-primary" href="javascript:;" data-toggle="make_thumb" data-url="{$make_thumb_url}" data-type="refresh">刷新</a>
                                         {/if}
                                     </p>
