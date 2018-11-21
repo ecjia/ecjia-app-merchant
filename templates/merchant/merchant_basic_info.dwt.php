@@ -109,7 +109,7 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                         <a class="btn btn-primary" href="javascript:;" data-toggle="make_thumb" data-url="{$make_thumb_url}" data-type="make">手动生成</a>
                                         {else}
                                         <img src="{$banner_thumb_url}" alt="banner图" style="width: 120px;height: 40px;"/>
-                                        <a class="btn btn-primary" href="javascript:;" data-toggle="make_thumb" data-url="{$make_thumb_url}" data-type="refresh">刷新</a>
+                                        <a class="btn btn-primary" href="javascript:;" data-toggle="make_thumb" data-url="{$make_thumb_url}" data-type="refresh">重新生成</a>
                                         {/if}
                                     </p>
                                     <span class="help-block">生成后，图片内存将变小，缩略图可以减小存放内存，提高访问效率</span>

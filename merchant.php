@@ -585,17 +585,17 @@ class merchant extends ecjia_merchant
 
     public function make_thumb()
     {
-        $type = trim($_GET['type']);
+        $type = trim($_POST['type']);
         if ($type == 'make') {
-            $message = '生成成功';
+            $message = '生成APP Banner缩略图成功';
         } elseif ($type == 'refresh') {
-            $message = '刷新成功';
+            $message = '重新生成APP Banner缩略图成功';
         }
 
         $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
         $banner->createBannerThumbFile();
         
-        return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+        return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => $this->request->header('referer')));
     }
 }
 
