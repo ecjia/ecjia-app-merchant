@@ -121,6 +121,7 @@ class BannerThumb
             $img->resize($this->thumb_width, $this->thumb_height, function ($constraint) {
                 $constraint->aspectRatio();
             });
+            $img->encode(RC_File::extension($this->getStoreBannerPath()));
 
             $tempPath = $this->getTempPath();
             // dd($tempPath);
