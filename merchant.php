@@ -195,9 +195,11 @@ class merchant extends ecjia_merchant
             $merchants_config['shop_logo'] = merchant_file_upload_info('shop_logo', '', $shop_logo);
         }
 
+        $edit_app_banner = false;
         // APPbanner图
         if (!empty($_FILES['shop_banner_pic']) && empty($_FILES['error']) && !empty($_FILES['shop_banner_pic']['name'])) {
             $merchants_config['shop_banner_pic'] = merchant_file_upload_info('shop_banner', 'shop_banner_pic', $shop_banner_pic);
+            $edit_app_banner = true;
         }
         // 如果没有上传店铺LOGO 提示上传店铺LOGO
         $shop_logo = get_merchant_config('shop_logo');
@@ -251,6 +253,11 @@ class merchant extends ecjia_merchant
             return $this->showmessage('请编辑要修改的内容', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
+        if ($edit_app_banner) {
+            $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+            $banner->createBannerThumbFile();
+        }
+        
         if (!empty($merchant)) {
             // 记录日志
             ecjia_merchant::admin_log('修改店铺基本信息', 'edit', 'merchant');
