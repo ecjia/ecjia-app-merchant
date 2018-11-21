@@ -141,6 +141,7 @@ class merchant extends ecjia_merchant
         $this->assign('data', $merchant_info);
         $this->assign('form_action', RC_Uri::url('merchant/merchant/update'));
         $this->assign('store_id', $_SESSION['store_id']);
+        $this->assign('make_thumb_url', RC_Uri::url('merchant/merchant/make_thumb'));
 
         $this->display('merchant_basic_info.dwt');
     }
@@ -573,6 +574,18 @@ class merchant extends ecjia_merchant
         $shop_template = trim($_POST['shop_template']);
         RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_template')->update(array('value' => $shop_template));
         return $this->showmessage('保存成功', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+    }
+
+    public function make_thumb()
+    {
+        $type = trim($_GET['type']);
+        if ($type == 'make') {
+            $message = '生成成功';
+        } elseif ($type == 'refresh') {
+            $message = '刷新成功';
+        }
+        
+        return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
     }
 }
 
