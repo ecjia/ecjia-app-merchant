@@ -115,9 +115,9 @@ class BannerThumb
     public function createBannerThumbFile()
     {
         if (RC_Storage::disk()->exists($this->getStoreBannerPath())) {
-            // dd($this->getStoreBannerPath());
+            
             $img = RC_Image::make($this->getStoreBannerPath());
-            // dd($img);
+            
             $img->resize($this->thumb_width, $this->thumb_height, function ($constraint) {
                 $constraint->aspectRatio();
             });
