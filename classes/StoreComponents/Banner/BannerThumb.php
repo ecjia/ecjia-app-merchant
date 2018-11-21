@@ -20,7 +20,7 @@ class BannerThumb
 
     protected $store_id;
 
-    protected $store_banner_pic;
+    protected $store_banner;
 
     /**
      * 缩略图宽度
@@ -37,7 +37,7 @@ class BannerThumb
     public function __construct($banner)
     {
         $banner = str_replace(RC_Upload::upload_url(), '', $banner);
-        $this->store_banner_pic = $banner;
+        $this->store_banner = $banner;
     }
 
     /**
@@ -45,7 +45,7 @@ class BannerThumb
      */
     public function getStoreBannerPath()
     {
-        return RC_Upload::upload_path($this->store_banner_pic);
+        return RC_Upload::upload_path($this->store_banner);
     }
 
     /**
@@ -53,7 +53,7 @@ class BannerThumb
      */
     public function getStoreBannerUrl()
     {
-        return RC_Upload::upload_url($this->store_banner_pic);
+        return RC_Upload::upload_url($this->store_banner);
     }
 
     /**
@@ -96,10 +96,10 @@ class BannerThumb
      */
     protected function transformBannerThumbFileName($banner = null)
     {
-        if (empty($this->store_banner_pic)) {
+        if (empty($this->store_banner)) {
             return null;
         }
-        return str_replace('.', $this->suffix . '.', $this->store_banner_pic);
+        return str_replace('.', $this->suffix . '.', $this->store_banner);
     }
 
     /**
