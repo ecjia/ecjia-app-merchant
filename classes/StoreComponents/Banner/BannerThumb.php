@@ -36,6 +36,7 @@ class BannerThumb
 
     public function __construct($banner)
     {
+        $banner = str_replace(RC_Upload::upload_url(), '', $banner);
         $this->store_banner_pic = $banner;
     }
 

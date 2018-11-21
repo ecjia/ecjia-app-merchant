@@ -143,7 +143,7 @@ class merchant extends ecjia_merchant
         $this->assign('store_id', $_SESSION['store_id']);
         $this->assign('make_thumb_url', RC_Uri::url('merchant/merchant/make_thumb'));
 
-        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($merchant_info['shop_banner_pic']));
         if (!empty($banner->getStoreBannerThumbPath())) {
             $banner_url = $banner->getStoreBannerThumbUrl();
             $this->assign('banner_thumb_url', $banner_url);
@@ -254,7 +254,7 @@ class merchant extends ecjia_merchant
         }
 
         if ($edit_app_banner) {
-            $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+            $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($merchants_config['shop_banner_pic']));
             $banner->createBannerThumbFile();
         }
         
@@ -282,6 +282,9 @@ class merchant extends ecjia_merchant
             $msg = '店铺LOGO';
         } elseif ($code == 'shop_banner_pic') {
             $msg = 'APP Banner图';
+
+            $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($img));
+            $banner->removeBannerThumbFile();
         }
         // 记录日志
         ecjia_merchant::admin_log('删除' . $msg, 'edit', 'merchant');
@@ -592,6 +595,8 @@ class merchant extends ecjia_merchant
 
     public function make_thumb()
     {
+        $merchant_info = get_merchant_info($_SESSION['store_id']);
+
         $type = trim($_POST['type']);
         if ($type == 'make') {
             $message = '生成APP Banner缩略图成功';
@@ -599,7 +604,7 @@ class merchant extends ecjia_merchant
             $message = '重新生成APP Banner缩略图成功';
         }
 
-        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($_SESSION['store_id']));
+        $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($merchant_info['shop_banner_pic']));
         $banner->createBannerThumbFile();
         
         return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => $this->request->header('referer')));

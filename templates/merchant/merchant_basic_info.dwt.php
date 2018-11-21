@@ -102,6 +102,8 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                     <a class="btn btn-danger btn-sm fileupload-exists" {if $data.shop_banner_pic}data-toggle="ajax_remove"{else}data-dismiss="fileupload"{/if} href="{url path='merchant/merchant/drop_file' args="code=shop_banner_pic"}" >删除</a>
                                 </div>
                                 <span class="help-block">推荐图片的尺寸为：3:1（1200x400px）</span>
+                                    
+                                {if $data.shop_banner_pic}
                                 <div>
                                     <p>缩略图：</p>
                                     <p>
@@ -114,6 +116,8 @@ label + div.col-lg-6, label + div.col-lg-2 {
                                     </p>
                                     <span class="help-block">生成后，图片内存将变小，缩略图可以减小存放内存，提高访问效率</span>
                                 </div>
+                                {/if}
+
                             </div>
                         </div>
                         
