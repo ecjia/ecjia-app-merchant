@@ -8,7 +8,6 @@
 
 namespace Ecjia\App\Merchant\StoreComponents\Banner;
 
-use Ecjia\App\Merchant\Models\StoreFranchiseeModel;
 use RC_Upload;
 use RC_Image;
 use RC_Storage;
@@ -21,7 +20,7 @@ class BannerThumb
 
     protected $store_id;
 
-    protected $model;
+    protected $store_banner_pic;
 
     /**
      * 缩略图宽度
@@ -35,16 +34,9 @@ class BannerThumb
      */
     protected $thumb_height = 150;
 
-    public function __construct($store_id)
+    public function __construct($banner)
     {
-        $this->store_id = $store_id;
-        $this->model = (new StoreFranchiseeModel)->find($this->store_id);
-    }
-
-
-    public function getStoreModel()
-    {
-        return $this->model;
+        $this->store_banner_pic = $banner;
     }
 
     /**
@@ -52,7 +44,7 @@ class BannerThumb
      */
     public function getStoreBannerPath()
     {
-        return RC_Upload::upload_path($this->model->shop_banner_pic);
+        return RC_Upload::upload_path($this->store_banner_pic);
     }
 
     /**
@@ -60,7 +52,7 @@ class BannerThumb
      */
     public function getStoreBannerUrl()
     {
-        return RC_Upload::upload_url($this->model->shop_banner_pic);
+        return RC_Upload::upload_url($this->store_banner_pic);
     }
 
     /**
@@ -101,12 +93,12 @@ class BannerThumb
      *
      * @return string
      */
-    protected function transformBannerThumbFileName()
+    protected function transformBannerThumbFileName($banner = null)
     {
-        if (empty($this->model->shop_banner_pic)) {
+        if (empty($this->store_banner_pic)) {
             return null;
         }
-        return str_replace('.', $this->suffix . '.', $this->model->shop_banner_pic);
+        return str_replace('.', $this->suffix . '.', $this->store_banner_pic);
     }
 
     /**
@@ -135,6 +127,16 @@ class BannerThumb
         }
 
         return $this;
+    }
+
+
+    public function removeBannerThumbFile()
+    {
+        if (RC_Storage::disk()->exists($this->getStoreBannerThumbPath())) {
+            return RC_Storage::delete($this->getStoreBannerThumbPath());
+        }
+
+        return false;
     }
 
 
