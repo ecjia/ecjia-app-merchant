@@ -121,11 +121,11 @@ class BannerThumb
             $img->resize($this->thumb_width, $this->thumb_height, function ($constraint) {
                 $constraint->aspectRatio();
             });
-            $img->encode(RC_File::extension($this->getStoreBannerPath()));
+            $content = $img->encode(RC_File::extension($this->getStoreBannerPath()));
 
             $tempPath = $this->getTempPath();
-            // dd($tempPath);
-            $img->save($tempPath);
+            
+            RC_File::put($tempPath, $content);
 
             //上传临时文件到指定目录
             RC_Storage::disk()->move($tempPath, $this->getStoreBannerThumbPath(), true, FS_CHMOD_FILE);
