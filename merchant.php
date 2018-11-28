@@ -562,13 +562,13 @@ class merchant extends ecjia_merchant
     }
 
     /**
-     * 小程序模版
+     * 小程序模板
      */
     public function template()
     {
         $this->admin_priv('merchant_template');
 
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('小程序模版'));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here('小程序模板'));
         $this->assign('app_url', RC_App::apps_url('statics/img/template/', __FILE__));
 
         $shop_template_info = RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'shop_template')->first();
@@ -578,7 +578,7 @@ class merchant extends ecjia_merchant
         } else {
             $this->assign('shop_template', $shop_template_info['value']);
         }
-        $this->assign('ur_here', '小程序模版');
+        $this->assign('ur_here', '小程序模板');
         $this->assign('form_action', RC_Uri::url('merchant/merchant/template_update'));
 
         $this->display('merchant_template.dwt');
