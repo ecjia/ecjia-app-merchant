@@ -306,7 +306,7 @@ class merchant extends ecjia_merchant
         $shop_info = RC_DB::table('article')->where('cat_id', 0)->where('article_id', $id)->first();
 
         if (empty($shop_info)) {
-            return $this->showmessage('该网店信息不存在', ecjia::MSGSTAT_ERROR | ecjia::MSGTYPE_HTML);
+            return $this->showmessage('该网店信息不存在', ecjia::MSGTYPE_HTML | ecjia::MSGSTAT_ERROR);
         }
         $shopinfo_list = RC_DB::table('article')
             ->select('article_id', 'title', 'content', 'file_url')
