@@ -50,7 +50,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
 define('IN_MERCHANT', true);
 
 abstract class ecjia_merchant extends ecjia_base implements ecjia_template_fileloader {
-    
+
 	public function __construct() {
 		parent::__construct();
 
