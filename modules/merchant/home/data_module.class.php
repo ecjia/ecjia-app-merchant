@@ -387,6 +387,10 @@ class merchant_home_data_module extends api_front implements api_interface {
 			foreach ( $result['list'] as $k => $v ) {
 				if ($v['unformatted_promote_price'] > 0 && $v['unformatted_promote_end_date'] < $time) {
 					$cache_key = 'goods-list-'. $_SESSION['user_rank'];
+					if ($request['seller_id']) {
+						$cache_key .= '-store-'.$request['seller_id'];
+					}
+					$cache_key .= '-need_cashier_goods-'.'-intro-promotion'.'-page-'.$filter['page'].'-size-'.$filter['size'].'-g.sort_order-ASC-goods_id-DESC';
 					\Ecjia\App\Goods\DeleteGoodsCacheManager::clear_goods_list_cache($cache_key);
 				}
 			}
