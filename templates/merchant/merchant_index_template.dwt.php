@@ -14,9 +14,7 @@
     </div>
     <div class="pull-right">
         {if $action_link}
-        <a href="{$action_link.href}" class="btn btn-primary data-pjax">
-            <i class="fa fa-reply"></i> {$action_link.text}
-        </a>
+        <a target="__blank" href="{$action_link.href}" class="btn btn-primary">{$action_link.text}</a>
         {/if}
     </div>
     <div class="clearfix"></div>
