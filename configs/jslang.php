@@ -44,42 +44,26 @@
 //
 //  ---------------------------------------------------------------------------------
 //
-defined('IN_ECJIA') or exit('No permission resources.');
 
 /**
- * 商家店铺管理菜单
- * @author songqian
+ * js语言包设置
  */
-class merchant_merchant_menu_api extends Component_Event_Api
-{
 
-    public function call(&$options)
-    {
-        $menus = ecjia_merchant::make_admin_menu('staff', __('仪表盘', 'merchant'), RC_Uri::url('merchant/dashboard/init'), 0)->add_icon('fa-dashboard')->add_base('dashboard');
+defined('IN_ECJIA') or exit('No permission resources.');
 
-        $mymenus  = ecjia_merchant::make_admin_menu('14_merchant', __('店铺', 'merchant'), '', 10)->add_icon('fa-home')->add_base('store')->add_purview(array('merchant_manage', 'franchisee_manage', 'bank_manage', 'shopguide_manage'));
-        $submenus = array(
-            ecjia_merchant::make_admin_menu('01_merchant_setinfo', __('店铺设置', 'merchant'), RC_Uri::url('merchant/merchant/init'), 1)->add_purview('merchant_manage')->add_icon('fa-gears'),
-            ecjia_merchant::make_admin_menu('02_merchant_franchisee', __('入驻信息', 'merchant'), RC_Uri::url('merchant/mh_franchisee/init'), 2)->add_purview('franchisee_manage')->add_icon('fa-info-circle'),
-            ecjia_merchant::make_admin_menu('03_merchant_Receipt', __('收款账号', 'merchant'), RC_Uri::url('merchant/mh_franchisee/receipt'), 3)->add_purview('franchisee_bank')->add_icon('fa-credit-card'),
-            ecjia_merchant::make_admin_menu('04_merchant_switch', __('店铺打烊', 'merchant'), RC_Uri::url('merchant/merchant/mh_switch'), 4)->add_purview('merchant_switch')->add_icon('fa-power-off'),
-            ecjia_merchant::make_admin_menu('05_merchant_template', __('小程序模板', 'merchant'), RC_Uri::url('merchant/merchant/template'), 5)->add_purview('merchant_template')->add_icon('fa-navicon'),
-        );
+return array(
+    //merchant
+    'merchant_page' =>array(
+        'next_day'		        => __('次日', 'merchant'),
+        'do_this'			    => __('您确定进行该操作吗？', 'merchant'),
+        'parameter_error'				=> __('参数错误！', 'merchant'),
+        'address_source_specified'            => __('必须指定地址源', 'merchant'),
+        'resend' =>  __('重新发送', 'merchant'),
+        'resend_code' =>  __('重新发送验证码', 'merchant'),
+        'ok' =>  __('确定', 'merchant'),
+        'cancel' =>  __('取消', 'merchant'),
 
-        $mymenus->add_submenu($submenus);
+    ),
 
-        if (ecjia::config('template') == 'dscmall') {
-            $mymenus->add_submenu(ecjia_merchant::make_admin_menu('06_merchant_template', __('PC店铺首页模板', 'merchant'), RC_Uri::url('merchant/merchant/store_template'), 6)->add_purview('merchant_template')->add_icon('fa-navicon'));
-        };
-
-        $mymenus = RC_Hook::apply_filters('merchant_merchant_menu_api', $mymenus);
-        $mymenus = RC_Hook::apply_filters('cashier_merchant_merchant_menu_api', $mymenus);
-
-        if ($mymenus->has_submenus()) {
-            return array($menus, $mymenus);
-        }
-        return false;
-    }
-}
-
-// end
+);
+//end
