@@ -83,7 +83,7 @@ class mh_franchisee extends ecjia_merchant {
         
         RC_Loader::load_app_func('merchant');
         Ecjia\App\Merchant\Helper::assign_adminlog_content();
-        RC_Script::localize_script('merchant', 'js_lang', config('app-merchant::jslang.merchant_page'));
+        RC_Script::localize_script('merchant_info', 'js_lang', config('app-merchant::jslang.merchant_page'));
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('我的店铺', 'merchant'), RC_Uri::url('merchant/mh_franchisee/init')));
 
