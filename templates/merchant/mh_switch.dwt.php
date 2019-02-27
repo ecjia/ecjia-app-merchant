@@ -79,7 +79,7 @@
 				        	{if $merchant_info.shop_close eq 0}
 								<input class="btn btn-info unset_SetRemain" type="submit" name="name" value='{t domain="merchant"}店铺打烊{/t}'>
 				           	{else}
-								<input class="btn btn-info unset_SetRemain" type="submit" name="name" value='{t domain="merchant"}店铺营业{/t}'}>
+								<input class="btn btn-info unset_SetRemain" type="submit" name="name" value='{t domain="merchant"}店铺营业{/t}'>
 				           	{/if}
 				        </div>
 				    </div>
