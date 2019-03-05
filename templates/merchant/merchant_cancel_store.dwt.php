@@ -141,6 +141,28 @@
                     </div>
                 </div>
             </form>
+            <!-- {else if $step eq 3} -->
+
+            <div class="merchant-cancel-three">
+                <div><img src="{$cancel_png}" alt=""></div>
+                <p class="bold">{t domain="merchant"}已提交注销！{/t}</p>
+                <p class="time lefttime" data-time="{$store_info.delete_time}">
+                    {t domain="merchant"}倒计时：{/t}
+                    <span class="days"></span>{t domain="merchant"}天{/t}
+                    <span class="hours"></span>{t domain="merchant"}时{/t}
+                    <span class="minutes"></span>{t domain="merchant"}分{/t}
+                    <span class="seconds"></span>{t domain="merchant"}秒{/t}
+                </p>
+                <div class="notice">
+                    {t domain="merchant"}为了您的账户安全，我们将会给您30日的“后悔期”，即先将您的店铺锁定30日，30日后，
+                    如您未提出异议或未重新点击下方按钮“激活账号”，我们将注销您的店铺及账户，账户一旦
+                    被注销将不可恢复。{/t}
+                </div>
+                <div>
+                    <a class="btn btn-info active_store_btn" data-url="{RC_Uri::url('merchant/merchant/active_store')}" data-msg='{t domain="merchant"}您确定要激活当前店铺吗？{/t}'>{t domain="merchant"}激活店铺{/t}</a>
+                </div>
+            </div>
+
             <!-- {/if} -->
 
         </section>

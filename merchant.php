@@ -72,6 +72,8 @@ class merchant extends ecjia_merchant
         RC_Style::enqueue_style('bootstrap-fileupload', RC_App::apps_url('statics/assets/bootstrap-fileupload/bootstrap-fileupload.css', __FILE__), array());
         RC_Script::enqueue_script('bootstrap-fileupload', RC_App::apps_url('statics/assets/bootstrap-fileupload/bootstrap-fileupload.js', __FILE__), array(), false, true);
 
+        RC_Script::enqueue_script('yomi', RC_App::apps_url('statics/js/jquery.yomi.js', __FILE__), array(), false, true);
+
         // 时间区间
         RC_Style::enqueue_style('range', RC_App::apps_url('statics/css/range.css', __FILE__), array());
         RC_Script::enqueue_script('jquery-range', RC_App::apps_url('statics/js/jquery.range.js', __FILE__), array(), false, true);
@@ -476,7 +478,7 @@ class merchant extends ecjia_merchant
         if (empty($mobile)) {
             return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-        $code = rand(100000, 999999);
+        $code     = rand(100000, 999999);
         $options  = array(
             'mobile' => $mobile,
             'event'  => 'sms_get_validate',
@@ -684,12 +686,15 @@ class merchant extends ecjia_merchant
         $data['confirm_time'] = RC_Time::local_date('Y-m-d H:i:s', $data['confirm_time']);
         $data['shop_logo']    = !empty($merchant_info['shop_logo']) ? $merchant_info['shop_logo'] : RC_App::apps_url('statics/img/merchant_logo.jpg', __FILE__);
 
+        $data['delete_time'] = RC_Time::local_date('Y/m/d H:i:s O', $data['expired_time'] + 30 * 24 * 3600);
+
         $this->assign('store_info', $data);
 
         $time = RC_Time::local_date('Y-m-d H:i:s', RC_Time::gmtime());
         $diff = $this->diffDate($data['confirm_time'], $time);
 
         $this->assign('diff', $diff); //开店时长
+        $this->assign('cancel_png', RC_App::apps_url('statics/img/cancel.png', __FILE__));
 
         $this->display('merchant_cancel_store.dwt');
     }
@@ -727,6 +732,13 @@ class merchant extends ecjia_merchant
         $_SESSION[$type]['temp_code_time'] = '';
 
         return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 3))));
+    }
+
+    public function active_store()
+    {
+        $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
+
+        return $this->showmessage(__('激活成功', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/dashboard/init')));
     }
 
 

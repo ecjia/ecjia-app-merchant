@@ -549,6 +549,24 @@
                     }
                 }, {ok: js_lang.ok, cancel: js_lang.cancel});
             });
+
+            $('.lefttime').yomi();
+
+            $('.active_store_btn').off('click').on('click', function (e) {
+                e.preventDefault();
+
+                var $this = $(this),
+                    url = $this.attr('data-url'),
+                    msg = $this.attr('data-msg');
+
+                smoke.confirm(msg, function (e) {
+                    if (e) {
+                        $.post(url, function (data) {
+                            ecjia.merchant.showmessage(data);
+                        }, 'json');
+                    }
+                }, {ok: js_lang.ok, cancel: js_lang.cancel});
+            });
         }
     };
 })(ecjia.merchant, jQuery);
