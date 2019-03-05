@@ -46,7 +46,7 @@
 //
 defined('IN_ECJIA') or exit('No permission resources.');
 /**
- * 缓存管理API
+ * 商家会员登录记录
  * @author royalwang
  *
  */
