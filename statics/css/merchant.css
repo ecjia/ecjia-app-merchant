@@ -1,6 +1,7 @@
 .form-group .merchant-info-img {
     max-width: 150px;
 }
+
 #toTop {
     display: none;
     text-decoration: none;
@@ -14,6 +15,7 @@
     text-indent: 100%;
     border-radius: 3px 0px 0px 3px;
 }
+
 #toTopHover {
     background-position: 0 -32px;
     width: 29px;
@@ -25,35 +27,42 @@
     -moz-opacity: 0;
     filter: alpha(opacity=0);
 }
+
 .merchant-examine {
     text-align: center;
     line-height: 100px;
 }
+
 .input-must {
     line-height: 34px;
     padding-left: 0;
 }
-.chzn-search input{
+
+.chzn-search input {
     border-radius: 4px;
 }
-.hide{
+
+.hide {
     display: none;
 }
+
 .status {
     text-align: center;
     margin-top: 70px;
     padding-bottom: 20px;
 }
-.status .error{
+
+.status .error {
     position: relative;
     width: 90px;
     height: 90px;
     transform: translateX(-50%);
     left: 50%;
-    border:2px solid red;
+    border: 2px solid red;
     border-radius: 100%;
 }
-.status .error .line{
+
+.status .error .line {
     height: 2px;
     width: 70px;
     background: red;
@@ -62,7 +71,8 @@
     left: 10px;
     transform: rotate(45deg);
 }
-.status .error .line::before{
+
+.status .error .line::before {
     content: '';
     display: inline-block;
     width: 70px;
@@ -73,22 +83,104 @@
     left: 0px;
     transform: rotate(90deg);
 }
-.error-title{
+
+.error-title {
     margin-top: 10px;
     margin-bottom: 20px;
 }
-.error-logs{
-    margin:0 auto;
+
+.error-logs {
+    margin: 0 auto;
     color: #999;
 }
-.table{
+
+.table {
     margin-bottom: 0;
 }
-.merchant_tags{
+
+.merchant_tags {
     padding: 4px 10px;
     margin-left: 20px;
     font-size: 12px;
     background-color: #3498db;
     border-radius: 7px;
-    color:#fff;
+    color: #fff;
+}
+
+
+.stepy-titles {
+    width: 90%;
+    margin: 30px auto;
+    margin-bottom: 0;
+}
+
+.stepy-titles .current-step {
+    color: #1ABC9C;
+}
+
+.stepy-titles .current-step .stepNb {
+    background: #1ABC9C;
+}
+
+.stepy-titles li {
+    cursor: auto;
+    padding: 0 98px 14px 45px;
+}
+
+.stepy-titles li:before {
+    left: -90px;
+}
+
+.merchant-main-info {
+    background-color: #F9FAFA;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 20px 40px;
+    position: relative;
+}
+
+.merchant-main-info .left {
+    float: left;
+}
+
+.merchant-main-info .left img {
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.merchant-main-info .right {
+    margin-left: 120px;
+}
+
+.merchant-main-info .right .bold {
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.merchant-main-info .right .unclose {
+    color: #fff;
+    background-color: #1abc9c;
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 15px
+}
+
+.merchant-main-info .right .closed {
+    color: #fff;
+    background-color: #e74c3c;
+    border-radius: 4px;
+    padding: 5px 8px;
+    font-size: 15px
+}
+
+.merchant-main-info .right p:last-child {
+    margin-bottom: 0;
+}
+
+.merchant-main-info .link {
+    position: absolute;
+    right: 40px;
+    bottom: 20px;
+    font-size: 16px;
 }

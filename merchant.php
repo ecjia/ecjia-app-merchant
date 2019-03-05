@@ -57,6 +57,7 @@ class merchant extends ecjia_merchant
         RC_Script::enqueue_script('jquery-form');
         RC_Script::enqueue_script('smoke');
         RC_Style::enqueue_style('uniform-aristo');
+        RC_Style::enqueue_style('jquery-stepy');
         // 自定义JS
         RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__), array(), false, true);
         RC_Script::enqueue_script('photoswipe', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe.min.js', __FILE__), array(), false, true);
@@ -103,7 +104,7 @@ class merchant extends ecjia_merchant
         //店铺最小购物金额设置
         $has_min_goods_amount = array_key_exists('min_goods_amount', $merchant_info);
         if ($has_min_goods_amount == false) {
-            $db = RC_DB::table('merchants_config');
+            $db   = RC_DB::table('merchants_config');
             $data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'min_goods_amount', 'type' => 'text', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
             $db->insert($data);
         }
@@ -111,7 +112,7 @@ class merchant extends ecjia_merchant
         //接单类型
         $has_orders_auto_confirm = array_key_exists('orders_auto_confirm', $merchant_info);
         if ($has_orders_auto_confirm == false) {
-            $db = RC_DB::table('merchants_config');
+            $db   = RC_DB::table('merchants_config');
             $data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'orders_auto_confirm', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
             $db->insert($data);
         }
@@ -119,7 +120,7 @@ class merchant extends ecjia_merchant
         //拒绝接单时间
         $has_orders_auto_rejection_time = array_key_exists('orders_auto_rejection_time', $merchant_info);
         if ($has_orders_auto_rejection_time == false) {
-            $db = RC_DB::table('merchants_config');
+            $db   = RC_DB::table('merchants_config');
             $data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'orders_auto_rejection_time', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
             $db->insert($data);
         }
@@ -127,14 +128,14 @@ class merchant extends ecjia_merchant
         //小票离线打印
         $has_printer_offline_send = array_key_exists('printer_offline_send', $merchant_info);
         if ($has_printer_offline_send == false) {
-            $db = RC_DB::table('merchants_config');
+            $db   = RC_DB::table('merchants_config');
             $data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'printer_offline_send', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
             $db->insert($data);
         }
 
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
 
-        $disk = RC_Filesystem::disk();
+        $disk         = RC_Filesystem::disk();
         $store_qrcode = 'data/qrcodes/merchants/merchant_' . $_SESSION['store_id'] . '.png';
         if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
             $merchant_info['store_qrcode'] = RC_Upload::upload_url($store_qrcode) . '?' . time();
@@ -152,6 +153,10 @@ class merchant extends ecjia_merchant
             $this->assign('banner_thumb_exists', $banner->hasStoreBannerThumbPath());
         }
 
+        if ($_SESSION['action_list'] == 'all') {
+            $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/cancel_store'), 'text' => __('注销店铺', 'merchant')));
+        }
+
         $this->display('merchant_basic_info.dwt');
     }
 
@@ -162,31 +167,31 @@ class merchant extends ecjia_merchant
     {
         $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
 
-        $store_id = $_SESSION['store_id'];
-        $shop_kf_mobile = ($_POST['shop_kf_mobile'] == get_merchant_config('shop_kf_mobile')) ? '' : htmlspecialchars($_POST['shop_kf_mobile']);
-        $shop_description = ($_POST['shop_description'] == get_merchant_config('shop_description')) ? '' : htmlspecialchars($_POST['shop_description']);
-        $shop_trade_time = empty($_POST['shop_trade_time']) ? '' : htmlspecialchars($_POST['shop_trade_time']);
-        $shop_notice = ($_POST['shop_notice'] == get_merchant_config('shop_notice')) ? '' : htmlspecialchars($_POST['shop_notice']);
-        $express_assign_auto = isset($_POST['express_assign_auto']) ? intval($_POST['express_assign_auto']) : 0;
-        $min_goods_amount = isset($_POST['min_goods_amount']) ? intval($_POST['min_goods_amount']) : 0;
-        $orders_auto_confirm = isset($_POST['orders_auto_confirm']) ? intval($_POST['orders_auto_confirm']) : 0;
+        $store_id                   = $_SESSION['store_id'];
+        $shop_kf_mobile             = ($_POST['shop_kf_mobile'] == get_merchant_config('shop_kf_mobile')) ? '' : htmlspecialchars($_POST['shop_kf_mobile']);
+        $shop_description           = ($_POST['shop_description'] == get_merchant_config('shop_description')) ? '' : htmlspecialchars($_POST['shop_description']);
+        $shop_trade_time            = empty($_POST['shop_trade_time']) ? '' : htmlspecialchars($_POST['shop_trade_time']);
+        $shop_notice                = ($_POST['shop_notice'] == get_merchant_config('shop_notice')) ? '' : htmlspecialchars($_POST['shop_notice']);
+        $express_assign_auto        = isset($_POST['express_assign_auto']) ? intval($_POST['express_assign_auto']) : 0;
+        $min_goods_amount           = isset($_POST['min_goods_amount']) ? intval($_POST['min_goods_amount']) : 0;
+        $orders_auto_confirm        = isset($_POST['orders_auto_confirm']) ? intval($_POST['orders_auto_confirm']) : 0;
         $orders_auto_rejection_time = isset($_POST['orders_auto_rejection_time']) ? intval($_POST['orders_auto_rejection_time']) : 0;
-        $printer_offline_send = isset($_POST['printer_offline_send']) ? intval($_POST['printer_offline_send']) : 0;
+        $printer_offline_send       = isset($_POST['printer_offline_send']) ? intval($_POST['printer_offline_send']) : 0;
 
-        $merchants_config = array();
-        $merchants_config['express_assign_auto'] = $express_assign_auto;
-        $merchants_config['min_goods_amount'] = $min_goods_amount;
-        $merchants_config['orders_auto_confirm'] = $orders_auto_confirm;
+        $merchants_config                         = array();
+        $merchants_config['express_assign_auto']  = $express_assign_auto;
+        $merchants_config['min_goods_amount']     = $min_goods_amount;
+        $merchants_config['orders_auto_confirm']  = $orders_auto_confirm;
         $merchants_config['printer_offline_send'] = $printer_offline_send;
 
         if (empty($orders_auto_confirm)) {
             $merchants_config['orders_auto_rejection_time'] = $orders_auto_rejection_time;
         }
         $shop_nav_background = get_merchant_config('shop_nav_background');
-        $shop_logo = get_merchant_config('shop_logo');
-        $shop_thumb_logo = get_merchant_config('shop_thumb_logo');
-        $shop_banner_pic = get_merchant_config('shop_banner_pic');
-        $shop_front_logo = get_merchant_config('shop_front_logo');
+        $shop_logo           = get_merchant_config('shop_logo');
+        $shop_thumb_logo     = get_merchant_config('shop_thumb_logo');
+        $shop_banner_pic     = get_merchant_config('shop_banner_pic');
+        $shop_front_logo     = get_merchant_config('shop_front_logo');
 
         // 店铺导航背景图
         if (!empty($_FILES['shop_nav_background']) && empty($_FILES['error']) && !empty($_FILES['shop_nav_background']['name'])) {
@@ -201,7 +206,7 @@ class merchant extends ecjia_merchant
         // APPbanner图
         if (!empty($_FILES['shop_banner_pic']) && empty($_FILES['error']) && !empty($_FILES['shop_banner_pic']['name'])) {
             $merchants_config['shop_banner_pic'] = merchant_file_upload_info('shop_banner', 'shop_banner_pic', $shop_banner_pic);
-            $edit_app_banner = true;
+            $edit_app_banner                     = true;
         }
         // 如果没有上传店铺LOGO 提示上传店铺LOGO
         $shop_logo = get_merchant_config('shop_logo');
@@ -226,18 +231,18 @@ class merchant extends ecjia_merchant
                 return $this->showmessage(__('24小时营业请选择0-24', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
             }
 
-            $s_h = ($shop_time[0] / 60);
-            $s_i = ($shop_time[0] % 60);
-            $e_h = ($shop_time[1] / 60);
-            $e_i = ($shop_time[1] % 60);
-            $start_h = empty($s_h) ? '00' : intval($s_h);
-            $start_i = empty($s_i) ? '00' : intval($s_i);
-            $end_h = empty($e_h) ? '00' : intval($e_h);
-            $end_i = empty($e_i) ? '00' : intval($e_i);
-            $start_time = $shop_time[0] == 0 ? '00:00' : $start_h . ":" . $start_i;
-            $end_time = $end_h . ":" . $end_i;
-            $time['start'] = $start_time;
-            $time['end'] = $end_time;
+            $s_h             = ($shop_time[0] / 60);
+            $s_i             = ($shop_time[0] % 60);
+            $e_h             = ($shop_time[1] / 60);
+            $e_i             = ($shop_time[1] % 60);
+            $start_h         = empty($s_h) ? '00' : intval($s_h);
+            $start_i         = empty($s_i) ? '00' : intval($s_i);
+            $end_h           = empty($e_h) ? '00' : intval($e_h);
+            $end_i           = empty($e_i) ? '00' : intval($e_i);
+            $start_time      = $shop_time[0] == 0 ? '00:00' : $start_h . ":" . $start_i;
+            $end_time        = $end_h . ":" . $end_i;
+            $time['start']   = $start_time;
+            $time['end']     = $end_time;
             $shop_trade_time = serialize($time);
             if ($shop_trade_time != get_merchant_config('shop_trade_time')) {
                 $merchants_config['shop_trade_time'] = $shop_trade_time; // 营业时间
@@ -259,7 +264,7 @@ class merchant extends ecjia_merchant
             $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($merchants_config['shop_banner_pic']));
             $banner->createBannerThumbFile();
         }
-        
+
         if (!empty($merchant)) {
             // 记录日志
             ecjia_merchant::admin_log(__('修改店铺基本信息', 'merchant'), 'edit', 'merchant');
@@ -272,11 +277,11 @@ class merchant extends ecjia_merchant
      */
     public function drop_file()
     {
-        $code = $_GET['code'];
-        $img = get_merchant_config($code);
+        $code     = $_GET['code'];
+        $img      = get_merchant_config($code);
         $merchant = set_merchant_config($code, '');
-        $file = !empty($img) ? RC_Upload::upload_path($img) : '';
-        $disk = RC_Filesystem::disk();
+        $file     = !empty($img) ? RC_Upload::upload_path($img) : '';
+        $disk     = RC_Filesystem::disk();
         $disk->delete($file);
         if ($code == 'shop_nav_background') {
             $msg = __('店铺导航背景图', 'merchant');
@@ -304,7 +309,7 @@ class merchant extends ecjia_merchant
         $this->assign('ur_here', __('网店信息', 'merchant'));
         $this->assign('shop_title', __('网店信息', 'merchant'));
 
-        $id = !empty($_GET['id']) ? intval($_GET['id']) : 0;
+        $id        = !empty($_GET['id']) ? intval($_GET['id']) : 0;
         $shop_info = RC_DB::table('article')->where('cat_id', 0)->where('article_id', $id)->first();
 
         if (empty($shop_info)) {
@@ -321,7 +326,7 @@ class merchant extends ecjia_merchant
             $disk = RC_Filesystem::disk();
             foreach ($shopinfo_list as $k => $v) {
                 if (!empty($v['file_url']) && $disk->exists(RC_Upload::upload_path($v['file_url']))) {
-                    $file_url = RC_Upload::upload_url($v['file_url']);
+                    $file_url                      = RC_Upload::upload_url($v['file_url']);
                     $shopinfo_list[$k]['file_url'] = '<img src=' . $file_url . ' / style="width:12px;height:14px;">';
                 } else {
                     $shopinfo_list[$k]['file_url'] = '<i class="fa fa-info-circle"></i>';
@@ -345,8 +350,8 @@ class merchant extends ecjia_merchant
 
         $this->assign('ur_here', __('公告通知', 'merchant'));
 
-        $id = !empty($_GET['id']) ? intval($_GET['id']) : 0;
-        $shop_notice = RC_DB::table('article')->where('article_id', $id)->first();
+        $id                     = !empty($_GET['id']) ? intval($_GET['id']) : 0;
+        $shop_notice            = RC_DB::table('article')->where('article_id', $id)->first();
         $shop_notice['content'] = stripslashes($shop_notice['content']);
 
         $shop_notice_list = RC_DB::table('article as a')
@@ -359,7 +364,7 @@ class merchant extends ecjia_merchant
             $disk = RC_Filesystem::disk();
             foreach ($shop_notice_list as $k => $v) {
                 if (!empty($v['file_url']) && $disk->exists(RC_Upload::upload_path($v['file_url']))) {
-                    $file_url = RC_Upload::upload_url($v['file_url']);
+                    $file_url                         = RC_Upload::upload_url($v['file_url']);
                     $shop_notice_list[$k]['file_url'] = '<img src=' . $file_url . ' / style="width:12px;height:14px;">';
                 } else {
                     $shop_notice_list[$k]['file_url'] = '<i class="fa fa-info-circle"></i>';
@@ -384,14 +389,14 @@ class merchant extends ecjia_merchant
         $this->assign('app_url', RC_App::apps_url('statics', __FILE__));
 
         $this->assign('ur_here', __('店铺打烊', 'merchant'));
-        $merchant_info = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
+        $merchant_info           = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
         $merchant_info['mobile'] = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
 
         //判断营业时间
         $merchant_info['shop_trade_time'] = get_store_trade_time($_SESSION['store_id']);
-        
+
         $shop_trade_time = get_merchant_config('shop_trade_time', '', $_SESSION['store_id']);
-        $shop_closed = get_shop_close($merchant_info['shop_close'], $shop_trade_time);
+        $shop_closed     = get_shop_close($merchant_info['shop_close'], $shop_trade_time);
         //1为不营业，0为营业
 
         $this->assign('shop_closed', $shop_closed);
@@ -405,6 +410,7 @@ class merchant extends ecjia_merchant
         $this->display('mh_switch.dwt');
 
     }
+
     /**
      * 店铺开关
      */
@@ -412,16 +418,16 @@ class merchant extends ecjia_merchant
     {
         $this->admin_priv('merchant_switch', ecjia::MSGTYPE_JSON);
 
-        $code = !empty($_POST['code']) ? $_POST['code'] : '';
+        $code   = !empty($_POST['code']) ? $_POST['code'] : '';
         $mobile = !empty($_POST['mobile']) ? trim($_POST['mobile']) : '';
 
-        $shop_close = 0;
+        $shop_close    = 0;
         $merchant_info = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
         if (empty($merchant_info['shop_close'])) {
             $shop_close = 1;
         }
 
-        $past_time = RC_Time::gmtime() - 1800;
+        $past_time    = RC_Time::gmtime() - 1800;
         $staff_mobile = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
         if (empty($code) || $code != $_SESSION['temp_code'] || $past_time >= $_SESSION['temp_code_time'] || $mobile != $_SESSION['temp_mobile'] || $staff_mobile != $_SESSION['temp_mobile']) {
             return $this->showmessage(__('请输入正确的手机验证码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
@@ -431,7 +437,7 @@ class merchant extends ecjia_merchant
 
         /* 释放app缓存*/
         $store_franchisee_db = RC_Model::model('merchant/orm_store_franchisee_model');
-        $store_cache_array = $store_franchisee_db->get_cache_item('store_list_cache_key_array');
+        $store_cache_array   = $store_franchisee_db->get_cache_item('store_list_cache_key_array');
         if (!empty($store_cache_array)) {
             foreach ($store_cache_array as $val) {
                 $store_franchisee_db->delete_cache_item($val);
@@ -443,8 +449,8 @@ class merchant extends ecjia_merchant
             clear_cart_list($_SESSION['store_id']);
         }
         if ($switch_update) {
-            $_SESSION['temp_mobile'] = '';
-            $_SESSION['temp_code'] = '';
+            $_SESSION['temp_mobile']    = '';
+            $_SESSION['temp_code']      = '';
             $_SESSION['temp_code_time'] = '';
             // 记录日志
             if ($shop_close == 0) {
@@ -467,19 +473,19 @@ class merchant extends ecjia_merchant
         if (empty($mobile)) {
             return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-        $code = rand(100000, 999999);
-        $options = array(
+        $code     = rand(100000, 999999);
+        $options  = array(
             'mobile' => $mobile,
-            'event' => 'sms_get_validate',
-            'value' => array(
-                'code' => $code,
+            'event'  => 'sms_get_validate',
+            'value'  => array(
+                'code'          => $code,
                 'service_phone' => ecjia::config('service_phone'),
             ),
         );
         $response = RC_Api::api('sms', 'send_event_sms', $options);
 
-        $_SESSION['temp_mobile'] = $mobile;
-        $_SESSION['temp_code'] = $code;
+        $_SESSION['temp_mobile']    = $mobile;
+        $_SESSION['temp_code']      = $code;
         $_SESSION['temp_code_time'] = RC_Time::gmtime();
 
         if (is_ecjia_error($response)) {
@@ -496,7 +502,7 @@ class merchant extends ecjia_merchant
     {
         $store_id = $_SESSION['store_id'];
         //删除生成的店铺二维码
-        $disk = RC_Filesystem::disk();
+        $disk         = RC_Filesystem::disk();
         $store_qrcode = 'data/qrcodes/merchants/merchant_' . $store_id . '.png';
         if ($disk->exists(RC_Upload::upload_path($store_qrcode))) {
             $disk->delete(RC_Upload::upload_path() . $store_qrcode);
@@ -517,7 +523,7 @@ class merchant extends ecjia_merchant
     {
         $store_id = $_SESSION['store_id'];
         //删除生成的店铺小程序二维码
-        $disk = RC_Filesystem::disk();
+        $disk               = RC_Filesystem::disk();
         $store_weapp_qrcode = 'data/qrcodes/merchants/merchant_weapp_' . $store_id . '.png';
         if ($disk->exists(RC_Upload::upload_path($store_weapp_qrcode))) {
             $disk->delete(RC_Upload::upload_path() . $store_weapp_qrcode);
@@ -547,7 +553,7 @@ class merchant extends ecjia_merchant
             }
             $filename = 'merchant_qrcode.png';
         } else if ($type == 'merchant_weapp_qrcode') {
-            $file = RC_Uri::url('weapp/wxacode/init', array('storeid' => $_SESSION['store_id']));
+            $file     = RC_Uri::url('weapp/wxacode/init', array('storeid' => $_SESSION['store_id']));
             $filename = 'merchant_weapp_qrcode.png';
         }
 
@@ -608,7 +614,7 @@ class merchant extends ecjia_merchant
 
         $banner = (new \Ecjia\App\Merchant\StoreComponents\Banner\BannerThumb($merchant_info['shop_banner_pic']));
         $banner->createBannerThumbFile();
-        
+
         return $this->showmessage($message, ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => $this->request->header('referer')));
     }
 
@@ -624,7 +630,7 @@ class merchant extends ecjia_merchant
 
         $shop_template_info = RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'store_index_category_template')->first();
         if (empty($shop_template_info)) {
-           RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->insert(array('code' => 'store_index_category_template', 'value' => 'default1', 'store_id' => $_SESSION['store_id']));
+            RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->insert(array('code' => 'store_index_category_template', 'value' => 'default1', 'store_id' => $_SESSION['store_id']));
             $this->assign('store_index_template', 'default1');
         } else {
             $this->assign('store_index_template', $shop_template_info['value']);
@@ -645,9 +651,61 @@ class merchant extends ecjia_merchant
         $this->admin_priv('merchant_template', ecjia::MSGTYPE_JSON);
 
         $store_index_template = trim($_POST['store_index_template']);
-       RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'store_index_category_template')->update(array('value' => $store_index_template));
+        RC_DB::table('merchants_config')->where('store_id', $_SESSION['store_id'])->where('code', 'store_index_category_template')->update(array('value' => $store_index_template));
 
         return $this->showmessage(__('保存成功', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+    }
+
+    //注销店铺
+    public function cancel_store()
+    {
+        $this->admin_priv('merchant_manage');
+
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('店铺设置', 'merchant'), RC_Uri::url('merchant/merchant/init')));
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('注销店铺', 'merchant')));
+
+        $this->assign('ur_here', __('注销店铺', 'merchant'));
+        $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/init'), 'text' => __('店铺设置', 'merchant')));
+
+        $this->assign('step', 1);
+
+        $merchant_info = get_merchant_info($_SESSION['store_id']);
+        $data          = get_store_info($_SESSION['store_id']);
+
+        $shop_trade_time      = get_merchant_config('shop_trade_time', '', $_SESSION['store_id']);
+        $data['shop_closed']  = get_shop_close($data['shop_close'], $shop_trade_time);
+        $data['confirm_time'] = RC_Time::local_date('Y-m-d H:i:s', $data['confirm_time']);
+        $data['shop_logo']    = !empty($merchant_info['shop_logo']) ? $merchant_info['shop_logo'] : RC_App::apps_url('statics/img/merchant_logo.jpg', __FILE__);
+
+        $this->assign('store_info', $data);
+
+        $time = RC_Time::local_date('Y-m-d H:i:s', RC_Time::gmtime());
+        $diff = $this->diffDate($data['confirm_time'], $time);
+
+        $this->assign('diff', $diff); //开店时长
+
+        $this->display('merchant_cancel_store.dwt');
+    }
+
+
+    private function diffDate($date1, $date2)
+    {
+        $datetime1 = new \DateTime($date1);
+        $datetime2 = new \DateTime($date2);
+        $interval  = $datetime1->diff($datetime2);
+        $time['y'] = $interval->format('%Y');
+        $time['m'] = $interval->format('%m');
+
+        $time_str = '';
+        $year     = intval($time['y']);
+        if (!empty($year)) {
+            $time_str .= $year . ' 年';
+        }
+        $month = intval($time['m']);
+        if (!empty($month)) {
+            $time_str .= $month . ' 个月';
+        }
+        return $time_str;
     }
 }
 
