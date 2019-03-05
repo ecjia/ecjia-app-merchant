@@ -426,10 +426,11 @@ class merchant extends ecjia_merchant
         if (empty($merchant_info['shop_close'])) {
             $shop_close = 1;
         }
+        $type = 'shop_close';
 
         $past_time    = RC_Time::gmtime() - 1800;
         $staff_mobile = RC_DB::table('staff_user')->where('store_id', $_SESSION['store_id'])->where('parent_id', 0)->pluck('mobile');
-        if (empty($code) || $code != $_SESSION['temp_code'] || $past_time >= $_SESSION['temp_code_time'] || $mobile != $_SESSION['temp_mobile'] || $staff_mobile != $_SESSION['temp_mobile']) {
+        if (empty($code) || $code != $_SESSION[$type]['temp_code'] || $past_time >= $_SESSION[$type]['temp_code_time'] || $mobile != $_SESSION[$type]['temp_mobile'] || $staff_mobile != $_SESSION[$type]['temp_mobile']) {
             return $this->showmessage(__('请输入正确的手机验证码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
@@ -449,9 +450,9 @@ class merchant extends ecjia_merchant
             clear_cart_list($_SESSION['store_id']);
         }
         if ($switch_update) {
-            $_SESSION['temp_mobile']    = '';
-            $_SESSION['temp_code']      = '';
-            $_SESSION['temp_code_time'] = '';
+            $_SESSION[$type]['temp_mobile']    = '';
+            $_SESSION[$type]['temp_code']      = '';
+            $_SESSION[$type]['temp_code_time'] = '';
             // 记录日志
             if ($shop_close == 0) {
                 ecjia_merchant::admin_log(__('店铺营业', 'merchant'), 'edit', 'merchant');
@@ -470,10 +471,12 @@ class merchant extends ecjia_merchant
     public function get_code_value()
     {
         $mobile = isset($_GET['mobile']) ? $_GET['mobile'] : '';
+        $type   = trim($_GET['type']);
+
         if (empty($mobile)) {
             return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
-        $code     = rand(100000, 999999);
+        $code = rand(100000, 999999);
         $options  = array(
             'mobile' => $mobile,
             'event'  => 'sms_get_validate',
@@ -484,9 +487,9 @@ class merchant extends ecjia_merchant
         );
         $response = RC_Api::api('sms', 'send_event_sms', $options);
 
-        $_SESSION['temp_mobile']    = $mobile;
-        $_SESSION['temp_code']      = $code;
-        $_SESSION['temp_code_time'] = RC_Time::gmtime();
+        $_SESSION[$type]['temp_mobile']    = $mobile;
+        $_SESSION[$type]['temp_code']      = $code;
+        $_SESSION[$type]['temp_code_time'] = RC_Time::gmtime();
 
         if (is_ecjia_error($response)) {
             return $this->showmessage($response->get_error_message(), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
@@ -667,7 +670,11 @@ class merchant extends ecjia_merchant
         $this->assign('ur_here', __('注销店铺', 'merchant'));
         $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/init'), 'text' => __('店铺设置', 'merchant')));
 
-        $this->assign('step', 1);
+        $step = intval($_GET['step']);
+        if (empty($step)) {
+            $step = 1;
+        }
+        $this->assign('step', $step);
 
         $merchant_info = get_merchant_info($_SESSION['store_id']);
         $data          = get_store_info($_SESSION['store_id']);
@@ -685,6 +692,41 @@ class merchant extends ecjia_merchant
         $this->assign('diff', $diff); //开店时长
 
         $this->display('merchant_cancel_store.dwt');
+    }
+
+    public function cancel_store_confirm()
+    {
+        $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
+
+        $step = intval($_POST['step']);
+
+        $_SESSION['cancel_store']['step'] = $step;
+
+        return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 2))));
+    }
+
+    public function check_cancel_sms()
+    {
+        $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
+
+        $code   = !empty($_POST['code']) ? $_POST['code'] : '';
+        $mobile = !empty($_POST['mobile']) ? trim($_POST['mobile']) : '';
+        $type   = 'cancel_store';
+
+        $past_time = RC_Time::gmtime() - 1800;
+        $data      = get_store_info($_SESSION['store_id']);
+
+        if (empty($code) || $code != $_SESSION[$type]['temp_code'] || $past_time >= $_SESSION[$type]['temp_code_time'] || $mobile != $_SESSION[$type]['temp_mobile'] || $data['contact_mobile'] != $_SESSION[$type]['temp_mobile']) {
+            return $this->showmessage(__('请输入正确的手机验证码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
+        $_SESSION['cancel_store']['step'] = 3;
+
+        $_SESSION[$type]['temp_mobile']    = '';
+        $_SESSION[$type]['temp_code']      = '';
+        $_SESSION[$type]['temp_code_time'] = '';
+
+        return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 3))));
     }
 
 

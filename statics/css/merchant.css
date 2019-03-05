@@ -184,3 +184,27 @@
     bottom: 20px;
     font-size: 16px;
 }
+
+.merchant-cancel-notice .header {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.merchant-cancel-notice .notice-item {
+    line-height: 25px;
+    margin: 10px 0;
+}
+
+.merchant-cancel-notice .left {
+    float: left;
+}
+
+.merchant-cancel-notice .right {
+    margin-left: 20px;
+}
+
+.header-step-two {
+    margin: 15px 70px 30px 70px;
+    font-weight: bold;
+    font-size: 16px;
+}
