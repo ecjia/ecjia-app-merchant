@@ -59,7 +59,6 @@ class merchant extends ecjia_merchant
         RC_Style::enqueue_style('uniform-aristo');
         RC_Style::enqueue_style('jquery-stepy');
         // 自定义JS
-        RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__), array(), false, true);
         RC_Script::enqueue_script('photoswipe', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe.min.js', __FILE__), array(), false, true);
         RC_Script::enqueue_script('photoswipe-ui', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe-ui-default.min.js', __FILE__), array(), false, true);
         RC_Style::enqueue_style('photoswipe', RC_App::apps_url('statics/lib/photoswipe/css/photoswipe.css', __FILE__), array());
@@ -85,6 +84,7 @@ class merchant extends ecjia_merchant
         RC_Loader::load_app_func('merchant');
         Ecjia\App\Merchant\Helper::assign_adminlog_content();
 
+        RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__), array(), false, true);
         RC_Script::localize_script('merchant_info', 'js_lang', config('app-merchant::jslang.merchant_page'));
 
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('我的店铺', 'merchant'), RC_Uri::url('merchant/merchant/init')));
