@@ -26,7 +26,6 @@
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
-            {if $actived neq 1}
             <div class="panel-body">
                 <ul id="validate_wizard-titles" class="stepy-titles clearfix">
                     <li id="step1" class="{if $step gt 0}current-step{/if}">
@@ -49,12 +48,10 @@
                     </li>
                 </ul>
             </div>
-            {/if}
 
             <!-- {if $step eq 1} -->
             <div class="panel-body">
                 <form class="form-horizontal">
-
 
                     <div class="merchant-main-info">
                         <div class="left"><img src="{$store_info.shop_logo}" alt="" width="80" height="80"></div>
@@ -109,7 +106,7 @@
                     </div>
                     <div class="notice-item">
                         <input id="agree" type="checkbox" name="agree" value="1" data-msg='{t domain="merchant"}请先阅读并同意《店铺注销须知》{/t}'>
-                        <label for="agree">{t domain="merchant"}已阅读并同意{/t}<a target="_blank" href="javascript:;">{t domain="merchant"}《店铺注销须知》{/t}</a></label>
+                        <label for="agree">{t domain="merchant"}已阅读并同意{/t}</label><a class="cancel_notice_link" data-toggle="modal" href="#cancel_model">{t domain="merchant"}《店铺注销须知》{/t}</a>
                     </div>
                     <div class="form-group">
                         <input class="m_l20 btn btn-info cancel_store_btn" type="button" name="name" value='{t domain="merchant"}注销{/t}'
@@ -140,7 +137,8 @@
 
                     <div class="form-group ">
                         <div class="col-lg-6 col-md-offset-2">
-                            <input class="btn btn-info unset_SetRemain" type="submit" value='{t domain="merchant"}确认{/t}'>
+                            <input type="hidden" name="type" value="cancel_store"/>
+                            <input class="btn btn-info" type="submit" value='{t domain="merchant"}确认{/t}'>
                         </div>
                     </div>
                 </form>
@@ -148,7 +146,7 @@
             <!-- {else if $step eq 3} -->
 
             <div class="merchant-cancel-three">
-                {if $actived neq 1}
+                {if $wait_delete eq 1}
                 <div><img src="{$cancel_png}" alt=""></div>
                 <p class="bold">{t domain="merchant"}已提交注销！{/t}</p>
                 <p class="time lefttime" data-time="{$store_info.delete_time}">
@@ -174,11 +172,65 @@
                 </div>
                 {/if}
             </div>
-
             <!-- {/if} -->
 
         </section>
     </div>
 </div>
+
+
+<div id="cancel_model" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">{$article_detail.title}</h4>
+            </div>
+            <div class="modal-body">{$article_detail.content}</div>
+        </div>
+    </div>
+</div>
+
+
+<div id="check_active_modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">验证手机号</h4>
+            </div>
+            <div class="modal-body">
+                <div class="merchant-cancel-two">
+                    <form class="form-horizontal" name="theForm" action="{RC_Uri::url('merchant/merchant/check_cancel_sms')}" method="post">
+                        <div class="header-step-two">{t domain="merchant"}请使用店铺已绑定的手机号获取短信验证码{/t}</div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">{t domain="merchant"}手机号码：{/t}</label>
+                            <div class="controls col-lg-6">
+                                <input class="form-control" name="mobile" id="mobile" placeholder='{t domain="merchant"}请输入手机号码{/t}' type="text" value="{$store_info.contact_mobile}" readonly/>
+                            </div>
+                            <a class="btn btn-primary" data-url="{url path='merchant/merchant/get_code_value'}&type=active_store" id="get_code">{t domain="merchant"}获取验证码{/t}</a>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-lg-2">{t domain="merchant"}短信验证码：{/t}</label>
+                            <div class="col-lg-6">
+                                <input class="form-control" name="code" placeholder='{t domain="merchant"}请输入验证码{/t}' type="text"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <div class="col-lg-6 col-md-offset-2">
+                                <input type="hidden" name="type" value="active_store"/>
+                                <input class="btn btn-info" type="submit" value='{t domain="merchant"}确认{/t}'>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <!-- {/block} -->

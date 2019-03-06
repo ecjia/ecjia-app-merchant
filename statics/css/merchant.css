@@ -195,6 +195,14 @@
     margin: 10px 0;
 }
 
+.merchant-cancel-notice .notice-item [type="checkbox"] + label {
+    padding-right: 0;
+}
+
+.merchant-cancel-notice .notice-item .cancel_notice_link {
+    text-decoration: none;
+}
+
 .merchant-cancel-notice .left {
     float: left;
 }
@@ -246,4 +254,16 @@
 
 .merchant-cancel-three .merchant-cancel-active {
     padding-top: 50px;
+}
+
+#cancel_model .modal-dialog {
+    width: 1000px;
+}
+
+#check_active_modal .modal-dialog {
+    width: 800px;
+}
+
+#check_active_modal .modal-dialog .header-step-two {
+    margin: 15px 70px 30px 20px;
 }

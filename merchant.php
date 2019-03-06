@@ -474,9 +474,8 @@ class merchant extends ecjia_merchant
     {
         $mobile = isset($_GET['mobile']) ? $_GET['mobile'] : '';
         $type   = trim($_GET['type']);
-
         if (empty($mobile)) {
-            return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+            return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('type' => $type));
         }
         $code     = rand(100000, 999999);
         $options  = array(
@@ -494,9 +493,9 @@ class merchant extends ecjia_merchant
         $_SESSION[$type]['temp_code_time'] = RC_Time::gmtime();
 
         if (is_ecjia_error($response)) {
-            return $this->showmessage($response->get_error_message(), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+            return $this->showmessage($response->get_error_message(), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('type' => $type));
         } else {
-            return $this->showmessage(__('手机验证码发送成功，请注意查收', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS);
+            return $this->showmessage(__('手机验证码发送成功，请注意查收', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('type' => $type));
         }
     }
 
@@ -667,14 +666,8 @@ class merchant extends ecjia_merchant
         $this->admin_priv('merchant_manage');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('店铺设置', 'merchant'), RC_Uri::url('merchant/merchant/init')));
-
         $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/init'), 'text' => __('店铺设置', 'merchant')));
-
-        $step = intval($_GET['step']);
-        if (empty($step)) {
-            $step = 1;
-        }
-        $this->assign('step', $step);
+        $this->assign('cancel_png', RC_App::apps_url('statics/img/cancel.png', __FILE__));
 
         $merchant_info = get_merchant_info($_SESSION['store_id']);
         $data          = get_store_info($_SESSION['store_id']);
@@ -684,26 +677,60 @@ class merchant extends ecjia_merchant
         $data['confirm_time'] = RC_Time::local_date('Y-m-d H:i:s', $data['confirm_time']);
         $data['shop_logo']    = !empty($merchant_info['shop_logo']) ? $merchant_info['shop_logo'] : RC_App::apps_url('statics/img/merchant_logo.jpg', __FILE__);
 
-        $data['delete_time'] = RC_Time::local_date('Y/m/d H:i:s O', $data['expired_time'] + 30 * 24 * 3600);
-
-        $this->assign('store_info', $data);
-
-        $time = RC_Time::local_date('Y-m-d H:i:s', RC_Time::gmtime());
-        $diff = $this->diffDate($data['confirm_time'], $time);
-
-        $this->assign('diff', $diff); //开店时长
-        $this->assign('cancel_png', RC_App::apps_url('statics/img/cancel.png', __FILE__));
+        $step = intval($_GET['step']);
+        if (empty($step)) {
+            $step = 1;
+        }
 
         $ur_here = __('注销店铺', 'merchant');
-        if ($step == 3) {
-            $ur_here = __('激活店铺', 'merchant');
+        //已申请注销
+        if (!empty($data['delete_time'])) {
+            $ur_here             = __('激活店铺', 'merchant');
+            $data['delete_time'] = RC_Time::local_date('Y/m/d H:i:s O', $data['delete_time'] + 30 * 24 * 3600);
+            $this->assign('wait_delete', 1); //显示激活页面
+            $step = 3;
         }
+        $this->assign('store_info', $data);
+        $this->assign('step', $step);
+
+        //当前时间
+        $time = RC_Time::local_date('Y-m-d H:i:s', RC_Time::gmtime());
+        $diff = $this->diffDate($data['confirm_time'], $time);
+        $this->assign('diff', $diff); //开店时长
+
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($ur_here));
         $this->assign('ur_here', $ur_here);
 
-        $this->assign('actived', 1);
+        //店铺注销须知
+        $article_info            = RC_DB::table('article')->where('title', '店铺注销须知')->where('article_approved', 1)->where('article_type', 'system')->first();
+        $base                    = sprintf('<base href="%s/" />', dirname(SITE_URL));
+        $article_info['content'] = preg_replace('/\\\"/', '"', $article_info['content']);
+        $content                 = '<!DOCTYPE html><html><head><title>' . $article_info['title'] . '</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="viewport" content="initial-scale=1.0"><meta name="viewport" content="initial-scale = 1.0 , minimum-scale = 1.0 , maximum-scale = 1.0" /><style>img {width: auto\9;height: auto;vertical-align: middle;border: 0;-ms-interpolation-mode: bicubic;max-width: 100%; }html { font-size:100%; }p{word-wrap : break-word ;word-break:break-all;} </style>' . $base . '</head><body>' . $article_info['content'] . '</body></html>';
+
+        $article_detail = array(
+            'article_id' => intval($article_info['article_id']),
+            'title'      => empty($article_info['title']) ? '' : trim($article_info['title']),
+            'add_time'   => !empty($article_info['add_time']) ? RC_Time::local_date(ecjia::config('time_format'), $article_info['add_time']) : '',
+            'content'    => $content,
+        );
+        $this->assign('article_detail', $article_detail);
 
         $this->display('merchant_cancel_store.dwt');
+    }
+
+    public function cancel_store_notice()
+    {
+        $this->admin_priv('merchant_manage');
+
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('店铺设置', 'merchant'), RC_Uri::url('merchant/merchant/init')));
+        $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/init'), 'text' => __('店铺设置', 'merchant')));
+        $this->assign('cancel_png', RC_App::apps_url('statics/img/cancel.png', __FILE__));
+
+        $ur_here = __('激活店铺', 'merchant');
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($ur_here));
+        $this->assign('ur_here', $ur_here);
+
+        $this->display('merchant_cancel_store_notice.dwt');
     }
 
     public function cancel_store_confirm()
@@ -711,8 +738,6 @@ class merchant extends ecjia_merchant
         $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
 
         $step = intval($_POST['step']);
-
-        $_SESSION['cancel_store']['step'] = $step;
 
         return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 2))));
     }
@@ -723,31 +748,31 @@ class merchant extends ecjia_merchant
 
         $code   = !empty($_POST['code']) ? $_POST['code'] : '';
         $mobile = !empty($_POST['mobile']) ? trim($_POST['mobile']) : '';
-        $type   = 'cancel_store';
+        $type   = !empty($_POST['type']) ? trim($_POST['type']) : '';
 
         $past_time = RC_Time::gmtime() - 1800;
         $data      = get_store_info($_SESSION['store_id']);
 
         if (empty($code) || $code != $_SESSION[$type]['temp_code'] || $past_time >= $_SESSION[$type]['temp_code_time'] || $mobile != $_SESSION[$type]['temp_mobile'] || $data['contact_mobile'] != $_SESSION[$type]['temp_mobile']) {
-            return $this->showmessage(__('请输入正确的手机验证码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+            return $this->showmessage(__('请输入正确的手机验证码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('type' => $type));
         }
-
-        $_SESSION['cancel_store']['step'] = 3;
 
         $_SESSION[$type]['temp_mobile']    = '';
         $_SESSION[$type]['temp_code']      = '';
         $_SESSION[$type]['temp_code_time'] = '';
 
-        return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 3))));
+        $url = RC_Uri::url('merchant/merchant/cancel_store', array('step' => 3));
+
+        if ($type == 'cancel_store') {
+            $data = array('account_status' => 'wait_delete', 'delete_time' => RC_Time::gmtime());
+        } elseif ($type == 'active_store') {
+            $data = array('account_status' => 'normal', 'delete_time' => 0, 'activate_time' => RC_Time::gmtime());
+            $url  = RC_Uri::url('merchant/merchant/cancel_store_notice');
+        }
+        RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->update($data);
+
+        return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => $url));
     }
-
-    public function active_store()
-    {
-        $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
-
-        return $this->showmessage(__('激活成功', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/dashboard/init')));
-    }
-
 
     private function diffDate($date1, $date2)
     {

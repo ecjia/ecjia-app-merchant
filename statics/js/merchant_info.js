@@ -26,6 +26,14 @@
                     $this.ajaxSubmit({
                         dataType: "json",
                         success: function (data) {
+                            if (data.type == 'active_store') {
+                                if (data.state == 'error') {
+                                    smoke.alert(data.message, {ok: js_lang.ok});
+                                }
+                                return false;
+                            }
+                            $('.modal').modal('hide');
+                            $(".modal-backdrop").remove();
                             ecjia.merchant.showmessage(data);
                         }
                     });
@@ -251,6 +259,7 @@
             $("#get_code").off('click').on('click', function (e) {
                 e.preventDefault();
                 var url = $(this).attr('data-url') + '&mobile=' + $("input[name='mobile']").val();
+                $(this).addClass('disabled');
                 $.get(url, function (data) {
                     if (!!data && data.state == 'success') {
                         curCount = count;
@@ -258,6 +267,13 @@
                         $("#get_code").attr("disabled", "true");
                         $("#get_code").html(js_lang.resend + curCount + "(s)");
                         InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                    }
+                    if (data.type == 'active_store') {
+                        if (data.state == 'error') {
+                            $(this).removeClass('disabled');
+                            smoke.alert(data.message, {ok: js_lang.ok});
+                        }
+                        return false;
                     }
                     ecjia.merchant.showmessage(data);
                 }, 'json');
@@ -276,7 +292,7 @@
                     $("#get_code").html(js_lang.resend + curCount + "(s)");
                 }
             };
-            $('.unset_SetRemain').on('click', function () {
+            $('.unset_SetRemain').off('click').on('click', function () {
                 window.clearInterval(InterValObj);
             })
         },
@@ -554,18 +570,10 @@
 
             $('.active_store_btn').off('click').on('click', function (e) {
                 e.preventDefault();
-
                 var $this = $(this),
                     url = $this.attr('data-url'),
                     msg = $this.attr('data-msg');
-
-                smoke.confirm(msg, function (e) {
-                    if (e) {
-                        $.post(url, function (data) {
-                            ecjia.merchant.showmessage(data);
-                        }, 'json');
-                    }
-                }, {ok: js_lang.ok, cancel: js_lang.cancel});
+                $('#check_active_modal').modal('show');
             });
         }
     };
