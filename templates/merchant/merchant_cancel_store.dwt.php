@@ -26,6 +26,7 @@
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
+            {if $actived neq 1}
             <div class="panel-body">
                 <ul id="validate_wizard-titles" class="stepy-titles clearfix">
                     <li id="step1" class="{if $step gt 0}current-step{/if}">
@@ -48,6 +49,7 @@
                     </li>
                 </ul>
             </div>
+            {/if}
 
             <!-- {if $step eq 1} -->
             <div class="panel-body">
@@ -117,33 +119,36 @@
             </div>
 
             <!-- {else if $step eq 2} -->
-            <form class="form-horizontal" name="cancelForm" action="{RC_Uri::url('merchant/merchant/check_cancel_sms')}" method="post">
-                <div class="header-step-two">{t domain="merchant"}请使用店铺已绑定的手机号获取短信验证码{/t}</div>
+            <div class="merchant-cancel-two">
+                <form class="form-horizontal" name="cancelForm" action="{RC_Uri::url('merchant/merchant/check_cancel_sms')}" method="post">
+                    <div class="header-step-two">{t domain="merchant"}请使用店铺已绑定的手机号获取短信验证码{/t}</div>
 
-                <div class="form-group">
-                    <label class="control-label col-lg-2">{t domain="merchant"}手机号码：{/t}</label>
-                    <div class="controls col-lg-6">
-                        <input class="form-control" name="mobile" id="mobile" placeholder='{t domain="merchant"}请输入手机号码{/t}' type="text" value="{$store_info.contact_mobile}" readonly/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">{t domain="merchant"}手机号码：{/t}</label>
+                        <div class="controls col-lg-6">
+                            <input class="form-control" name="mobile" id="mobile" placeholder='{t domain="merchant"}请输入手机号码{/t}' type="text" value="{$store_info.contact_mobile}" readonly/>
+                        </div>
+                        <a class="btn btn-primary" data-url="{url path='merchant/merchant/get_code_value'}&type=cancel_store" id="get_code">{t domain="merchant"}获取验证码{/t}</a>
                     </div>
-                    <a class="btn btn-primary" data-url="{url path='merchant/merchant/get_code_value'}&type=cancel_store" id="get_code">{t domain="merchant"}获取验证码{/t}</a>
-                </div>
 
-                <div class="form-group">
-                    <label class="control-label col-lg-2">{t domain="merchant"}短信验证码：{/t}</label>
-                    <div class="col-lg-6">
-                        <input class="form-control" name="code" placeholder='{t domain="merchant"}请输入验证码{/t}' type="text"/>
+                    <div class="form-group">
+                        <label class="control-label col-lg-2">{t domain="merchant"}短信验证码：{/t}</label>
+                        <div class="col-lg-6">
+                            <input class="form-control" name="code" placeholder='{t domain="merchant"}请输入验证码{/t}' type="text"/>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group ">
-                    <div class="col-lg-6 col-md-offset-2">
-                        <input class="btn btn-info unset_SetRemain" type="submit" value='{t domain="merchant"}确认{/t}'>
+                    <div class="form-group ">
+                        <div class="col-lg-6 col-md-offset-2">
+                            <input class="btn btn-info unset_SetRemain" type="submit" value='{t domain="merchant"}确认{/t}'>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
             <!-- {else if $step eq 3} -->
 
             <div class="merchant-cancel-three">
+                {if $actived neq 1}
                 <div><img src="{$cancel_png}" alt=""></div>
                 <p class="bold">{t domain="merchant"}已提交注销！{/t}</p>
                 <p class="time lefttime" data-time="{$store_info.delete_time}">
@@ -161,6 +166,13 @@
                 <div>
                     <a class="btn btn-info active_store_btn" data-url="{RC_Uri::url('merchant/merchant/active_store')}" data-msg='{t domain="merchant"}您确定要激活当前店铺吗？{/t}'>{t domain="merchant"}激活店铺{/t}</a>
                 </div>
+                {else}
+                <div class="merchant-cancel-active"><img src="{$cancel_png}" alt=""></div>
+                <p class="bold">{t domain="merchant"}已成功激活！可继续使用您的店铺{/t}</p>
+                <div>
+                    <a class="btn btn-info" href="{RC_Uri::url('merchant/dashboard/init')}">{t domain="merchant"}完成{/t}</a>
+                </div>
+                {/if}
             </div>
 
             <!-- {/if} -->
