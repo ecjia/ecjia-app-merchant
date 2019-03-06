@@ -209,15 +209,24 @@
     font-size: 16px;
 }
 
+.merchant-cancel-two {
+    margin: 30px 0 45px 0;
+}
+
 .merchant-cancel-three {
     text-align: center;
-    padding: 30px 0;
+    margin: 50px 0 100px 0;
 }
 
 .merchant-cancel-three .bold {
-    margin-top: 10px;
+    margin: 20px 0;
     font-size: 16px;
     font-weight: bold;
+}
+
+.merchant-cancel-three img {
+    width: 60px;
+    height: 60px;
 }
 
 .merchant-cancel-three .time span {
