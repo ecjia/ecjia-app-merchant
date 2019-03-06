@@ -730,14 +730,18 @@ class merchant extends ecjia_merchant
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($ur_here));
         $this->assign('ur_here', $ur_here);
 
+        $data = get_store_info($_SESSION['store_id']);
+        //已申请注销
+        if (!empty($data['delete_time'])) {
+            return $this->redirect(RC_Uri::url('merchant/merchant/cancel_store'));
+        }
+
         $this->display('merchant_cancel_store_notice.dwt');
     }
 
     public function cancel_store_confirm()
     {
         $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
-
-        $step = intval($_POST['step']);
 
         return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 2))));
     }

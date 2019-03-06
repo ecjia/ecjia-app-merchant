@@ -258,8 +258,9 @@
 
             $("#get_code").off('click').on('click', function (e) {
                 e.preventDefault();
-                var url = $(this).attr('data-url') + '&mobile=' + $("input[name='mobile']").val();
-                $(this).addClass('disabled');
+                var $this = $(this);
+                var url = $this.attr('data-url') + '&mobile=' + $("input[name='mobile']").val();
+                $this.addClass('disabled');
                 $.get(url, function (data) {
                     if (!!data && data.state == 'success') {
                         curCount = count;
@@ -270,7 +271,7 @@
                     }
                     if (data.type == 'active_store') {
                         if (data.state == 'error') {
-                            $(this).removeClass('disabled');
+                            $this.removeClass('disabled');
                             smoke.alert(data.message, {ok: js_lang.ok});
                         }
                         return false;
