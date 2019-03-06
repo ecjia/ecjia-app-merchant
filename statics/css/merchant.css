@@ -243,3 +243,7 @@
     text-align: left;
     line-height: 30px;
 }
+
+.merchant-cancel-three .merchant-cancel-active {
+    padding-top: 50px;
+}

@@ -667,9 +667,7 @@ class merchant extends ecjia_merchant
         $this->admin_priv('merchant_manage');
 
         ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('店铺设置', 'merchant'), RC_Uri::url('merchant/merchant/init')));
-        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('注销店铺', 'merchant')));
 
-        $this->assign('ur_here', __('注销店铺', 'merchant'));
         $this->assign('action_link', array('href' => RC_Uri::url('merchant/merchant/init'), 'text' => __('店铺设置', 'merchant')));
 
         $step = intval($_GET['step']);
@@ -695,6 +693,15 @@ class merchant extends ecjia_merchant
 
         $this->assign('diff', $diff); //开店时长
         $this->assign('cancel_png', RC_App::apps_url('statics/img/cancel.png', __FILE__));
+
+        $ur_here = __('注销店铺', 'merchant');
+        if ($step == 3) {
+            $ur_here = __('激活店铺', 'merchant');
+        }
+        ecjia_screen::get_current_screen()->add_nav_here(new admin_nav_here($ur_here));
+        $this->assign('ur_here', $ur_here);
+
+        $this->assign('actived', 1);
 
         $this->display('merchant_cancel_store.dwt');
     }

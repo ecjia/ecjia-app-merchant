@@ -26,6 +26,7 @@
 <div class="row">
     <div class="col-lg-12">
         <section class="panel">
+            {if $actived neq 1}
             <div class="panel-body">
                 <ul id="validate_wizard-titles" class="stepy-titles clearfix">
                     <li id="step1" class="{if $step gt 0}current-step{/if}">
@@ -48,6 +49,7 @@
                     </li>
                 </ul>
             </div>
+            {/if}
 
             <!-- {if $step eq 1} -->
             <div class="panel-body">
@@ -146,6 +148,7 @@
             <!-- {else if $step eq 3} -->
 
             <div class="merchant-cancel-three">
+                {if $actived neq 1}
                 <div><img src="{$cancel_png}" alt=""></div>
                 <p class="bold">{t domain="merchant"}已提交注销！{/t}</p>
                 <p class="time lefttime" data-time="{$store_info.delete_time}">
@@ -163,6 +166,13 @@
                 <div>
                     <a class="btn btn-info active_store_btn" data-url="{RC_Uri::url('merchant/merchant/active_store')}" data-msg='{t domain="merchant"}您确定要激活当前店铺吗？{/t}'>{t domain="merchant"}激活店铺{/t}</a>
                 </div>
+                {else}
+                <div class="merchant-cancel-active"><img src="{$cancel_png}" alt=""></div>
+                <p class="bold">{t domain="merchant"}已成功激活！可继续使用您的店铺{/t}</p>
+                <div>
+                    <a class="btn btn-info" href="{RC_Uri::url('merchant/dashboard/init')}">{t domain="merchant"}完成{/t}</a>
+                </div>
+                {/if}
             </div>
 
             <!-- {/if} -->
