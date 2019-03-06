@@ -54,7 +54,7 @@
                 <form class="form-horizontal">
 
                     <div class="merchant-main-info">
-                        <div class="left"><img src="{$store_info.shop_logo}" alt="" width="80" height="80"></div>
+                        <div class="left"><img src="{$store_info.shop_logo}"></div>
                         <div class="right">
                             <p>
                                 <span class="bold">{$store_info.merchants_name}</span>

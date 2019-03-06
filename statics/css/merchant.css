@@ -146,6 +146,8 @@
 .merchant-main-info .left img {
     border-radius: 50%;
     margin-top: 10px;
+    width: 80px;
+    height: 80px;
 }
 
 .merchant-main-info .right {

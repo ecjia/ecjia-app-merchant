@@ -477,8 +477,8 @@ class merchant extends ecjia_merchant
         if (empty($mobile)) {
             return $this->showmessage(__('请输入手机号码', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR, array('type' => $type));
         }
-        $code     = rand(100000, 999999);
-        $options  = array(
+        $code    = rand(100000, 999999);
+        $options = array(
             'mobile' => $mobile,
             'event'  => 'sms_get_validate',
             'value'  => array(
@@ -689,6 +689,12 @@ class merchant extends ecjia_merchant
             $data['delete_time'] = RC_Time::local_date('Y/m/d H:i:s O', $data['delete_time'] + 30 * 24 * 3600);
             $this->assign('wait_delete', 1); //显示激活页面
             $step = 3;
+            unset($_SESSION['cancel_store_temp']);
+        } else {
+            $temp_step = $_SESSION['cancel_store_temp']['step'];
+            if ((empty($temp_step) && $step != 1) || (!empty($temp_step) && $temp_step < 2)) {
+                return $this->redirect(RC_Uri::url('merchant/merchant/cancel_store'));
+            }
         }
         $this->assign('store_info', $data);
         $this->assign('step', $step);
@@ -743,6 +749,7 @@ class merchant extends ecjia_merchant
     {
         $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
 
+        $_SESSION['cancel_store_temp']['step'] = 2;
         return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 2))));
     }
 
