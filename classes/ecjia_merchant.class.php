@@ -49,7 +49,8 @@ defined('IN_ECJIA') or exit('No permission resources.');
 //定义在后台
 define('IN_MERCHANT', true);
 
-abstract class ecjia_merchant extends ecjia_base implements ecjia_template_fileloader {
+abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Frameworks\Contracts\EcjiaTemplateFileLoader
+{
 
 	public function __construct() {
 		parent::__construct();
