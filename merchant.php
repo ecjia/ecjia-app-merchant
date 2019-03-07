@@ -59,8 +59,8 @@ class merchant extends ecjia_merchant
         RC_Style::enqueue_style('uniform-aristo');
         RC_Style::enqueue_style('jquery-stepy');
         // 自定义JS
-        RC_Script::enqueue_script('photoswipe', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe.min.js', __FILE__), array(), false, true);
-        RC_Script::enqueue_script('photoswipe-ui', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe-ui-default.min.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('photoswipe', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe.min.js', __FILE__), array(), false, 1);
+        RC_Script::enqueue_script('photoswipe-ui', RC_App::apps_url('statics/lib/photoswipe/js/photoswipe-ui-default.min.js', __FILE__), array(), false, 1);
         RC_Style::enqueue_style('photoswipe', RC_App::apps_url('statics/lib/photoswipe/css/photoswipe.css', __FILE__), array());
         RC_Style::enqueue_style('default-skin', RC_App::apps_url('statics/lib/photoswipe/css/default-skin/default-skin.css', __FILE__), array());
         // 页面css样式
@@ -69,22 +69,22 @@ class merchant extends ecjia_merchant
         RC_Style::enqueue_style('merchant_template', RC_App::apps_url('statics/css/merchant_template.css', __FILE__), array());
         // input file 长传
         RC_Style::enqueue_style('bootstrap-fileupload', RC_App::apps_url('statics/assets/bootstrap-fileupload/bootstrap-fileupload.css', __FILE__), array());
-        RC_Script::enqueue_script('bootstrap-fileupload', RC_App::apps_url('statics/assets/bootstrap-fileupload/bootstrap-fileupload.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('bootstrap-fileupload', RC_App::apps_url('statics/assets/bootstrap-fileupload/bootstrap-fileupload.js', __FILE__), array(), false, 1);
 
-        RC_Script::enqueue_script('yomi', RC_App::apps_url('statics/js/jquery.yomi.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('yomi', RC_App::apps_url('statics/js/jquery.yomi.js', __FILE__), array(), false, 1);
 
         // 时间区间
         RC_Style::enqueue_style('range', RC_App::apps_url('statics/css/range.css', __FILE__), array());
-        RC_Script::enqueue_script('jquery-range', RC_App::apps_url('statics/js/jquery.range.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('jquery-range', RC_App::apps_url('statics/js/jquery.range.js', __FILE__), array(), false, 1);
 
         RC_Script::enqueue_script('jquery.toggle.buttons', RC_Uri::admin_url('statics/lib/toggle_buttons/jquery.toggle.buttons.js'));
         RC_Style::enqueue_style('bootstrap-toggle-buttons', RC_Uri::admin_url('statics/lib/toggle_buttons/bootstrap-toggle-buttons.css'));
-        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('migrate', RC_App::apps_url('statics/js/migrate.js', __FILE__), array(), false, 1);
 
         RC_Loader::load_app_func('merchant');
         Ecjia\App\Merchant\Helper::assign_adminlog_content();
 
-        RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__), array(), false, true);
+        RC_Script::enqueue_script('merchant_info', RC_App::apps_url('statics/js/merchant_info.js', __FILE__), array(), false, 1);
         RC_Script::localize_script('merchant_info', 'js_lang', config('app-merchant::jslang.merchant_page'));
 
         ecjia_merchant_screen::get_current_screen()->add_nav_here(new admin_nav_here(__('我的店铺', 'merchant'), RC_Uri::url('merchant/merchant/init')));
