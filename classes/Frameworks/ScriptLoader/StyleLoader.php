@@ -104,7 +104,7 @@ class StyleLoader extends EcjiaStyleLoader
 
         $dev_suffix = $develop_src ? '' : '.min';
 
-        $base_url = dirname(RC_App::app_dir_url(__FILE__)) . '/statics';
+        $base_url = dirname(dirname(dirname(RC_App::app_dir_url(__FILE__)))) . '/statics';
 
         $this->styles->remove('bootstrap');
         $this->styles->remove('bootstrap-reset');
