@@ -769,9 +769,9 @@ class merchant extends ecjia_merchant
             ->whereIn('order_status', array(OS_CONFIRMED, OS_SPLITED))
             ->where('shipping_status', SS_RECEIVED)
             ->where('pay_status', array(PS_PAYED, PS_PAYING))
-            ->count();
+            ->pluck('confirm_time');
 
-        if (!empty($order_count) || $confirm_time - RC_Time::gmtime() < 15 * 3600 * 24) {
+        if (!empty($order_count) || (!empty($confirm_time) && $confirm_time - RC_Time::gmtime() < 15 * 3600 * 24)) {
             return $this->showmessage(__('您店铺内还有正在交易的订单，请等待订单完成15天后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
