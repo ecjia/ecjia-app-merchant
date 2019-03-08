@@ -792,15 +792,20 @@ class merchant extends ecjia_merchant
         $interval  = $datetime1->diff($datetime2);
         $time['y'] = $interval->format('%Y');
         $time['m'] = $interval->format('%m');
+        $time['d'] = $interval->format('%d');
 
         $time_str = '';
         $year     = intval($time['y']);
         if (!empty($year)) {
-            $time_str .= $year . ' 年';
+            $time_str .= $year . '年';
         }
         $month = intval($time['m']);
         if (!empty($month)) {
-            $time_str .= $month . ' 个月';
+            $time_str .= $month . '个月';
+        }
+        $day = intval($time['d']);
+        if (!empty($day)) {
+            $time_str .= $day . '天';
         }
         return $time_str;
     }
