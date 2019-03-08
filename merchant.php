@@ -792,7 +792,10 @@ class merchant extends ecjia_merchant
         } else {
             $amount_available = $data['money'] - $data['deposit']; //可用余额=money-保证金
         }
-        if (!empty($amount_available)) {
+        if ($amount_available < 0) {
+            return $this->showmessage(__('当前您的店铺资金还没有结清，请您结清后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+        if ($amount_available > 0) {
             return $this->showmessage(__('当前您的店铺资金还没有全部取出，请您将资金全部取出后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
 
