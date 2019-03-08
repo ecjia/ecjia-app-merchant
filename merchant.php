@@ -749,6 +749,53 @@ class merchant extends ecjia_merchant
     {
         $this->admin_priv('merchant_manage', ecjia::MSGTYPE_JSON);
 
+        //检查是否满足注销条件
+        $goods_count = RC_DB::table('goods')->where('store_id', $_SESSION['store_id'])->count();
+        if (!empty($goods_count)) {
+            return $this->showmessage(__('您店铺内还有商品，请将店内商品删除后再注销，避免出现新的交易！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
+        $order_count = RC_DB::table('order_info')
+            ->where('store_id', $_SESSION['store_id'])
+            ->where(function ($query) {
+                $query->where('order_status', OS_UNCONFIRMED)
+                    ->orWhere('shipping_status', array(SS_UNSHIPPED, SS_SHIPPED))
+                    ->orWhere('pay_status', PS_UNPAYED);
+            })
+            ->count();
+
+        $confirm_time = RC_DB::table('order_info')
+            ->where('store_id', $_SESSION['store_id'])
+            ->whereIn('order_status', array(OS_CONFIRMED, OS_SPLITED))
+            ->where('shipping_status', SS_RECEIVED)
+            ->where('pay_status', array(PS_PAYED, PS_PAYING))
+            ->count();
+
+        if (!empty($order_count) || $confirm_time - RC_Time::gmtime() < 15 * 3600 * 24) {
+            return $this->showmessage(__('您店铺内还有正在交易的订单，请等待订单完成15天后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
+        $refund_count = RC_DB::table('refund_order')
+            ->where('store_id', $_SESSION['store_id'])
+            ->where(function ($query) {
+                $query->where('status', 0)
+                    ->orWhere('refund_status', 1);
+            })
+            ->count();
+        if (!empty($refund_count)) {
+            return $this->showmessage(__('您的店铺还有未完成的售后订单，请等待售后流程完成后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
+        $data = RC_DB::table('store_account')->where('store_id', $_SESSION['store_id'])->first();
+        if (empty($data)) {
+            $amount_available = 0;
+        } else {
+            $amount_available = $data['money'] - $data['deposit']; //可用余额=money-保证金
+        }
+        if (!empty($amount_available)) {
+            return $this->showmessage(__('当前您的店铺资金还没有全部取出，请您将资金全部取出后再来注销！', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
+        }
+
         $_SESSION['cancel_store_temp']['step'] = 2;
         return $this->showmessage('', ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_SUCCESS, array('pjaxurl' => RC_Uri::url('merchant/merchant/cancel_store', array('step' => 2))));
     }
@@ -775,9 +822,9 @@ class merchant extends ecjia_merchant
         $url = RC_Uri::url('merchant/merchant/cancel_store', array('step' => 3));
 
         if ($type == 'cancel_store') {
-            $data = array('account_status' => 'wait_delete', 'delete_time' => RC_Time::gmtime());
+            $data = array('account_status' => 'wait_delete', 'delete_time' => RC_Time::gmtime(), 'shop_close' => 1);
         } elseif ($type == 'active_store') {
-            $data = array('account_status' => 'normal', 'delete_time' => 0, 'activate_time' => RC_Time::gmtime());
+            $data = array('account_status' => 'normal', 'delete_time' => 0, 'activate_time' => RC_Time::gmtime(), 'shop_close' => 0);
             $url  = RC_Uri::url('merchant/merchant/cancel_store_notice');
         }
         RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->update($data);

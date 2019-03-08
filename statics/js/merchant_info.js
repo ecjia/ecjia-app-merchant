@@ -561,6 +561,10 @@
                 smoke.confirm(msg, function (e) {
                     if (e) {
                         $.post(url, {step: 2}, function (data) {
+                            if (data.state == 'error') {
+                                ecjia.merchant.showmessage(data);
+                                return false;
+                            }
                             ecjia.pjax(data.pjaxurl);
                         }, 'json');
                     }
