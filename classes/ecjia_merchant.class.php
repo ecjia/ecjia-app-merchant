@@ -526,13 +526,13 @@ abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Framew
 		RC_Script::enqueue_script('ecjia-mh-jquery-migrate');
 		RC_Script::enqueue_script('ecjia-mh-jquery-quicksearch');
 
-		RC_Script::enqueue_script('ecjia-mh-morris-script');
+// 		RC_Script::enqueue_script('ecjia-mh-morris-script');
 		RC_Script::enqueue_script('ecjia-mh-owl-carousel');
 		RC_Script::enqueue_script('ecjia-mh-respond');
-		RC_Script::enqueue_script('ecjia-mh-slider');
+// 		RC_Script::enqueue_script('ecjia-mh-slider');
 		RC_Script::enqueue_script('ecjia-mh-sparkline-chart');
-		RC_Script::enqueue_script('ecjia-mh-themes');
-		RC_Script::enqueue_script('ecjia-mh-xchart');
+// 		RC_Script::enqueue_script('ecjia-mh-themes');
+// 		RC_Script::enqueue_script('ecjia-mh-xchart');
 		RC_Script::enqueue_script('ecjia-mh-chosen-jquery');
 		RC_Script::enqueue_script('ecjia-mh-chart');
 

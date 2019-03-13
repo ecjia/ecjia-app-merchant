@@ -126,18 +126,16 @@ class ScriptLoader extends EcjiaScriptLoader
         $this->scripts->add( 'ecjia-mh-jquery-quicksearch',   $base_url.'/mh-js/jquery.quicksearch.js', array('jquery'), false, 1 );
 
         $this->scripts->add( 'ecjia-mh-jquery-easy-pie-chart',  $base_url.'/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js', array('jquery'), false, 1 );
-
+        $this->scripts->add( 'ecjia-mh-morris-script',    $base_url.'/assets/morris.js-0.4.3/morris.min.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-owl-carousel',     $base_url.'/mh-js/owl.carousel.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-respond',          $base_url.'/mh-js/respond.min.js', array(), false, 1 );
+        $this->scripts->add( 'ecjia-mh-slider',    $base_url.'/assets/slider/js/bootstrap-slider.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-sparkline-chart',  $base_url.'/mh-js/sparkline-chart.js', array(), false, 1 );
-
+        $this->scripts->add( 'ecjia-mh-themes',    $base_url.'/mh-js/themes.js', array(), false, 1 );
+        $this->scripts->add( 'ecjia-mh-xchart',    $base_url.'/mh-js/xchart.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-chosen-jquery',    $base_url.'/assets/chosen/chosen.jquery.min.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-chart',    $base_url.'/assets/Chart/Chart.min.js', array(), false, 1 );
-
         $this->scripts->add( 'ecjia-mh-bootstrap-fileupload-js',	$base_url.'/assets/bootstrap-fileupload/bootstrap-fileupload.js', array(), false, 1 );
         $this->scripts->add( 'ecjia-mh-editable-js',    $base_url.'/assets/x-editable/bootstrap-editable/js/bootstrap-editable.min.js', array(), false, 1 );
-
     }
-
-
 }
