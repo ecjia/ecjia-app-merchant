@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App merchant 1.28.0\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-06 09:04:39+00:00\n"
+"POT-Creation-Date: 2019-03-13 05:24:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,67 +143,67 @@ msgstr ""
 msgid "参数无效"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:113 classes/ecjia_merchant.class.php:476
+#: classes/ecjia_merchant.class.php:114 classes/ecjia_merchant.class.php:477
 msgid "系统提示"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:114
+#: classes/ecjia_merchant.class.php:115
 msgid "重新登录"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:407
+#: classes/ecjia_merchant.class.php:408
 msgid "操作错误"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:472 classes/ecjia_merchant.class.php:477
+#: classes/ecjia_merchant.class.php:473 classes/ecjia_merchant.class.php:478
 msgid "对不起，您没有执行此项操作的权限！"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:550
+#: classes/ecjia_merchant.class.php:551
 msgid "显示侧边栏"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:551
+#: classes/ecjia_merchant.class.php:552
 msgid "隐藏侧边栏"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:552
+#: classes/ecjia_merchant.class.php:553
 msgid "请先输入搜索信息"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:553
+#: classes/ecjia_merchant.class.php:554
 msgid "未搜索到导航信息"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:554
+#: classes/ecjia_merchant.class.php:555
 msgid "操作成功"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:555
+#: classes/ecjia_merchant.class.php:556
 msgid "操作失败"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:556
+#: classes/ecjia_merchant.class.php:557
 msgid "是否确认跳转？"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:557 configs/jslang.php:63
+#: classes/ecjia_merchant.class.php:558 configs/jslang.php:63
 msgid "确定"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:558 configs/jslang.php:64
+#: classes/ecjia_merchant.class.php:559 configs/jslang.php:64
 msgid "取消"
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:559
+#: classes/ecjia_merchant.class.php:560
 msgid "请求失败，错误编号："
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:560
+#: classes/ecjia_merchant.class.php:561
 msgid "，错误信息："
 msgstr ""
 
-#: classes/ecjia_merchant.class.php:791
+#: classes/ecjia_merchant.class.php:792
 msgid "版权所有 © 2013-2016 上海商创网络科技有限公司，并保留所有权利。"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "店铺开关"
 msgstr ""
 
-#: merchant.php:436 merchant.php:768
+#: merchant.php:436 merchant.php:818
 msgid "请输入正确的手机验证码"
 msgstr ""
 
@@ -368,6 +368,26 @@ msgstr ""
 
 #: merchant.php:688 merchant.php:735
 msgid "激活店铺"
+msgstr ""
+
+#: merchant.php:755
+msgid "您店铺内还有商品，请将店内商品删除后再注销，避免出现新的交易！"
+msgstr ""
+
+#: merchant.php:775
+msgid "您店铺内还有正在交易的订单，请等待订单完成15天后再来注销！"
+msgstr ""
+
+#: merchant.php:786
+msgid "您的店铺还有未完成的售后订单，请等待售后流程完成后再来注销！"
+msgstr ""
+
+#: merchant.php:796
+msgid "当前您的店铺资金还没有结清，请您结清后再来注销！"
+msgstr ""
+
+#: merchant.php:799
+msgid "当前您的店铺资金还没有全部取出，请您将资金全部取出后再来注销！"
 msgstr ""
 
 #: mh_franchisee.php:103
@@ -1073,7 +1093,7 @@ msgid "网站首页"
 msgstr ""
 
 #: content/apps/merchant/templates/merchant/library/common_header.lbi.php:66
-msgid "您有  条新通知"
+msgid "您有 %1 条新通知"
 msgstr ""
 
 #: content/apps/merchant/templates/merchant/library/common_header.lbi.php:94
