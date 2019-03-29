@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App merchant 1.28.0\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-13 05:24:26+00:00\n"
+"POT-Creation-Date: 2019-03-29 01:42:02+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -388,6 +388,18 @@ msgstr ""
 
 #: merchant.php:799
 msgid "当前您的店铺资金还没有全部取出，请您将资金全部取出后再来注销！"
+msgstr ""
+
+#: merchant.php:850
+msgid "年"
+msgstr ""
+
+#: merchant.php:854
+msgid "个月"
+msgstr ""
+
+#: merchant.php:858
+msgid "天"
 msgstr ""
 
 #: mh_franchisee.php:103
@@ -1339,10 +1351,6 @@ msgstr ""
 
 #: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:153
 msgid "倒计时："
-msgstr ""
-
-#: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:154
-msgid "天"
 msgstr ""
 
 #: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:155
