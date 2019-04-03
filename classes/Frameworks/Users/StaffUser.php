@@ -162,7 +162,7 @@ class StaffUser extends AbstractRepository implements UserInterface
         if ($this->user->avatar) {
             $avatar = RC_Upload::upload_url($this->user->avatar);
         } else {
-            $avatar = RC_App::apps_url('statics/img/ecjia_avatar.jpg', dirname(dirname(dirname(dirname(__FILE__)))));
+            $avatar = RC_App::apps_url('statics/img/ecjia_avatar.jpg', dirname(dirname(dirname(__FILE__))));
         }
 
         return $avatar;
