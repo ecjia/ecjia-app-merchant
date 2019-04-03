@@ -4,16 +4,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ecjia App merchant 1.28.0\n"
 "Report-Msgid-Bugs-To: https://make.ecjia.com/polyglots/\n"
-"POT-Creation-Date: 2019-03-06 09:04:39+00:00\n"
+"POT-Creation-Date: 2019-04-03 17:14+0800\n"
+"PO-Revision-Date: 2019-04-03 17:34+0800\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <ecjia@ecjia.com>\n"
+"Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-03-21 16:05+0800\n"
-"Language-Team: LANGUAGE <ecjia@ecjia.com>\n"
 "X-Generator: Poedit 1.8.7\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_TW\n"
 
 #: admin_store_setting.php:86
 msgid "入驻商家"
@@ -146,67 +146,67 @@ msgstr "店鋪入駐信息"
 msgid "参数无效"
 msgstr "參數無效"
 
-#: classes/ecjia_merchant.class.php:113 classes/ecjia_merchant.class.php:476
+#: classes/ecjia_merchant.class.php:114 classes/ecjia_merchant.class.php:477
 msgid "系统提示"
 msgstr "系統提示"
 
-#: classes/ecjia_merchant.class.php:114
+#: classes/ecjia_merchant.class.php:115
 msgid "重新登录"
 msgstr "重新登錄"
 
-#: classes/ecjia_merchant.class.php:407
+#: classes/ecjia_merchant.class.php:408
 msgid "操作错误"
 msgstr "操作錯誤"
 
-#: classes/ecjia_merchant.class.php:472 classes/ecjia_merchant.class.php:477
+#: classes/ecjia_merchant.class.php:473 classes/ecjia_merchant.class.php:478
 msgid "对不起，您没有执行此项操作的权限！"
 msgstr "對不起，您沒有執行此項操作的權限！"
 
-#: classes/ecjia_merchant.class.php:550
+#: classes/ecjia_merchant.class.php:551
 msgid "显示侧边栏"
 msgstr "顯示側邊欄"
 
-#: classes/ecjia_merchant.class.php:551
+#: classes/ecjia_merchant.class.php:552
 msgid "隐藏侧边栏"
 msgstr "隱藏側邊欄"
 
-#: classes/ecjia_merchant.class.php:552
+#: classes/ecjia_merchant.class.php:553
 msgid "请先输入搜索信息"
 msgstr "請先輸入搜索信息"
 
-#: classes/ecjia_merchant.class.php:553
+#: classes/ecjia_merchant.class.php:554
 msgid "未搜索到导航信息"
 msgstr "未搜索到導航信息"
 
-#: classes/ecjia_merchant.class.php:554
+#: classes/ecjia_merchant.class.php:555
 msgid "操作成功"
 msgstr "操作成功"
 
-#: classes/ecjia_merchant.class.php:555
+#: classes/ecjia_merchant.class.php:556
 msgid "操作失败"
 msgstr "操作失敗"
 
-#: classes/ecjia_merchant.class.php:556
+#: classes/ecjia_merchant.class.php:557
 msgid "是否确认跳转？"
 msgstr "是否確認跳轉？"
 
-#: classes/ecjia_merchant.class.php:557 configs/jslang.php:63
+#: classes/ecjia_merchant.class.php:558 configs/jslang.php:63
 msgid "确定"
 msgstr "確定"
 
-#: classes/ecjia_merchant.class.php:558 configs/jslang.php:64
+#: classes/ecjia_merchant.class.php:559 configs/jslang.php:64
 msgid "取消"
 msgstr "取消"
 
-#: classes/ecjia_merchant.class.php:559
+#: classes/ecjia_merchant.class.php:560
 msgid "请求失败，错误编号："
 msgstr "請求失敗，錯誤編號："
 
-#: classes/ecjia_merchant.class.php:560
+#: classes/ecjia_merchant.class.php:561
 msgid "，错误信息："
 msgstr "，錯誤信息："
 
-#: classes/ecjia_merchant.class.php:791
+#: classes/ecjia_merchant.class.php:792
 msgid "版权所有 © 2013-2016 上海商创网络科技有限公司，并保留所有权利。"
 msgstr "版權所有 © 2013-2016 上海商創網絡科技有限公司，並保留所有權利。"
 
@@ -320,7 +320,7 @@ msgstr "公告通知"
 msgid "店铺开关"
 msgstr "店鋪開關"
 
-#: merchant.php:436 merchant.php:768
+#: merchant.php:436 merchant.php:818
 msgid "请输入正确的手机验证码"
 msgstr "請輸入正確的手機驗證碼"
 
@@ -375,6 +375,38 @@ msgstr "預覽效果"
 #: merchant.php:688 merchant.php:735
 msgid "激活店铺"
 msgstr "激活店鋪"
+
+#: merchant.php:755
+msgid "您店铺内还有商品，请将店内商品删除后再注销，避免出现新的交易！"
+msgstr "您店舖內還有商品，請將店內商品刪除後再註銷，避免出現新的交易！"
+
+#: merchant.php:775
+msgid "您店铺内还有正在交易的订单，请等待订单完成15天后再来注销！"
+msgstr "您店舖內還有正在交易的訂單，請等待訂單完成15天后再來註銷！"
+
+#: merchant.php:786
+msgid "您的店铺还有未完成的售后订单，请等待售后流程完成后再来注销！"
+msgstr "您的店鋪還有未完成的售後訂單，請等待售後流程完成後再來註銷！"
+
+#: merchant.php:796
+msgid "当前您的店铺资金还没有结清，请您结清后再来注销！"
+msgstr "當前您的店鋪資金還沒有結清，請您結清後再來註銷！"
+
+#: merchant.php:799
+msgid "当前您的店铺资金还没有全部取出，请您将资金全部取出后再来注销！"
+msgstr "當前您的店鋪資金還沒有全部取出，請您將資金全部取出後再來註銷！"
+
+#: merchant.php:850
+msgid "年"
+msgstr "年"
+
+#: merchant.php:854
+msgid "个月"
+msgstr "個月"
+
+#: merchant.php:858
+msgid "天"
+msgstr "天"
 
 #: mh_franchisee.php:103
 msgid "商家入驻信息"
@@ -1080,8 +1112,8 @@ msgid "网站首页"
 msgstr "網站首頁"
 
 #: content/apps/merchant/templates/merchant/library/common_header.lbi.php:66
-msgid "您有  条新通知"
-msgstr "您有  條新通知"
+msgid "您有 %1 条新通知"
+msgstr "您有 %1 條新通知"
 
 #: content/apps/merchant/templates/merchant/library/common_header.lbi.php:94
 msgid "暂无新通知"
@@ -1334,10 +1366,6 @@ msgstr "已提交註銷！"
 #: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:153
 msgid "倒计时："
 msgstr "倒計時："
-
-#: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:154
-msgid "天"
-msgstr "天"
 
 #: content/apps/merchant/templates/merchant/merchant_cancel_store.dwt.php:155
 msgid "时"
@@ -1601,3 +1629,6 @@ msgstr "優惠買單模板"
 #: content/apps/merchant/templates/merchant/merchant_template.dwt.php:87
 msgid "适用于到店支付、享受店铺优惠"
 msgstr "適用於到店支付、享受店鋪優惠"
+
+#~ msgid "您有  条新通知"
+#~ msgstr "您有  條新通知"
