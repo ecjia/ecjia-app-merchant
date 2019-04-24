@@ -115,8 +115,9 @@ class merchant_goods_storebuy_suggestlist_module extends api_front implements ap
 			$filters['store_id'] = $store_id;
 		}
     	//商家商品分类
-		if ($category > 0 && $store_id > 0) {
-			$filters['store_id_and_merchant_cat_id'] = [[$category], $store_id];
+		if ($category > 0 && !empty($store_id)) {
+		    $children_cat = Ecjia\App\Goods\GoodsSearch\MerchantGoodsCategory::getChildrenCategoryId($category, $store_id);
+		    $filters['store_id_and_merchant_cat_id'] = [$children_cat, $store_id];
 		}
 		//店铺推荐，新品，热销
 		if (!empty($action_type)) {
