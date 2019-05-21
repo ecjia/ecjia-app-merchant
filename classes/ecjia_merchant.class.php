@@ -181,6 +181,11 @@ abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Framew
 		RC_Hook::do_action('ecjia_merchant_finish_launching');
 	}
 
+    protected function registerServiceProvider()
+    {
+        royalcms()->forgeRegister('Ecjia\System\Providers\EcjiaAdminServiceProvider');
+    }
+
 	protected function session_start()
 	{
 	    RC_Hook::add_filter('royalcms_session_name', function ($sessin_name) {
