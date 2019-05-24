@@ -5680,3 +5680,10 @@ table tr th.sorting-desc{
 	border: 1px solid #FE9550;
 	margin-right: 5px;
 }
+/*开关组件新样式*/
+
+.label.toggleOff {
+	background-color:#fff;
+	color: #333;
+	border:1px solid #ddd;
+}
