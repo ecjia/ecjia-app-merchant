@@ -5687,3 +5687,6 @@ table tr th.sorting-desc{
 	color: #333;
 	border:1px solid #ddd;
 }
+.label.toggleOff, .label.toggleOn{
+	font-size: 96%;
+}
