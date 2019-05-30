@@ -49,7 +49,7 @@ defined('IN_ECJIA') or exit('No permission resources.');
 //定义在后台
 define('IN_MERCHANT', true);
 
-abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Frameworks\Contracts\EcjiaTemplateFileLoader
+abstract class ecjia_merchant extends Ecjia\System\BaseController\EcjiaController implements \Ecjia\System\Frameworks\Contracts\EcjiaTemplateFileLoader
 {
 
 	public function __construct() {
@@ -371,16 +371,6 @@ abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Framew
 	        }
 	    }
 		return parent::fetch($tpl_file, $cache_id, $options);
-	}
-
-	/**
-	 * 直接跳转
-	 *
-	 * @param string $url
-	 * @param int $code
-	 */
-	public function redirect($url, $code = 302) {
-	    return parent::redirect($url, $code);
 	}
 
 	/**
