@@ -183,7 +183,8 @@ abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Framew
 
     protected function registerServiceProvider()
     {
-        royalcms()->forgeRegister('Ecjia\System\Providers\EcjiaAdminServiceProvider');
+        royalcms()->register('Royalcms\Component\Purifier\PurifierServiceProvider');
+        royalcms()->register('Ecjia\System\Providers\EcjiaAdminServiceProvider');
     }
 
 	protected function session_start()
@@ -379,7 +380,7 @@ abstract class ecjia_merchant extends ecjia_base implements \Ecjia\System\Framew
 	 * @param int $code
 	 */
 	public function redirect($url, $code = 302) {
-	    parent::redirect($url, $code);
+	    return parent::redirect($url, $code);
 	}
 
 	/**
