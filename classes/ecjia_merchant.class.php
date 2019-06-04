@@ -410,7 +410,7 @@ abstract class ecjia_merchant extends Ecjia\System\BaseController\EcjiaControlle
 	            'url' => $url,
 	            'time' => $time
 	        ));
-	        $this->display($system_tpl);
+	        return $this->display($system_tpl);
 	    } else {
 	        return parent::message($msg, $url, $time, $tpl);
 	    }
