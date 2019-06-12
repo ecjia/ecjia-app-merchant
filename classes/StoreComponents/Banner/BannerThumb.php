@@ -116,15 +116,8 @@ class BannerThumb
             });
             $content = $img->encode(RC_File::extension($this->getStoreBannerPath()));
 
-            $tempPath = $this->getTempPath();
-            
-            RC_File::put($tempPath, $content);
-
             //上传临时文件到指定目录
-            RC_Storage::disk()->move($tempPath, $this->getStoreBannerThumbPath(), true, FS_CHMOD_FILE);
-
-            //删除临时文件
-            RC_File::delete($tempPath);
+            RC_Storage::disk()->put($this->getStoreBannerThumbPath(), $content, true, FS_CHMOD_FILE);
         }
 
         return $this;
