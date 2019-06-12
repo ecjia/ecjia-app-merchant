@@ -117,7 +117,7 @@ class BannerThumb
             $content = $img->encode(RC_File::extension($this->getStoreBannerPath()));
 
             //上传临时文件到指定目录
-            RC_Storage::disk()->put($this->getStoreBannerThumbPath(), $content, true, FS_CHMOD_FILE);
+            RC_Storage::disk()->write($this->getStoreBannerThumbPath(), $content);
         }
 
         return $this;
