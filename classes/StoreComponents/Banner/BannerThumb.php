@@ -119,7 +119,7 @@ class BannerThumb
             $content = $content->getEncoded();
 
             //上传临时文件到指定目录
-            RC_Storage::disk()->write($this->getStoreBannerThumbPath(), $content);
+            RC_Storage::disk()->write($this->$this->transformBannerThumbFileName(), $content);
         }
 
         return $this;
@@ -128,8 +128,8 @@ class BannerThumb
 
     public function removeBannerThumbFile()
     {
-        if (RC_Storage::disk()->exists($this->getStoreBannerThumbPath())) {
-            return RC_Storage::delete($this->getStoreBannerThumbPath());
+        if (RC_Storage::disk()->exists($this->$this->transformBannerThumbFileName())) {
+            return RC_Storage::delete($this->$this->transformBannerThumbFileName());
         }
 
         return false;
