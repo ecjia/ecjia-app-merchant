@@ -116,6 +116,8 @@ class BannerThumb
             });
             $content = $img->encode(RC_File::extension($this->getStoreBannerPath()));
 
+            $content = $content->getEncoded();
+
             //上传临时文件到指定目录
             RC_Storage::disk()->write($this->getStoreBannerThumbPath(), $content);
         }
