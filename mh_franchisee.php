@@ -157,11 +157,11 @@ class mh_franchisee extends ecjia_merchant {
     public function receipt_update() {
         $this->admin_priv('franchisee_bank', ecjia::MSGTYPE_JSON);
 
-        $bank_name              = !empty($_POST['bank_name'])           ? htmlspecialchars($_POST['bank_name'])             : '';
-        $bank_account_number    = !empty($_POST['bank_account_number']) ? htmlspecialchars($_POST['bank_account_number'])   : '';
-        $bank_account_name      = !empty($_POST['bank_account_name'])   ? htmlspecialchars($_POST['bank_account_name'])     : '';
-        $bank_branch_name       = !empty($_POST['bank_branch_name'])    ? htmlspecialchars($_POST['bank_branch_name'])      : '';
-        $bank_address           = !empty($_POST['bank_address'])        ? htmlspecialchars($_POST['bank_address'])          : '';
+        $bank_name              = !empty($_POST['bank_name'])           ? htmlspecialchars(remove_xss($_POST['bank_name']))             : '';
+        $bank_account_number    = !empty($_POST['bank_account_number']) ? htmlspecialchars(remove_xss($_POST['bank_account_number']))   : '';
+        $bank_account_name      = !empty($_POST['bank_account_name'])   ? htmlspecialchars(remove_xss($_POST['bank_account_name']))     : '';
+        $bank_branch_name       = !empty($_POST['bank_branch_name'])    ? htmlspecialchars(remove_xss($_POST['bank_branch_name']))      : '';
+        $bank_address           = !empty($_POST['bank_address'])        ? htmlspecialchars(remove_xss($_POST['bank_address']))          : '';
         if (empty($bank_name) || empty($bank_account_number) || empty($bank_account_name) || empty($bank_branch_name) || empty($bank_address)) {
             return $this->showmessage(__('请不要提交空值', 'merchant'), ecjia::MSGTYPE_JSON | ecjia::MSGSTAT_ERROR);
         }
@@ -275,26 +275,26 @@ class mh_franchisee extends ecjia_merchant {
         $store_info = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->first();
         $validate_type = $store_info['validate_type'];
 
-        $merchants_name             = !empty($_POST['merchants_name'])? htmlspecialchars($_POST['merchants_name']) : '';
-        $company_name               = !empty($_POST['company_name'])? htmlspecialchars($_POST['company_name']) : '';
-        $shop_keyword               = !empty($_POST['shop_keyword'])? htmlspecialchars($_POST['shop_keyword']) : '';
+        $merchants_name             = !empty($_POST['merchants_name'])? htmlspecialchars(remove_xss($_POST['merchants_name'])) : '';
+        $company_name               = !empty($_POST['company_name'])? htmlspecialchars(remove_xss($_POST['company_name'])) : '';
+        $shop_keyword               = !empty($_POST['shop_keyword'])? htmlspecialchars(remove_xss($_POST['shop_keyword'])) : '';
         $cat_id                     = !empty($_POST['cat_id'])? intval($_POST['cat_id']) : '';
-        $responsible_person         = !empty($_POST['responsible_person'])? htmlspecialchars($_POST['responsible_person']) : '';
-        $email                      = !empty($_POST['email'])? htmlspecialchars($_POST['email']) : '';
-        $contact_mobile             = !empty($_POST['contact_mobile'])? htmlspecialchars($_POST['contact_mobile']) : '';
+        $responsible_person         = !empty($_POST['responsible_person'])? htmlspecialchars(remove_xss($_POST['responsible_person'])) : '';
+        $email                      = !empty($_POST['email'])? htmlspecialchars(remove_xss($_POST['email'])) : '';
+        $contact_mobile             = !empty($_POST['contact_mobile'])? htmlspecialchars(remove_xss($_POST['contact_mobile'])) : '';
 
-        $province                   = !empty($_POST['province']) ? trim($_POST['province']) : '';
-        $city                       = !empty($_POST['city'])     ? trim($_POST['city'])     : '';
-        $district                   = !empty($_POST['district']) ? trim($_POST['district']) : '';
-        $street                   	= !empty($_POST['street']) ? trim($_POST['street']) : '';
+        $province                   = !empty($_POST['province']) ? remove_xss($_POST['province']) : '';
+        $city                       = !empty($_POST['city'])     ? remove_xss($_POST['city'])     : '';
+        $district                   = !empty($_POST['district']) ? remove_xss($_POST['district']) : '';
+        $street                   	= !empty($_POST['street']) ? remove_xss($_POST['street']) : '';
         
-        $address                    = !empty($_POST['address'])? htmlspecialchars($_POST['address']) : '';
-        $identity_type              = !empty($_POST['identity_type'])? intval($_POST['identity_type']) : '';
-        $identity_number            = !empty($_POST['identity_number'])? htmlspecialchars($_POST['identity_number']) : '';
-        $business_licence           = !empty($_POST['business_licence'])? htmlspecialchars($_POST['business_licence']) : '';
-        $longitude                  = !empty($_POST['longitude'])? htmlspecialchars($_POST['longitude']) : '';
-        $latitude                   = !empty($_POST['latitude'])? htmlspecialchars($_POST['latitude']) : '';
-        $type                   = !empty($_POST['type'])? htmlspecialchars($_POST['type']) : '';
+        $address                    = !empty($_POST['address'])? htmlspecialchars(remove_xss($_POST['address'])) : '';
+        $identity_type              = !empty($_POST['identity_type'])? intval(remove_xss($_POST['identity_type'])) : '';
+        $identity_number            = !empty($_POST['identity_number'])? htmlspecialchars(remove_xss($_POST['identity_number'])) : '';
+        $business_licence           = !empty($_POST['business_licence'])? htmlspecialchars(remove_xss($_POST['business_licence'])) : '';
+        $longitude                  = !empty($_POST['longitude'])? htmlspecialchars(remove_xss($_POST['longitude'])) : '';
+        $latitude                   = !empty($_POST['latitude'])? htmlspecialchars(remove_xss($_POST['latitude'])) : '';
+        $type                   = !empty($_POST['type'])? htmlspecialchars(remove_xss($_POST['type'])) : '';
 
         $franchisee_count = RC_DB::table('store_franchisee')->where('email', '=', $email)->where('store_id', '!=', $_SESSION['store_id'])->count();
         $preaudit_count   = RC_DB::table('store_preaudit')->where('email', '=', $email)->where('store_id', '!=', $_SESSION['store_id'])->count();
@@ -357,25 +357,45 @@ class mh_franchisee extends ecjia_merchant {
         }
 
         if (!empty($_FILES['identity_pic_front']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_front']['name'])) {
-            $data['identity_pic_front'] = merchant_file_upload_info('identity_pic', 'identity_pic_front');
+            $identity_pic_front_check = merchant_file_upload_info('identity_pic', 'identity_pic_front');
+            if (is_ecjia_error($identity_pic_front_check)) {
+                return $identity_pic_front_check;
+            } else {
+                 $data['identity_pic_front'] = $identity_pic_front_check;
+            }
         } else {
             $data['identity_pic_front'] = $store_info['identity_pic_front'];
         }
 
         if (!empty($_FILES['identity_pic_back']) && empty($_FILES['error']) && !empty($_FILES['identity_pic_back']['name'])) {
-            $data['identity_pic_back'] = merchant_file_upload_info('identity_pic', 'identity_pic_back');
+            $identity_pic_back_check = merchant_file_upload_info('identity_pic', 'identity_pic_back');
+            if (is_ecjia_error($identity_pic_back_check)) {
+                return $identity_pic_back_check;
+            } else {
+                $data['identity_pic_back'] = $identity_pic_back_check;
+            }
         } else {
             $data['identity_pic_back'] = $store_info['identity_pic_back'];
         }
 
         if (!empty($_FILES['personhand_identity_pic']) && empty($_FILES['error']) && !empty($_FILES['personhand_identity_pic']['name'])) {
-            $data['personhand_identity_pic'] = merchant_file_upload_info('identity_pic', 'personhand_identity_pic');
+            $personhand_identity_pic_check = merchant_file_upload_info('identity_pic', 'personhand_identity_pic');
+            if (is_ecjia_error($personhand_identity_pic_check)) {
+                return $personhand_identity_pic_check;
+            } else {
+                $data['personhand_identity_pic'] = $personhand_identity_pic_check;
+            }
         } else {
             $data['personhand_identity_pic'] = $store_info['personhand_identity_pic'];
         }
 
         if (!empty($_FILES['business_licence_pic']) && empty($_FILES['error']) && !empty($_FILES['business_licence_pic']['name'])) {
-            $data['business_licence_pic'] = merchant_file_upload_info('business_licence', 'business_licence_pic');
+            $business_licence_pic_check =  merchant_file_upload_info('business_licence', 'business_licence_pic');
+            if (is_ecjia_error($business_licence_pic_check)) {
+                return $business_licence_pic_check;
+            } else {
+                $data['business_licence_pic'] = $business_licence_pic_check;
+            }
         } else {
             $data['business_licence_pic'] = $store_info['business_licence_pic'];
         }
