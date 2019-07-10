@@ -126,7 +126,7 @@ class merchant_home_category_module extends api_front implements api_interface {
 		    		$filters['product'] = true;
 		    	}
 		    	$filters['store_id'] = $store_id;
-		    	$filters['is_hot']   = 1;
+		    	$filters['store_hot']   = 1;
 		    	//商家商品分类
 		    	if ($cat['cat_id'] > 0 && !empty($store_id)) {
 		    		$filters['store_id_and_merchant_cat_id'] = [$cat['cat_id'], $store_id];
