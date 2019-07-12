@@ -49,7 +49,6 @@ defined('IN_ECJIA') or exit('No permission resources.');
 /**
  * 申请商家入驻
  * @author will.chen
- * @last_update 1.32 1.33 增加邀请码
  */
 class admin_merchant_signup_module extends api_admin implements api_interface {
     public function handleRequest(\Royalcms\Component\HttpKernel\Request $request) {
@@ -68,7 +67,6 @@ class admin_merchant_signup_module extends api_admin implements api_interface {
 		$longitude			= $this->requestData('location.longitude');
 		$latitude			= $this->requestData('location.latitude');
 		$validate_code	    = $this->requestData('validate_code');
-        $invite_code	    = $this->requestData('invite_code');
 
 
 		if (empty($responsible_person) || empty($email) || empty($mobile) || empty($seller_name) || empty($seller_category)
@@ -135,27 +133,9 @@ class admin_merchant_signup_module extends api_admin implements api_interface {
 		);
 		
 		$insert_id = RC_DB::table('store_preaudit')->insertGetId($merchant_shop_data);
-
-		if($insert_id) {
-            //审核日志
-            RC_Loader::load_app_func('merchant_franchisee', 'franchisee');
-            add_check_log($merchant_shop_data, '', $insert_id);
-
-		    //关联推荐人
-            if($invite_code) {
-                $invite_info = Ecjia\App\Affiliate\Models\AffiliateStoreModel::where('id', $invite_code)->first();
-                if($invite_info) {
-                    $record = [
-                        'affiliate_store_id' => $invite_code,
-                        'user_id' => $invite_info['user_id'],
-                        'store_preaudit_id' => $insert_id,
-                        'add_time' => RC_Time::gmtime()
-                    ];
-                    Ecjia\App\Affiliate\Models\AffiliateStoreRecordModel::insert($record);
-                }
-            }
-        }
-
+		//审核日志
+		RC_Loader::load_app_func('merchant_franchisee', 'franchisee');
+		add_check_log($merchant_shop_data, '', $insert_id);
 
 		unset($_SESSION['merchant_validate_code']);
 		unset($_SESSION['merchant_validate_expiry']);
