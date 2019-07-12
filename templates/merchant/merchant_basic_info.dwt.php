@@ -242,6 +242,17 @@ label + div.col-lg-6, label + div.col-lg-2 {
                         </div>
                         
                         <div class="form-group">
+                            <label class="control-label col-lg-2">{t domain="merchant"}堂食点餐：{/t}</label>
+                            <div class="col-lg-8">
+                                <input id="open_storebuy_1" type="radio" name="open_storebuy" value="1" {if $data.open_storebuy eq 1} checked="true" {/if}  />
+                                <label for="open_storebuy_1">{t domain="merchant"}开启{/t}</label>
+                                <input id="open_storebuy_0" type="radio" name="open_storebuy" value="0" {if $data.open_storebuy eq 0} checked="true" {/if}  />
+                                <label for="open_storebuy_0">{t domain="merchant"}关闭{/t}</label>
+                                <span class="help-block">{t domain="merchant"}开启后，顾客在店内点餐时，只需微信扫一扫快速点餐，订单马上推送到给后厨和服务员，方便备菜和上菜{/t}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
                             <div class="col-lg-6 col-md-offset-2">
                                 <input class="btn btn-info" type="submit" name="name" value='{t domain="merchant"}提交信息{/t}'>
                             </div>

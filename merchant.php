@@ -134,6 +134,14 @@ class merchant extends ecjia_merchant
             $data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'printer_offline_send', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
             $db->insert($data);
         }
+        
+        //堂食点餐
+        $has_open_storebuy = array_key_exists('open_storebuy', $merchant_info);
+        if ($has_open_storebuy == false) {
+        	$db   = RC_DB::table('merchants_config');
+        	$data = array('store_id' => $_SESSION['store_id'], 'group' => 0, 'code' => 'open_storebuy', 'type' => '', 'store_range' => '', 'store_dir' => '', 'value' => 0, 'sort_order' => 1);
+        	$db->insert($data);
+        }
 
         $merchant_info['merchants_name'] = RC_DB::table('store_franchisee')->where('store_id', $_SESSION['store_id'])->pluck('merchants_name');
 
@@ -179,13 +187,15 @@ class merchant extends ecjia_merchant
         $orders_auto_confirm        = isset($_POST['orders_auto_confirm']) ? intval($_POST['orders_auto_confirm']) : 0;
         $orders_auto_rejection_time = isset($_POST['orders_auto_rejection_time']) ? intval($_POST['orders_auto_rejection_time']) : 0;
         $printer_offline_send       = isset($_POST['printer_offline_send']) ? intval($_POST['printer_offline_send']) : 0;
+        $open_storebuy       		= isset($_POST['open_storebuy']) ? intval($_POST['open_storebuy']) : 0;
 
         $merchants_config                         = array();
         $merchants_config['express_assign_auto']  = $express_assign_auto;
         $merchants_config['min_goods_amount']     = $min_goods_amount;
         $merchants_config['orders_auto_confirm']  = $orders_auto_confirm;
         $merchants_config['printer_offline_send'] = $printer_offline_send;
-
+        $merchants_config['open_storebuy'] 		  = $open_storebuy;
+        
         if (empty($orders_auto_confirm)) {
             $merchants_config['orders_auto_rejection_time'] = $orders_auto_rejection_time;
         }
