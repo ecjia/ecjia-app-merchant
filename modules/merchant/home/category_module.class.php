@@ -95,7 +95,8 @@ class merchant_home_category_module extends api_front implements api_interface {
 		    	$filters['store_id'] = $store_id;
 		    	//商家商品分类
 		    	if ($cat['cat_id'] > 0 && !empty($store_id)) {
-		    		$filters['store_id_and_merchant_cat_id'] = [$cat['cat_id'], $store_id];
+		    		$children_cat = Ecjia\App\Goods\GoodsSearch\MerchantGoodsCategory::getAdminChildrenCategoryId($cat['cat_id'], $store_id);
+		    		$filters['store_id_and_merchant_cat_id'] = [$children_cat, $store_id];
 		    	}
 		    	//会员等级价格
 		    	$filters['user_rank'] = $_SESSION['user_rank'];
@@ -133,7 +134,8 @@ class merchant_home_category_module extends api_front implements api_interface {
 		    	$filters['store_hot']   = 1;
 		    	//商家商品分类
 		    	if ($cat['cat_id'] > 0 && !empty($store_id)) {
-		    		$filters['store_id_and_merchant_cat_id'] = [$cat['cat_id'], $store_id];
+		    		$children_cat = Ecjia\App\Goods\GoodsSearch\MerchantGoodsCategory::getAdminChildrenCategoryId($cat['cat_id'], $store_id);
+		    		$filters['store_id_and_merchant_cat_id'] = [$children_cat, $store_id];
 		    	}
 		    	//会员等级价格
 		    	$filters['user_rank'] = $_SESSION['user_rank'];
@@ -171,7 +173,8 @@ class merchant_home_category_module extends api_front implements api_interface {
 		        	$filters['store_id'] = $store_id;
 		        	//商家商品分类
 		        	if ($cat['cat_id'] > 0 && !empty($store_id)) {
-		        		$filters['store_id_and_merchant_cat_id'] = [$cat['cat_id'], $store_id];
+		        		$children_cat = Ecjia\App\Goods\GoodsSearch\MerchantGoodsCategory::getAdminChildrenCategoryId($cat['cat_id'], $store_id);
+		        		$filters['store_id_and_merchant_cat_id'] = [$children_cat, $store_id];
 		        	}
 		        	//会员等级价格
 		        	$filters['user_rank'] = $_SESSION['user_rank'];
