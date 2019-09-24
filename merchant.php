@@ -172,7 +172,7 @@ class merchant extends ecjia_merchant
         $store_id                   = $_SESSION['store_id'];
         $shop_kf_mobile             = ($_POST['shop_kf_mobile'] == get_merchant_config('shop_kf_mobile')) ? '' : htmlspecialchars(remove_xss($_POST['shop_kf_mobile']));
         $shop_description           = ($_POST['shop_description'] == get_merchant_config('shop_description')) ? '' : htmlspecialchars(remove_xss($_POST['shop_description']));
-        ``            = empty($_POST['shop_trade_time']) ? '' : htmlspecialchars(remove_xss($_POST['shop_trade_time']));
+        $shop_trade_time             = empty($_POST['shop_trade_time']) ? '' : htmlspecialchars(remove_xss($_POST['shop_trade_time']));
         $shop_notice                = ($_POST['shop_notice'] == get_merchant_config('shop_notice')) ? '' : htmlspecialchars(remove_xss($_POST['shop_notice']));
         $express_assign_auto        = isset($_POST['express_assign_auto']) ? intval($_POST['express_assign_auto']) : 0;
         $min_goods_amount           = isset($_POST['min_goods_amount']) ? intval($_POST['min_goods_amount']) : 0;
